@@ -20,12 +20,12 @@ load(infoFile);
 datasetInfo.fullPath = {};
 for i=1:datasetInfo.nFiles
     file = datasetInfo.files{i};
-    fullPath = fullfile(cd,dataFolder,file);
+    fullPath = fullfile(cd,dataFolder,name,file);
     datasetInfo.fullPath{i} = fullPath;
-    if ~exist(fullpath, 'file')
+    if ~exist(fullPath, 'file')
         error(['Something went wrong when creating fullpaths...\n' ...
             'File %s does not exist in fullpath:\n%s'], ...
-            file, fullpath);
+            file, fullPath);
     end
 end
 

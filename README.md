@@ -14,3 +14,5 @@ Planned features:
 
 Known problems:
 - Error thrown when dataset exists in DatasetEditor
+- DatasetEditor: Dataset name not displayed
+- DatasetEditor: Error when list is empty
