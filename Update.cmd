@@ -6,7 +6,7 @@ set target=%TEMP%\MSP-temp
 set expdir=Experiments
 set datadir=Data
 
-rmdir /S /Q %target% > nul
+rmdir /S /Q %target% >> nul
  
 
 :Question
@@ -42,7 +42,7 @@ for /D %%i in (%target%\*) do move /Y %%i .\
 
 :Clean
 echo "Cleaning..."
-rmdir /S /Q %target% >nul
+rmdir /S /Q %target% >> nul
 
 :END
 pause
