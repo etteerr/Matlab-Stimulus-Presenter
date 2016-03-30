@@ -9,7 +9,7 @@ function [ succes ] = createExperiment( name )
 %% Settings
 experimentDir = 'Experiments';
 ext = '.mat';
-expFile = fullfile(experimentDir, name, ext);
+expFile = fullfile(experimentDir, [name ext]);
 
 %% Checks
 if length(name) < 3
@@ -26,8 +26,8 @@ experi = struct;
 experi.name = name;
 experi.datasetDep = {}; % No dataset dependencies yet
 experi.eventDep = {}; % No event dependencies yet
-experi.creator = struct; % Here the blocks with events will be added
-experi.experiment = struct; % Here the generated experiment will be stored (when exp is run)
+experi.creator = {}; % Here the blocks with events will be added
+experi.experiment = {}; % Here the generated experiment will be stored (when exp is run)
 
 
 %% Save

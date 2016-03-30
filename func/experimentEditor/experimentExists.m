@@ -5,7 +5,7 @@ function [ succes, expFile, fullpath ] = experimentExists( name )
 %% Settings
 experimentDir = 'Experiments';
 ext = '.mat';
-expFile = fullfile(experimentDir, name, ext);
+expFile = fullfile(experimentDir, [name ext]);
 fullpath = fullfile(cd,expFile);
 
 %% Check

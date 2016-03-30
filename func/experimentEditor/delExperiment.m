@@ -5,7 +5,7 @@ succes = 0;
 %% Settings
 experimentDir = 'Experiments';
 ext = '.mat';
-expFile = fullfile(experimentDir, name, ext);
+expFile = fullfile(experimentDir, [name ext]);
 
 %% check
 [exists, ~, path] = experimentExists(name);

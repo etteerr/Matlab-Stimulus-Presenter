@@ -1,7 +1,6 @@
 function [ experiment ] = getExperiment( name )
 %GETEXPERIMENT gets the experiment struct from its file
 %   Checks if experiment exists before returning the struct
-
 %% Check
 [exist, file] = experimentExists(name);
 
