@@ -10,12 +10,13 @@ experimentDir = 'Experiments';
 files = dir(fullfile(experimentDir));
 
 list = {};
-for fil=files
-    file = fil{1};
+for fil=1:length(files)
+    file = files(fil);
     if ~strcmp(file.name,'.') && ~strcmp(file.name,'..') && ~file.isdir
-        [ succes, missingEvents, missingDatasets, corrupt  ] = verifyExperiment( name, 1);
+        [ succes, missingEvents, missingDatasets, corrupt  ] = verifyExperiment( file.name);
         if ~corrupt
-            list = [list ;{file.name}];
+            [~, name , ~] = fileparts(file.name);
+            list = [list ;{name}];
         end
     end
 end
