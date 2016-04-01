@@ -23,8 +23,7 @@ for i=1:datasetInfo.nFiles
     fullPath = fullfile(cd,dataFolder,name,file);
     datasetInfo.fullPath{i} = fullPath;
     if ~exist(fullPath, 'file')
-        error(['Something went wrong when creating fullpaths...\n' ...
-            'File %s does not exist in fullpath:\n%s'], ...
+        warning('Missing %s at %s', ...
             file, fullPath);
     end
 end
