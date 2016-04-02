@@ -28,7 +28,7 @@ DrawFormattedText(handle,'Press anykey to close this screen','center',0,[255 0 0
 Screen('Flip',handle);
 
 %Wait for key
-KbPressWait;
+KbWait(-1);
 
 %give them their mouse back!
 ShowCursor;
