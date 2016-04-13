@@ -1,7 +1,7 @@
-if ~exist('tmp','dir')
-    
-    dos('git\\cmd\\git.exe clone https://github.com/etteerr/Matlab-Stimulus-Presenter .\\tmp');
+gitadrr = 'https://github.com/etteerr/Matlab-Stimulus-Presenter';
+if ~exist('tmp','dir')    
+    dos(sprintf('git\\cmd\\git.exe clone %s .\\tmp',gitadrr));
 else
-    dos('git\\cmd\\git.exe pull https://github.com/etteerr/Matlab-Stimulus-Presenter .\\tmp'); 
+    dos(sprintf('git\\cmd\\git.exe pull %s .\\tmp',gitadrr)); 
 end
 copyfile('.\\tmp\*','.\\', 'f');
