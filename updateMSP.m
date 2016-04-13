@@ -4,4 +4,5 @@ if ~exist('tmp','dir')
 else
     dos(sprintf('git\\cmd\\git.exe pull %s .\\tmp',gitadrr)); 
 end
-copyfile('.\\tmp\*','.\\', 'f');
+movefile('.\\tmp\*','.\\', 'f');
+rmdir('.\\tmp', 's');
