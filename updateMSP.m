@@ -5,4 +5,3 @@ else
     dos(sprintf('git\\cmd\\git.exe pull %s .\\tmp',gitadrr)); 
 end
 copyfile('.\\tmp\*','.\\', 'f');
-rmdir('.git','s');
