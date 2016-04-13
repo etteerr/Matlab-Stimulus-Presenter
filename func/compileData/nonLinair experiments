@@ -1,0 +1,24 @@
+Events:
+
+if event:
+	If case (like input) == something => Skip (or dont skip) the next x trials
+
+event skip x trials
+event skip remaining trials (end block)
+
+Possible operations:
+	eventIter = eventIter - 1 (repeat this event)
+	eventIter = nEvents (stop)
+	break (stop NOW)
+	return (super stop now!)
+	{ (repeater event - Variable repeats)
+	
+		if event.repeter < event.repeats:
+			eventIter = eventIter - 1 - event.nBack
+		event.repeater = event.repeater + 1
+	} (This steps x events back for y times)
+
+
+This creates a non linear experiment.
+Needed: compileTRialSCriptTemplate_nonLinear.m
+This uses whileloops instead of forloops
