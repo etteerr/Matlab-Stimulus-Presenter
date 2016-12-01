@@ -72,11 +72,11 @@ function res = gateway(varargin)
 end
 %% Do edit the following
 function out = getEventName()
-    out = 'Ask'; % The displayed event name
+    out = 'Show Text'; % The displayed event name
 end
 
 function out = getDescription()
-    out = 'Ask a question, get a reply (mouse, keyboard etc)';
+    out = 'Displays text on screen from a text file';
 end
 
 function out = dataType()
@@ -100,24 +100,77 @@ function out = getLoadFunction()
 %               'Still the second line!\r\nThe Third line!'];
 % if out == '', no load function will be written.
 % Any change to event will be saved for the runFunction
-% [width, height]=Screen('WindowSize', windowPointerOrScreenNumber [, realFBSize=0]);
-    out = ['[width, height]=Screen(''WindowSize'', windowPtr);'...
-           'event.width = width; event.height=height;']; %may be multiline!
+    out = [
+    'if exist(''textDatasets'')~=1\r\n'...
+    '    textDatasets={};\r\n'...
+    'end\r\n'...
+    'if isempty(textDatasets)\r\n'...
+    '    textDataset = struct;\r\n'...
+    '    textDataset.name = event.cdataset;\r\n'...
+    '    textDataset.data = getTextSet(event.cdataset);\r\n'...
+    '    textDataset.iter = 1;\r\n'...
+    '    textDatasets{1,1} = event.cdataset;\r\n'...
+    '    textDatasets{2,1} = textDataset;\r\n'...
+    'elseif (sum(strcmp(textDatasets{1,:},event.cdataset))<1)\r\n'...
+    '    textDataset = struct;\r\n'...
+    '    textDataset.name = event.cdataset;\r\n'...
+    '    textDataset.data = getTextSet(event.cdataset);\r\n'...
+    '    textDataset.iter = 1;\r\n'...
+    '    [~,ind] = size(textDatasets);\r\n'...
+    '    textDatasets{1,ind+1} = event.cdataset;\r\n'...
+    '    textDatasets{2,ind+1} = textDataset;\r\n'...
+    'end\r\n'...
+    '[~, n] = size(textDatasets);\r\n'...
+    'for i=1:n\r\n'...
+    '    if (strcmp(textDatasets(1,i),event.cdataset))\r\n'...
+    '        dataset = textDatasets{2,i};\r\n'...
+    '        if (dataset.iter > length(dataset.data))\r\n'...
+    '            if (isempty(dataset.data))\r\n'...
+    '                error(''textData is out of stimuli! Dataset too small, change settings or increase datasetsize'');\r\n'...
+    '            end\r\n'...
+    '            dataset.iter = 1;\r\n'...
+    '        end\r\n'...
+    '        if (event.random)\r\n'...
+    '            event.line = dataset.data{randi(length(dataset.data))};\r\n'...
+    '        else\r\n'...
+    '            event.line = dataset.data{dataset.iter};\r\n'...
+    '        end\r\n'...
+    '        if (~event.putback)\r\n'...
+    '            dataset.data(dataset.iter) = [];\r\n'...
+    '        else\r\n'...
+    '            dataset.iter = dataset.iter+1;\r\n'...
+    '        end\r\n'...
+    '        textDatasets{2,i} = dataset;\r\n'...
+    '    end\r\n'...
+    'end\r\n'
+    ];
+
 end
 
 function out = getRunFunction()
 %event.eventData contains your requested data type from a dataset.
+%windowPtr contains the Psychtoolbox window pointer (handle)
+%reply is the struct in which you can create fields to save data
+%reply.timeEventStart contains the time passed since the start of the event
+%startTime contains the time since the start of the block (excl. loading)
+% To change the flow of the events (eg: go 2 events back)
+% you can use variable: eventIter
+% Also nEvents variable might come in handy
 % use \r\n for a new line.
 % tip: You can write multiple lines by using:
 %     string = ['My long strings first line\r\n', ...
 %               'The second line!', ...
 %               'Still the second line!\r\nThe Third line!'];
-% Screen('DrawText', windowPtr, text [,x] [,y] [,color] [,backgroundColor] [,yPositionIsBaseline] [,swapTextDirection]);
-% Screen('Flip', windowPtr [, when] [, dontclear] [, dontsync] [, multiflip]);
-%[newX,newY]=Screen('DrawText', windowPtr, text [,x] [,y] [,color] [,backgroundColor] [,yPositionIsBaseline] [,swapTextDirection]);
 
-    out = ['Screen(''Flip'', windowPtr, 0, event.clearscr, 2);\r\nreply.data = Ask(windowPtr, event.quest, event.textcolor,event.bgcolor,event.mode, ''center'', ''center'');\r\n'...
-           ];
+% [nx, ny, textbounds] = DrawFormattedText(win, tstring 
+%                         [sx][, sy][, color][, wrapat][, flipHorizontal]
+%                         [, flipVertical][, vSpacing][, righttoleft]
+%                         [, winRect])
+    out = [
+        'reply.line = event.line;'...
+        'DrawFormattedText(windowPtr, reply.line,''center'',''center'',event.color);\r\n'...
+        'Screen(''Flip'', windowPtr, 0, double(~event.clear));\r\n'
+    ];
 end
 
 function out = getQuestStruct()
@@ -133,38 +186,39 @@ function out = getQuestStruct()
 %     'checkbox' | 'edit' | 'text' | 'slider' | 'frame' | 'listbox' | 'popupmenu'.
 % If out == 0: No question dialog will popup and no questions are asked.
 % getEventStruct will be called regardless.
-    q = struct;
+    out = struct;
+    out(1).name = 'Event alias';
+    out(1).sort = 'edit';
+    out(1).data = 'Show text';
     
-    q(1).name = 'Event Alias: ';
-    q(1).sort = 'edit';
-    q(1).data = '';
+    %Gather text datasets
+    [datasetnames] = getTextSets();
+    if (isempty(datasetnames))
+        error('No datasets available in "textData" folder');
+    end
+    out(2).name = 'Dataset';
+    out(2).sort = 'popup';
+    out(2).data = datasetnames;
     
-    q(2).name = 'Question:';
-    q(2).sort = 'edit';
-    q(2).data = 'Type text to be displayed';
+    out(3).name = '';
+    out(3).sort = 'checkbox';
+    out(3).data = 'pick randomly';
     
-    q(3).name = 'Input sort';
-    q(3).sort = 'popupmenu';
-    q(3).data = { 'GetClicks', 'GetChar', 'GetString' };
-    q(3).toolTip = 'GetClicks: Waits for mouseclick, GetChar: Get keyboard input and shows it on screen, GetString: Gets keyboard input';
+    out(4).name = 'keep used sentences?';
+    out(4).sort = 'checkbox';
+    out(4).data = 'putback';
     
-    q(4).name = 'Text Color:';
-    q(4).sort = 'edit';
-    q(4).data = '[255 255 255]';
-    q(4).toolTip = 'RGB triplet: default white. [0 0 0] = black';
+    out(5).name = 'color';
+    out(5).sort = 'edit';
+    out(5).data = '[255 255 255]';
+    out(5).toolTip = 'RGB colors, from 0 to 255. first one is red, second is green, third is blue.';
     
-    q(5).name = 'Background color:';
-    q(5).sort = 'edit';
-    q(5).data = '[0 0 0]';
-    q(5).toolTip = 'RGB triplet: default black. [255 255 255] = white';
-    
-    q(6).name = '';
-    q(6).sort = 'checkbox';
-    q(6).data = 'Clear screen';
-    out = q; %See eventEditor
+    out(6).name = '';
+    out(6).sort = 'checkbox';
+    out(6).data = 'clear screen';
 end
 
-function out = getEventStruct(q)
+function out = getEventStruct(answer)
 % This function MUST return a struct.
 % The following struct names are in use and will be overwritten
 %   - .name => Contains getEventName()
@@ -177,12 +231,15 @@ function out = getEventStruct(q)
 % lenght + 2 will contain whether data selection is random (read only)
 % length + 3 will contain whether to put back a selected file after using
 % it.
-% reply.data = Ask(windowPtr, event.quest, event.textcolor,event.bgcolor,event.mode);';
-    event = struct;
-    event.quest = q(2).Answer;
-    event.mode = q(3).Answer;
-    event.textcolor = eval(q(4).Answer);
-    event.bgcolor = eval(q(5).Answer);
-    event.clearscr = q(6).Value;
-    out = event;
+% The following variables can be used to influence the experiment
+% generation. 
+%         out.generatorRepeat => repeats the previous events
+%         out.generatorNBack  => repeats go n back
+    out = struct;
+    out.alias = answer(1).String;
+    out.cdataset = answer(2).Answer;
+    out.random = answer(3).Value;
+    out.putback = answer(4).Value;
+    out.color = eval(answer(5).String);
+    out.clear = answer(6).Value;
 end

@@ -124,7 +124,10 @@ for i=1:length(creator) %For block in blocks
             if event.randomData
                 index = randi(length(dataset));
             else % it start at 0, we add one every time.
-                datasetIters(event.dataset) = datasetIters(event.dataset) + 1;
+                datasetIters(event.dataset) = mod(datasetIters(event.dataset) + 1,length(dataset));
+                if (datasetIters(event.dataset)==0)
+                    datasetIters(event.dataset)=length(dataset);
+                end
                 index = datasetIters(event.dataset);
             end
             if length(dataset) < index

@@ -102,6 +102,7 @@ function StartExperiment_Callback(hObject, eventdata, handles)
 % hObject    handle to StartExperiment (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+global experimentRunning;
 if isempty(handles.listExperiments.String)
     %easter
     waitfor(msgbox('You must first make an experiment! for now, enjoy the color'));
@@ -119,7 +120,9 @@ if ~succes
     missingEvents
     missingDatasets
     corrupt
+    return
 end
+
 % Get GUI data
 generatorPackage = struct;
 
@@ -164,8 +167,15 @@ dateNtime = datestr(datetime);
 Screen('Preference', 'SkipSyncTests', 0);
 oldLevel = Screen('Preference', 'Verbosity', 0);
 try
+    hObject.Enable = 'off';
+    if experimentRunning
+        return;
+    end
+    experimentRunning = 1;
     hW = initWindowBlack(ExperimentData.preMessage);
 catch e
+    experimentRunning = 0;
+    hObject.Enable = 'on';
     EndofExperiment;
     if strcmp(e.message,'See error message printed above.')
         try
@@ -183,6 +193,8 @@ end
 try
     Data = runExperiment(ExperimentData,hW);
 catch e
+    hObject.Enable = 'on';
+    experimentRunning = 0;
     waitfor(errordlg(sprintf('Error while running the experiment! SORRY! More details in the Command Window')));
     EndofExperiment;
     try
@@ -215,7 +227,6 @@ catch e
 end
 EndofExperiment(hW,'You have reached the end! Thanks you for participating!');
 Screen('Preference', 'Verbosity', oldLevel);
-
 %% Process and save data
 data = struct;
 dataiter = 0;
@@ -236,6 +247,8 @@ for i=1:length(Data)
 end
 exportStructToCSV(data,['Results_' name '.csv'],1);
 msgbox(sprintf('Results saved (and appended) to: %s', fullfile(cd,['Results_' name '.csv'])));
+hObject.Enable = 'on';
+experimentRunning = 0;
 
 
 % --- Executes on selection change in listExperiments.

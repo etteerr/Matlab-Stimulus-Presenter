@@ -265,6 +265,7 @@ if isempty(handles.eventList.String)
     return
 end
 handles.blockData.events(handles.eventList.Value) = [];
+handles.blockData.answers(handles.eventList.Value) = [];
 guidata(handles.figure1, handles);
 guiUpdate(handles);
 
@@ -277,7 +278,9 @@ if isempty(handles.eventList.String)
     return
 end
 event = handles.blockData.events(handles.eventList.Value);
+answers = handles.blockData.answers(handles.eventList.Value);
 handles.blockData.events = [handles.blockData.events event];
+handles.blockData.answers = [handles.blockData.answers answers];
 guidata(handles.figure1, handles);
 guiUpdate(handles);
 
@@ -330,11 +333,22 @@ if loc==1 %Already in top
     return
 end
 selected = handles.blockData.events{handles.eventList.Value};
+selecteda = handles.blockData.answers{handles.eventList.Value};
+
 res = handles.blockData.events;
+resa = handles.blockData.answers;
+
 res(loc) = [];
+resa(loc) = [];
+
 newOrder = [res(1:loc-2) {selected} res(loc-1:end)];
+newOrdera = [resa(1:loc-2) {selecteda} resa(loc-1:end)];
+
 handles.blockData.events = newOrder;
+handles.blockData.answers = newOrdera;
+
 handles.eventList.Value = handles.eventList.Value - 1;
+
 guidata(handles.figure1, handles);
 guiUpdate(handles);
 
@@ -349,11 +363,22 @@ if loc==length(handles.eventList.String) %Already in top
     return
 end
 selected = handles.blockData.events{handles.eventList.Value};
+selecteda = handles.blockData.answers{handles.eventList.Value};
+
 res = handles.blockData.events;
+resa = handles.blockData.answers;
+
 res(loc) = [];
+resa(loc) = [];
+
 newOrder = [res(1:loc) {selected} res(loc+1:end)];
+newOrdera = [resa(1:loc) {selecteda} resa(loc+1:end)];
+
 handles.blockData.events = newOrder;
-handles.eventList.Value = handles.eventList.Value +1;
+handles.blockData.answers = newOrdera;
+
+handles.eventList.Value = handles.eventList.Value + 1;
+
 guidata(handles.figure1, handles);
 guiUpdate(handles);
 

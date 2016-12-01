@@ -59,81 +59,86 @@ switch(nargin)
     otherwise
         error('incorrect usage of runTrial...');
 end
+try
+    %% initialisation
+    data = {};
+    nEvents = length(events); % the amount of events (show image, present sound, delay etc)
+    audioHandles = zeros(1,40);
+    replyData = cell(1,nEvents);
 
-%% initialisation
-data = {};
-nEvents = length(events); % the amount of events (show image, present sound, delay etc)
-audioHandles = zeros(1,40);
-replyData = cell(1,nEvents);
-
-%% Trial Loops
-switch mode
-    %% no preload
-    case 0
-        replyIter = 1;
-        eventIter = 1;
-        startTime = GetSecs();
-        while eventIter <= nEvents
-            % Craete data
-            event = events{eventIter};
-            reply = struct;
-            reply.name = event.name;
-            eventName = event.name;
-            reply.timeEventStart = GetSecs() - startTime;
-            % Run event
-            \\runload
-            % Save
-            reply.timeEventEnd = GetSecs() - startTime;
-            reply.blockname = event.blockname;
-            replyData{replyIter} = reply;
-            % Iter
-            replyIter = replyIter + 1;
-            eventIter = eventIter + 1;
-        end
-    %% preload  
-    case 1
-        for i=1:nEvents % load
-            event = events{i};
-            eventName = event.name;
-            \\load
-            events{i} = event; % save event data (that is loaded for the run fun)
-        end
-        replyIter = 1;
-        eventIter = 1;
-        startTime = GetSecs();
-        while eventIter <= nEvents % run
-            event = events{eventIter};
-            % Create data
-            reply = struct;
-            reply.name = event.name;
-            eventName = event.name;
-            reply.timeEventStart = GetSecs() - startTime;
-            % Run event
-            \\run
-            % Save data
-            reply.timeEventEnd = GetSecs() - startTime;
-            reply.blockname = event.blockname;
-            if isfield(event, 'alias')
-                reply.alias = event.alias;
+    %% Trial Loops
+    switch mode
+        %% no preload
+        case 0
+            replyIter = 1;
+            eventIter = 1;
+            startTime = GetSecs();
+            while eventIter <= nEvents
+                % Craete data
+                event = events{eventIter};
+                reply = struct;
+                reply.name = event.name;
+                eventName = event.name;
+                reply.timeEventStart = GetSecs() - startTime;
+                % Run event
+                \\runload
+                % Save
+                reply.timeEventEnd = GetSecs() - startTime;
+                reply.blockname = event.blockname;
+                replyData{replyIter} = reply;
+                % Iter
+                replyIter = replyIter + 1;
+                eventIter = eventIter + 1;
             end
-            replyData{replyIter} = reply;
-            events{eventIter} = event; % save event data (that is loaded for the run fun)
-            % Iters
-            replyIter = replyIter + 1;
-            eventIter = eventIter + 1;
-        end
-    otherwise
-        error('Unknown trial run mode')
-end
-
-%% Clean audio handles
-for i=1:length(audioHandles)
-    if ~(audioHandles(i)==0)
-        PsychPortAudio('Close' , audioHandles(i));
+        %% preload  
+        case 1
+            for iteratorwhichnamecannotbedupe=1:nEvents % load
+                event = events{iteratorwhichnamecannotbedupe};
+                eventName = event.name;
+                \\load
+                events{iteratorwhichnamecannotbedupe} = event; % save event data (that is loaded for the run fun)
+            end
+            replyIter = 1;
+            eventIter = 1;
+            startTime = GetSecs();
+            while eventIter <= nEvents % run
+                event = events{eventIter};
+                % Create data
+                reply = struct;
+                reply.name = event.name;
+                eventName = event.name;
+                reply.timeEventStart = GetSecs() - startTime;
+                % Run event
+                \\run
+                % Save data
+                reply.timeEventEnd = GetSecs() - startTime;
+                reply.blockname = event.blockname;
+                if isfield(event, 'alias')
+                    reply.alias = event.alias;
+                end
+                replyData{replyIter} = reply;
+                events{eventIter} = event; % save event data (that is loaded for the run fun)
+                % Iters
+                replyIter = replyIter + 1;
+                eventIter = eventIter + 1;
+            end
+        otherwise
+            error('Unknown trial run mode')
     end
-end
 
-%% finish data compile
-% nothing to do here
+    %% Clean audio handles
+    for iteratorwhichnamecannotbedupe=1:length(audioHandles)
+        if ~(audioHandles(iteratorwhichnamecannotbedupe)==0)
+            PsychPortAudio('Close' , audioHandles(iteratorwhichnamecannotbedupe));
+        end
+    end
+
+    %% finish data compile
+    % nothing to do here
+catch e
+    % Dump function workspace for later analysis
+    save('memdump.mat');
+    rethrow(e);
+end
 end
 

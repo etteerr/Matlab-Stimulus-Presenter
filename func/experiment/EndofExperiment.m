@@ -40,7 +40,7 @@ WaitSecs(1);
 WaitSecs(delay);
 
 DrawFormattedText(handle,Message,'center','center',[255 255 255 255]);
-DrawFormattedText(handle,'Press anykey to close this screen','center',0,[255 0 0 255]);
+DrawFormattedText(handle,'Press anykey to close this screen','center',15,[255 0 0 255]);
 
 Screen('Flip',handle);
 

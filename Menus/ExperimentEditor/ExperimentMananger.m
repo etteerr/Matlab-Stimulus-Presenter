@@ -131,8 +131,8 @@ if isempty(name)
     return
 end
 name = name{1};
-if length(name) < 2
-    errordlg('Sorry! Name must be longer than 2 characters!');
+if length(name) < 3
+    errordlg('Sorry! Name must be longer than 3 characters!');
     return
 end
 try

@@ -1,0 +1,15 @@
+First sentence displayed
+Second Sentence displayed, note: Not with random enabled ofc
+
+This row above is included as well! (empty sentence)
+Things like \n can be used as well!
+\n makes a new line
+Example:
+The following sentence is on the next line!\nNew line!!!
+To summarize:
+-Each line is a simulus
+-Multiple lines can be created with the \n thing.
+Additional information:
+Enabling putback and doing more show text events than lines will result in the program going back to the first line.
+Disabling putback and not having enough lines will result in a error in the beginning of the block in which the problem occurred.
+Ow and another one! Long lines like this one will be cut when they fall outside of the screen. This is intended as you manually need to specify the new lines so it will be the same on different size screens. All changes might affect your experiment. Ow and im lazy... ;)

@@ -66,7 +66,7 @@ DrawFormattedText(handle,Message,'center','center',[255 255 255 255]);
 
 %Add a extra disclamer
 DrawFormattedText(handle,'You can quit this experiment at any time using shift + 2 (@)\nPress anykey to start this experiment',...
-    'center',0,[255 0 0 255]);
+    'center',15,[255 0 0 255]);
 
 %flip the screen (to show the text)
 Screen('Flip',handle);
