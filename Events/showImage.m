@@ -146,6 +146,6 @@ function out = getEventStruct(answersOfQuestions)
 % event.data will be filled with the needed files specified in dataType()
     event = struct;
     event.alias = answersOfQuestions(1).String;
-    event.clear = 1;
+    event.clear = 0;
     out = event; %No other data needed
 end
