@@ -98,9 +98,6 @@ try
 catch e
     fprintf('A error occoured while writing your file:\n%s',e.message);
 end
-save(filename(1:end-4), 'data')
-%save('temp_results','data')
-%$exportStructToCSV(data,['Results_' name '.csv'],1);
 fclose(hFile);
 end
 
