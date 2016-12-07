@@ -116,7 +116,7 @@ function out = getRunFunction()
 % Screen('Flip', windowPtr [, when] [, dontclear] [, dontsync] [, multiflip]);
 %[newX,newY]=Screen('DrawText', windowPtr, text [,x] [,y] [,color] [,backgroundColor] [,yPositionIsBaseline] [,swapTextDirection]);
 
-    out = ['Screen(''Flip'', windowPtr, 0, event.clearscr, 2);\r\nreply.data = Ask(windowPtr, event.quest, event.textcolor,event.bgcolor,event.mode, ''center'', ''center'');\r\n'...
+    out = ['Screen(''Flip'', windowPtr, 0, double(~event.clearscr), 2);\r\nreply.data = Ask(windowPtr, event.quest, event.textcolor,event.bgcolor,event.mode, ''center'', ''center'');\r\n'...
            ];
 end
 
