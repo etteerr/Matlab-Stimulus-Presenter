@@ -53,7 +53,7 @@ try
     fprintf('Applying update...\n');
     dirname = dir('updatetmp');
     dirname = dirname(3).name;
-    movefile(fullfile('updatetmp', dirname,'\*'),'.', 'f');
+    movefile(fullfile('updatetmp', dirname,'*'),'.', 'f');
     
     %Clean
     rmdir('updatetmp','s');
