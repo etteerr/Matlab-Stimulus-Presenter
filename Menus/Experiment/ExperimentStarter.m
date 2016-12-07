@@ -68,7 +68,14 @@ function ExperimentStarter_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for ExperimentStarter
 handles.output = hObject;
-
+%load start message
+try
+    if (exist('startExpMessage.save','file')>0)
+        handles.editStartMessage.String=fileread('startExpMessage.save');
+    end
+catch e
+    warning('Problem with saving start message...\n%s',e.message);
+end
 % Update handles structure
 guidata(hObject, handles);
 guiUpdate(handles);
@@ -102,6 +109,17 @@ function StartExperiment_Callback(hObject, eventdata, handles)
 % hObject    handle to StartExperiment (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+%save start message
+try
+    f = fopen('startExpMessage.save','w');
+    text = handles.editStartMessage.String;
+    fprintf(f,text);
+    fclose(f);
+catch e
+    warning('Problem with saving start message...\n%s',e.message);
+end
+
 global experimentRunning;
 if isempty(handles.listExperiments.String)
     %easter
