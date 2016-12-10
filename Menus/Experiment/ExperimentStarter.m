@@ -261,11 +261,8 @@ try
             end
         end
     end
-    if (~(exist(fullfile(cd,'Results'),'dir')==7))
-        mkdir(fullfile(cd,'Results'));
-    end
-    exportStructToCSV(data,fullfile(cd,'Results',['Results_' name '.csv']),1);
-    msgbox(sprintf('Results saved (and appended) to: %s', fullfile(cd,'Results',['Results_' name '.csv'])));
+    exportStructToCSV(data,['Results_' name '.csv'],1);
+    msgbox(sprintf('Results saved (and appended) to: %s', fullfile(cd,['Results_' name '.csv'])));
 catch e
     experimentRunning = 0;
     rethrow(e);
