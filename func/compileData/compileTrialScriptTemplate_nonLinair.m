@@ -85,6 +85,9 @@ try
                 % Save
                 reply.timeEventEnd = GetSecs() - startTime;
                 reply.blockname = event.blockname;
+                if isfield(event, 'alias')
+                    reply.alias = event.alias;
+                end
                 replyData{replyIter} = reply;
                 % Iter
                 replyIter = replyIter + 1;
