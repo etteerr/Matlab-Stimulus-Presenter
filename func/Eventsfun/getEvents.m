@@ -52,7 +52,11 @@ for iFile = 1:nFiles
     end
 end
 path(prevPath);
-eventMap = containers.Map(eventNames,eventFiles);
+try
+    eventMap = containers.Map(eventNames,eventFiles);
+catch e
+    warning('eventMap is empty.\n%s\nThe line above should be your MSP root folder containing "Events" directory.\n%s', cd,e.message);
+end
 
 end
 

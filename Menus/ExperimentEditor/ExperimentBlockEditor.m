@@ -129,7 +129,7 @@ if handles.eventList.Value > length(handles.eventList.String)
 end
 
 % Update eventSelectorMenu
-[eventNames,eventFiles,eventDir, eventMap ] = getEvents();
+[eventNames,~, ~, ~ ] = getEvents();
 handles.eventSelectorMenu.String = eventNames;
 infoStr = '';
 % Check current selected item in listbox (not the dropdown)
