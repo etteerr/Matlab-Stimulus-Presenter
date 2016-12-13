@@ -1,4 +1,4 @@
-function updateMSP()
+function updateMSP(restore)
 %% Settings
 % master
 % development
@@ -8,29 +8,37 @@ branch = 'master';
 %% init
 repo = ['https://github.com/etteerr/Matlab-Stimulus-Presenter/zipball/' branch];
 versionRequest = ['https://api.github.com/repos/etteerr/Matlab-Stimulus-Presenter/commits/' branch];
+if nargin < 1
+    restore = false;
+end
 
 %% Go
 try
-    %% Check
-    fprintf('\n------------Checking for update---------\n');
-    answer = webread(versionRequest);
-    if (exist('version', 'file'))
-        f = fopen('version');
-        sha = fscanf(f, '%s');
-        if strcmp(sha,answer.sha)
-            fprintf('Matlab Stimulus presenter up to date.\n');
-            fprintf('--------------------End-----------------\n');
+    if ~restore
+        %% Check
+        fprintf('\n------------Checking for update---------\n');
+        answer = webread(versionRequest);
+        if (exist('version', 'file'))
+            f = fopen('version');
+            sha = fscanf(f, '%s');
+            if strcmp(sha,answer.sha)
+                fprintf('Matlab Stimulus presenter up to date.\n');
+                fprintf('--------------------End-----------------\n');
+                fclose(f);
+                return;
+            end
             fclose(f);
-            return;
         end
-        fclose(f);
+    else
+        fprintf('\n-------------Restoreing MSP-------------\n');
+        fprintf('Skipping check for update\n');
     end
 
     %% Download
     % Ask first!
     fprintf('Update available\n');
     if (strcmp('No',questdlg('Update available, do you want to update?','Update', 'Yes', 'No', 'No')))
-        fprintf('Update cancled');
+        fprintf('Update cancled\n');
         fprintf('--------------------End-----------------\n');
         return;
     end
