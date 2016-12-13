@@ -56,6 +56,7 @@ if debug
     handle = Screen('OpenWindow',screenNumber,screenColor, [20 20 800 600]);
 else
     handle = Screen('OpenWindow',screenNumber,screenColor);
+end
 
 %Hide cursor
 if hideCursor && ~debug
