@@ -133,7 +133,7 @@ elseif handles.blockList.Value > length(handles.blockList.String)
 end
 % Selected block info
 idx = handles.blockList.Value;
-if idx > length(handles.blockList.String) || idx == 0;
+if idx > length(handles.blockList.String) || idx == 0
     idx = length(handles.blockList.String);
     if idx == 0
         idx = 1;
