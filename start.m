@@ -61,6 +61,7 @@ function start_OpeningFcn(hObject, eventdata, handles, varargin)
     % handles    structure with handles and user data (see GUIDATA)
     % varargin   command line arguments to start (see VARARGIN)
 	
+
 	% First things first. This must be ran from a correct directory :D
 	% eg. no spaces in it !
     if sum(cd==' ')>0
@@ -73,7 +74,7 @@ function start_OpeningFcn(hObject, eventdata, handles, varargin)
                     'Please move MSP to a more appropriate location.']));
         error('The path:\n%s\n%s\nContains a space', cd, b);
     end
-    
+
     % Choose default command line output for start
     handles.output = hObject;
 
