@@ -201,7 +201,7 @@ catch e
         try
             disp('Warning, skipping sync tests!')
             Screen('Preference', 'SkipSyncTests', 1);
-            hW = initWindowBlack(ExperimentData.preMessage);
+            hW = initWindowBlack(ExperimentData.preMessage, -1, 1, debug);
         catch e
             rethrow(e)
         end
