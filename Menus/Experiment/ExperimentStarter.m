@@ -36,7 +36,7 @@ function varargout = ExperimentStarter(varargin)
 
 % Edit the above text to modify the response to help ExperimentStarter
 
-% Last Modified by GUIDE v2.5 31-Mar-2016 18:42:07
+% Last Modified by GUIDE v2.5 13-Dec-2016 12:59:27
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -119,7 +119,11 @@ try
 catch e
     warning('Problem with saving start message...\n%s',e.message);
 end
-
+if handles.debugtoggle.Value == 1
+    debug = true;
+else
+    debug = false;
+end
 global experimentRunning;
 if isempty(handles.listExperiments.String)
     %easter
@@ -189,7 +193,7 @@ try
         return;
     end
     experimentRunning = 1;
-    hW = initWindowBlack(ExperimentData.preMessage);
+    hW = initWindowBlack(ExperimentData.preMessage, -1, 1, debug);
 catch e
     experimentRunning = 0;
     EndofExperiment;
@@ -470,3 +474,12 @@ function editSeed_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on button press in debugtoggle.
+function debugtoggle_Callback(hObject, eventdata, handles)
+% hObject    handle to debugtoggle (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of debugtoggle
