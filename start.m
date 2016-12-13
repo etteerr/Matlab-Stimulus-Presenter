@@ -61,9 +61,20 @@ function start_OpeningFcn(hObject, eventdata, handles, varargin)
     % handles    structure with handles and user data (see GUIDATA)
     % varargin   command line arguments to start (see VARARGIN)
 	
-	% First things first. This must be ran from the correct directory :D
-	%TODO: The above check
-    
+
+	% First things first. This must be ran from a correct directory :D
+	% eg. no spaces in it !
+    if sum(cd==' ')>0
+        b = num2str(double(cd==' '));
+        b = strrep(b, ' ', '');
+        b = strrep(b, '0', ' ');
+        b = strrep(b, '1', '?');
+        errordlg(sprintf([  'The current directory contains a space.\n'...
+                    'This will result in failure to install psychtoolbox and maybe more.\n'...
+                    'Please move MSP to a more appropriate location.']));
+        error('The path:\n%s\n%s\nContains a space', cd, b);
+    end
+
     % Choose default command line output for start
     handles.output = hObject;
 
