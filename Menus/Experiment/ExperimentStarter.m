@@ -190,6 +190,7 @@ Screen('Preference', 'SkipSyncTests', 0);
 oldLevel = Screen('Preference', 'Verbosity', 0);
 try
     if experimentRunning
+        warning('Experiment is flagged as running. If this is not the case, type clear global in the command window');
         return;
     end
     experimentRunning = 1;
