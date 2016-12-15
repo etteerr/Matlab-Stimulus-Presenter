@@ -141,6 +141,11 @@ try
 catch e
     % Dump function workspace for later analysis
     save('memdump.mat');
+    try
+        assignin('base', 'event_that_caused_error', event);
+        openvar('event_that_caused_error');
+    catch b
+    end
     rethrow(e);
 end
 end
