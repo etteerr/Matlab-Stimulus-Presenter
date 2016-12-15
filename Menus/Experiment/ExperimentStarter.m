@@ -178,6 +178,7 @@ try
     initEvents(eventNames);
     clear functions;
 catch e
+    save(sprintf('memdump_%s.mat',strrep(strrep(datestr(clock), ' ', '_'), ':', '-')));
     delete(h);
     waitfor(errordlg(sprintf('Error while generating experiment:\n%s', e.message)));
     rethrow(e);
@@ -273,6 +274,7 @@ try
     msgbox(sprintf('Results saved (and appended) to: %s', fullfile(cd,'Results',['Results_' name '.csv'])));
 catch e
     experimentRunning = 0;
+    save(sprintf('memdump_%s.mat',strrep(strrep(datestr(clock), ' ', '_'), ':', '-')));
     rethrow(e);
     %% TODO error handling
 end

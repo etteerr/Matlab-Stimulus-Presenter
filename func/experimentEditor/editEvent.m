@@ -100,6 +100,7 @@ try
 
 catch e
     % wait with error and clean 
+    save(sprintf('memdump_%s.mat',strrep(strrep(datestr(clock), ' ', '_'), ':', '-')));
     path(prevpath);
     rethrow(e);
 end
