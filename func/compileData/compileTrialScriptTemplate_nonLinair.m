@@ -140,7 +140,12 @@ try
     % nothing to do here
 catch e
     % Dump function workspace for later analysis
-    save('memdump.mat');
+    save(sprintf('memdump_%s.mat',strrep(strrep(datestr(clock), ' ', '_'), ':', '-')));
+    try
+        assignin('base', 'event_that_caused_error', event);
+        openvar('event_that_caused_error');
+    catch b
+    end
     rethrow(e);
 end
 end

@@ -104,6 +104,7 @@ if length(handles.listbox.String) > 1
                            info.name, num2str(info.nFiles), datestr(info.createdDate), info.filetype);
        handles.databaseInfo.String = infostr;
     catch e
+        save(sprintf('memdump_%s.mat',strrep(strrep(datestr(clock), ' ', '_'), ':', '-')));
         handles.databaseInfo.String = e.message;
         rethrow(e);
     end

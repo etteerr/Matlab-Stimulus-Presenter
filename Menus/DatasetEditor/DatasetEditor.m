@@ -121,6 +121,7 @@ try
     guidata(handles.figure1, handles);
     guiUpdate(handles);
 catch e
+    save(sprintf('memdump_%s.mat',strrep(strrep(datestr(clock), ' ', '_'), ':', '-')));
     errordlg(sprintf('Error\n:%s',e.message));
     delete(handles.figure1);
     rethrow(e);
@@ -141,6 +142,7 @@ try
     handles.listbox.String = myData.files;
     handles.textDatasetName.String = datasetInfo.name;
 catch e
+    save(sprintf('memdump_%s.mat',strrep(strrep(datestr(clock), ' ', '_'), ':', '-')));
     errordlg(sprintf('Error while updating GUI:\n%s',e.message));
     delete(handles.figure1);
     rethrow(e);
@@ -213,6 +215,7 @@ try
             'Problems while adding files');
     end
 catch e
+    save(sprintf('memdump_%s.mat',strrep(strrep(datestr(clock), ' ', '_'), ':', '-')));
     errordlg(sprintf('Update dataset failed:\n%s',e.message));
     rethrow(e);
 end

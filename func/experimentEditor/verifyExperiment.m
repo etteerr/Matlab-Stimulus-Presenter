@@ -55,6 +55,7 @@ try
    % warning('Event checker not implemented');
     
 catch e
+    save(sprintf('memdump_%s.mat',strrep(strrep(datestr(clock), ' ', '_'), ':', '-')));
     warning('Unknown problem: %s', e.message);
     succes = 0;
 end
