@@ -12,7 +12,7 @@
 % 
 %     You should have received a copy of the GNU General Public License
 %     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-function [ data ] = runExperiment( ExperimentData, hWindow )
+function [ data ] = runExperiment( ExperimentData, hWindow, nojvm )
 %RUNEXPERIMENT Well... It needs data to do the experiment, like stimuli. It
 %needs a handle to a window... And it returns the input data that was
 %recorded.
@@ -26,6 +26,9 @@ function [ data ] = runExperiment( ExperimentData, hWindow )
 %   trial.
 if nargin < 2
     error('Invalid use of runExperiment');
+end
+if nargin == 2
+    nojvm = 0;
 end
 
 data = {};
@@ -70,7 +73,7 @@ try
     end
 
     if ~exist('runTrial.m','file')
-        errordlg('Error! the function runTrial is missing... check that the func folder is placed correctly and that it contains runTrial.m');
+       if (~nojvm) errordlg('Error! the function runTrial is missing... check that the func folder is placed correctly and that it contains runTrial.m'); end
         error('Error: runTrial missing!');
     end
 
@@ -95,7 +98,7 @@ catch e
     sca; %Close screen
     PsychPortAudio('close'); %close all sounds and shutdown sound driver
     fprintf('---------------------------- Aborted experiment "%s" at %s. ----------------------------\n',experimentName,datestr(datetime,'HH:MM:SS'));
-    errordlg(e.message); %give error
+    if (~nojvm) errordlg(e.message); end%give error
     disp(getReport(e));
 %    rmpath('func');
     global bakdata;

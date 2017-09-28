@@ -36,7 +36,7 @@ function varargout = ExperimentStarter(varargin)
 
 % Edit the above text to modify the response to help ExperimentStarter
 
-% Last Modified by GUIDE v2.5 13-Dec-2016 12:59:27
+% Last Modified by GUIDE v2.5 28-Sep-2017 11:42:03
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -184,70 +184,88 @@ catch e
     rethrow(e);
 end
 delete(h);
-% Run experiment
-dateNtime = datestr(datetime);
 
-Screen('Preference', 'SkipSyncTests', 0);
-oldLevel = Screen('Preference', 'Verbosity', 0);
-try
-    if experimentRunning
-        warning('Experiment is flagged as running. If this is not the case, type clear global in the command window');
-        return;
-    end
-    experimentRunning = 1;
-    hW = initWindowBlack(ExperimentData.preMessage, -1, 1, debug);
-catch e
-    experimentRunning = 0;
-    EndofExperiment;
-    if strcmp(e.message,'See error message printed above.')
-        try
-            disp('Warning, skipping sync tests!')
-            Screen('Preference', 'SkipSyncTests', 1);
-            hW = initWindowBlack(ExperimentData.preMessage, -1, 1, debug);
-        catch e
-            rethrow(e)
-        end
-    else
-        rethrow(e);
-    end
-end
-%end of init
-try
-    Data = runExperiment(ExperimentData,hW);
-catch e
-    experimentRunning = 0;
-    waitfor(errordlg(sprintf('Error while running the experiment! SORRY! More details in the Command Window')));
-    EndofExperiment;
+if (handles.nojvmmode.Value)
+    % nojvm gstreamer support mode
+    fprintf('Saving state in preperation of gstreamer support mode... ');
+    save('statesave.mat');
+    fprintf('Done.\n');
+    fprintf('Starting headless matlab session...\n');
+    startfile = fullfile(cd, 'Menus/Experiment/nojvmstart.m');
+    system(['matlab -nosplash -wait -nojvm -r "run(''' startfile ''')"']);
     try
-        %% Process and save data
-            data = struct;
-            global bakdata;
-            Data = bakdata;
-            dataiter = 0;
-            for i=1:length(Data)
-                blocknr = sprintf('Block %i',i);
-                for j=1:length(Data{i})
-                    dataiter = dataiter + 1;
-                    eventdata = Data{i}{j};
-                    fnames = fieldnames(eventdata);
-                    for k=1:length(fnames)
-                        eval(sprintf('data(dataiter).%s = eventdata.%s;',fnames{k}, fnames{k}));            
-                    end
-		    % Add extra collums
-                    data(dataiter).date    = dateNtime;
-                    data(dataiter).subjectId = subjectId;
-                    data(dataiter).blocknr = blocknr;
-                end
-            end
-            exportStructToCSV(data,['Results_' name '.csv'],1);
-            msgbox(sprintf('Results saved (and appended) to: %s', fullfile(cd,['Results_' name '.csv'])));
+        load('returnstate.mat');
+        delete 'returnstate.mat';
     catch e
-        waitfor(errordlg(sprintf('failed to save data! Sorry!')));
+        waitfor(errordlg(sprintf('Error while running experiment in gstreamer mode: Not return value found.\n')));
+        rethrow(e); 
     end
-    rethrow(e)
+else
+    % Run experiment
+    dateNtime = datestr(datetime);
+
+    Screen('Preference', 'SkipSyncTests', 0);
+    oldLevel = Screen('Preference', 'Verbosity', 0);
+    try
+        if experimentRunning
+            warning('Experiment is flagged as running. If this is not the case, type clear global in the command window');
+            return;
+        end
+        experimentRunning = 1;
+        hW = initWindowBlack(ExperimentData.preMessage, -1, 1, debug);
+    catch e
+        experimentRunning = 0;
+        EndofExperiment;
+        if strcmp(e.message,'See error message printed above.')
+            try
+                disp('Warning, skipping sync tests!')
+                Screen('Preference', 'SkipSyncTests', 1);
+                hW = initWindowBlack(ExperimentData.preMessage, -1, 1, debug);
+            catch e
+                rethrow(e)
+            end
+        else
+            rethrow(e);
+        end
+    end
+    %end of init
+    try
+        Data = runExperiment(ExperimentData,hW);
+    catch e
+        experimentRunning = 0;
+        waitfor(errordlg(sprintf('Error while running the experiment! SORRY! More details in the Command Window')));
+        EndofExperiment;
+        try
+            %% Process and save data
+                data = struct;
+                global bakdata;
+                Data = bakdata;
+                dataiter = 0;
+                for i=1:length(Data)
+                    blocknr = sprintf('Block %i',i);
+                    for j=1:length(Data{i})
+                        dataiter = dataiter + 1;
+                        eventdata = Data{i}{j};
+                        fnames = fieldnames(eventdata);
+                        for k=1:length(fnames)
+                            eval(sprintf('data(dataiter).%s = eventdata.%s;',fnames{k}, fnames{k}));            
+                        end
+                % Add extra collums
+                        data(dataiter).date    = dateNtime;
+                        data(dataiter).subjectId = subjectId;
+                        data(dataiter).blocknr = blocknr;
+                    end
+                end
+                exportStructToCSV(data,['Results_' name '.csv'],1);
+                msgbox(sprintf('Results saved (and appended) to: %s', fullfile(cd,['Results_' name '.csv'])));
+        catch e
+            waitfor(errordlg(sprintf('failed to save data! Sorry!')));
+        end
+        rethrow(e)
+    end
+    EndofExperiment(hW,'You have reached the end! Thanks you for participating!');
+    Screen('Preference', 'Verbosity', oldLevel);
 end
-EndofExperiment(hW,'You have reached the end! Thanks you for participating!');
-Screen('Preference', 'Verbosity', oldLevel);
 %% Process and save data
 try
     data = struct;
@@ -486,3 +504,12 @@ function debugtoggle_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of debugtoggle
+
+
+% --- Executes on button press in nojvmmode.
+function nojvmmode_Callback(hObject, eventdata, handles)
+% hObject    handle to nojvmmode (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of nojvmmode
