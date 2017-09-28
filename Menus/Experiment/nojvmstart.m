@@ -7,7 +7,9 @@ cd
 addpath(genpath('func'));
 addpath(genpath('Menus'));
 % Load env
+w = warning ('off','all');
 load('statesave.mat');
+warning(w)
 delete 'statesave.mat';
 
 % message
