@@ -104,9 +104,9 @@ function out = getLoadFunction()
 %[ moviePtr [duration] [fps] [width] [height] [count] [aspectRatio]]
 %    =Screen('OpenMovie', windowPtr, moviefile [, async=0] [, preloadSecs=1]
 % [, specialFlags1=0][, pixelFormat=4][, maxNumberThreads=-1][, movieOptions]);
-    out = [...
+    out = ['disp(event)\r\n'...
         '[event.pVideo, event.duration] = Screen(''OpenMovie'', windowPtr, event.data);\r\n'...
-        'disp(event)\r\n']; %may be multiline!
+        ]; %may be multiline!
 end
 
 function out = getRunFunction()
@@ -192,6 +192,10 @@ function out = getQuestStruct()
     q(6).name = '';
     q(6).sort = 'checkbox';
     q(6).data = 'Stop on Keypress';
+    
+    q(7).name = 'a complete installation of Gstreamer is required';
+    q(7).sort = 'edit';
+    q(7).data = 'https://gstreamer.freedesktop.org/data/pkg/windows/1.12.3/gstreamer-1.0-x86_64-1.12.3.msi';
     out = q; %See eventEditor
 end
 
