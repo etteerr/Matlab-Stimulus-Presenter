@@ -106,6 +106,7 @@ try
             startTime = GetSecs();
             while eventIter <= nEvents % run
                 event = events{eventIter};
+                eventTrueIt = eventIter;
                 % Create data
                 reply = struct;
                 reply.name = event.name;
@@ -120,7 +121,7 @@ try
                     reply.alias = event.alias;
                 end
                 replyData{replyIter} = reply;
-                events{eventIter} = event; % save event data (that is loaded for the run fun)
+                events{eventTrueIt} = event; % save event data (that is loaded for the run fun)
                 % Iters
                 replyIter = replyIter + 1;
                 eventIter = eventIter + 1;
