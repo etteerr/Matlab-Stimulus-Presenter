@@ -101,7 +101,11 @@ function out = getLoadFunction()
 %               'The second line!', ...
 %               'Still the second line!\r\nThe Third line!'];
 % Screen('Flip', windowPtr [, when] [, dontclear] [, dontsync] [, multiflip]);
-    out = 'event.im = imread(event.data);'; %may be multiline!
+    out = [ ... %may be multiline!
+        'im = imread(event.data);' ...
+        'event.im = Screen(''MakeTexture'', windowPtr, im); \r\n' ...
+        'clear im; \r\n' ...
+        ]; 
 end
 
 function out = getRunFunction()
@@ -111,7 +115,7 @@ function out = getRunFunction()
 %     string = ['My long strings first line\r\n', ...
 %               'The second line!', ...
 %               'Still the second line!\r\nThe Third line!'];
-    out = ['Screen(''PutImage'', windowPtr, event.im);\r\n' ...
+    out = ['Screen(''DrawTexture'', windowPtr, event.im); \r\n' ...
         'Screen(''Flip'', windowPtr, 0, double(~event.clear));\r\n'...
         '[~,name,ext] = fileparts(event.data); \n\r' ...
         'reply.image = strcat(name,ext); \r\n'...
@@ -137,10 +141,12 @@ function out = getQuestStruct()
     q(1).name = 'event Name';
     q(1).sort = 'edit';
     q(1).data = 'Draw Image';
+    q(1).tooltip = '';
         
     q(2).name = 'Behaviors';
     q(2).sort = 'text';
     q(2).data = 'Select options:';
+    q(2).tooltip = '';
     
     out = q; %See eventEditor
 end
@@ -149,6 +155,6 @@ function out = getEventStruct(answersOfQuestions)
 % event.data will be filled with the needed files specified in dataType()
     event = struct;
     event.alias = answersOfQuestions(1).String;
-    event.clear = 1;
+    event.clear = 0;
     out = event; %No other data needed
 end
