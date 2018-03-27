@@ -104,6 +104,8 @@ function out = getLoadFunction()
     'if exist(''textDatasets'')~=1\r\n'...
     '    textDatasets={};\r\n'...
     'end\r\n'...
+    'textDatasets \r\n' ...
+    'event.cdataset \r\n' ...
     'if isempty(textDatasets)\r\n'...
     '    textDataset = struct;\r\n'...
     '    textDataset.name = event.cdataset;\r\n'...
@@ -208,7 +210,7 @@ function out = getQuestStruct()
     out(4).sort = 'checkbox';
     out(4).data = 'putback';
     
-    out(5).name = 'color';
+    out(5).name = 'text color';
     out(5).sort = 'edit';
     out(5).data = '[255 255 255]';
     out(5).toolTip = 'RGB colors, from 0 to 255. first one is red, second is green, third is blue.';
@@ -216,6 +218,16 @@ function out = getQuestStruct()
     out(6).name = '';
     out(6).sort = 'checkbox';
     out(6).data = 'clear screen';
+    
+    out(7).name = 'Horizontal alignment:';
+    out(7).sort = 'popupmenu';
+    out(7).data = {'center', 'left', 'right'};
+    out(7).toolTip = 'determines where the text appears ';
+    
+    out(8).name = 'Vertical alignment:';
+    out(8).sort = 'popupmenu';
+    out(8).data = {'top', 'center', 'bottom'};
+    out(8).toolTip = 'determines where the text appears ';
 end
 
 function out = getEventStruct(answer)
@@ -242,4 +254,6 @@ function out = getEventStruct(answer)
     out.putback = answer(4).Value;
     out.color = eval(answer(5).String);
     out.clear = answer(6).Value;
+    out.horzpos = out(7).Answer;
+    out.vertpos = out(8).Answer;    
 end
