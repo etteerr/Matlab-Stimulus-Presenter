@@ -47,6 +47,15 @@ if ispc
     end
 end      
 
+%% CHeck gstreamer
+if ispc
+    status = checkGstreamer;
+    if status
+        waitfor(errordlg(...
+            'Failed to install gstreamer, download and install gstreamer if required'));
+    end  
+end
+
 %% Psychtoolbox
 [doesExist, version] = psychtoolboxExists;
 %targetVersion = ''%'Psychtoolbox-3.0.10';
