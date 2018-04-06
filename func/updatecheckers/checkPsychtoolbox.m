@@ -28,7 +28,26 @@ function [installed] = checkPsychtoolbox
 %           should only occour once.
 %           Done :-It might be userfriendly to ask before installing xD
 ppath = addpath('Psychtoolbox');
-addpath('SVN');
+
+%% Check svn
+% C:\Program Files\SlikSvn\
+% Only on windows
+if ispc
+    svnPath = 'C:\Program Files\SlikSvn\bin';
+    svnExec = 'svn.exe';
+    if ~exist(fullfile(svnPath, svnExec),'file')
+        % svn missing
+        status = installSvn;
+        if status
+            waitfor(errordlg(...
+                'Failed to install slikSvn, download and install sliksvn to C:\Program Files\SlikSvn'));
+        end
+    else
+        copyfile(svnPath, 'SVN');
+    end
+end      
+
+%% Psychtoolbox
 [doesExist, version] = psychtoolboxExists;
 %targetVersion = ''%'Psychtoolbox-3.0.10';
 if ispc
