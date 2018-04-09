@@ -80,6 +80,7 @@ if showWaitbar
 end
 
 %% Set status succesfull
+setenv('PATH', [getenv('PATH') ';C:\Program Files\SlikSvn\bin']);
 status = 0;
 end
 
