@@ -1,0 +1,5 @@
+date;subjectId;blocknr;name;timeEventStart;timeEventEnd;blockname;alias;droppedframes;movie;start;keyIsDown;secs;stop
+09-Apr-2018 11:32:42;;Block 1;DIO event;0.000112;0.33094;video;p0.0;;;;;;
+09-Apr-2018 11:32:42;;Block 1;Movie;0.3312;62.598;video;Play Movie;0;sample.mp4;5520.1932;0;5582.4389;5582.4449
+09-Apr-2018 11:32:42;;Block 1;DIO event;62.5982;62.6156;video;p0.0;;;;;;
+09-Apr-2018 11:32:42;;Block 1;Movie;62.6158;124.8853;video;Play Movie;0;sample.mp4;5582.4686;0;5644.7253;5644.7322
