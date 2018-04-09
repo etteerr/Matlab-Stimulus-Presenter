@@ -61,9 +61,9 @@ end
 %targetVersion = ''%'Psychtoolbox-3.0.10';
 if ispc
     % We are on windows
-    targetDir = 'c:\\Psychtoolbox';
+    targetDir = 'c:\\';
 else
-    targetDir = '~/Psychtoolbox';
+    targetDir = '~/';
 end
 
 if doesExist
@@ -76,10 +76,9 @@ else
    
        %Psychtoolbox does not Exist! 
     %This calls for: DownloadPsychtoolbox!!
-    if ~exist('Psychtoolbox\\DownloadPsychtoolbox.m','file')
-        %But it does not exist, not even the installer!
-        errordlg('Psychtoolbox tools are not present! Unable to start a experiment!','CALL HELP, RUN! or redownload this...');
-    else
+    websave('DownloadPsychtoolbox.m','https://raw.github.com/Psychtoolbox-3/Psychtoolbox-3/master/Psychtoolbox/DownloadPsychtoolbox.m')
+    
+    if exist('DownloadPsychtoolbox.m','file')
         %The installer exists, luckely!
         if strcmp(questdlg('Do you want to install Psychtoolbox now? (you need it to run experiments!)','Psychtoolbox','Yes','No','Yes'),'Yes')
             msgbox('Now installing Psychtoolbox. Watch the console, questions will be asked by the installer."  This can take a few minutes...','Warning, you need to do stuff');
@@ -90,7 +89,7 @@ else
                 if (v(1) < 7) || ((v(1) == 7) && (v(2) < 4))
                     errordlg(sprintf('Matlab version %i.%i not supported :(', v(1), v(2)), 'Unsupported matlab');
                     error('Matlab version %i.%i not supported :(', v(1), v(2));
-                    DownloadLegacyPsychtoolbox(targetDir);
+                    %DownloadLegacyPsychtoolbox(targetDir);
                 else
                     try
                         DownloadPsychtoolbox(targetDir);
