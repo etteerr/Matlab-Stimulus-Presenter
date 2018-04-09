@@ -82,7 +82,7 @@ try
                 if usejava('jvm')
                     waitbar(j/length(dio.channels),hWait,sprintf('Adding channels to %s...',dev.Model));
                 else
-                   	fprintf('Adding channels to %s...\n',dev.Model);
+                   	fprintf('Adding channel %s to %s...\n',dio.channels{j}.id,dev.Model);
                 end
                 addDigitalChannel(diosession, dev.ID, dio.channels{j}.id, dio.channels{j}.direction);
                 if strcmpi(dio.channels{j}.direction,'OutputOnly')
