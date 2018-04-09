@@ -27,7 +27,6 @@ function [installed] = checkPsychtoolbox
 %           Though it will prolong the installation of Psychtoolbox, it
 %           should only occour once.
 %           Done :-It might be userfriendly to ask before installing xD
-ppath = addpath('Psychtoolbox');
 
 %% Check svn
 % C:\Program Files\SlikSvn\
@@ -111,6 +110,5 @@ else
         end
     end
 end
-path(ppath);
 end
 
