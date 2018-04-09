@@ -171,8 +171,18 @@ catch e
     rethrow(e);
 end
 
+
+%% Prevent running exp. if it is running
+if experimentRunning
+    fprintf('Experiment is flagged as running. If this is not the case, type clear global in the command window');
+    return;
+end
+
 %% If headless is required (video) transfer data and start session
+
+
 if (handles.nojvmmode.Value)
+    
     % nojvm gstreamer support mode
     fprintf('Saving state in preperation of gstreamer support mode... ');
     save('statesave.mat');
@@ -211,10 +221,6 @@ else
     Screen('Preference', 'SkipSyncTests', 0);
     oldLevel = Screen('Preference', 'Verbosity', 0);
     try
-        if experimentRunning
-            warning('Experiment is flagged as running. If this is not the case, type clear global in the command window');
-            return;
-        end
         experimentRunning = 1;
         hW = initWindowBlack(ExperimentData.preMessage, -1, 1, debug);
     catch e
@@ -283,9 +289,11 @@ try
             data(dataiter).subjectId = subjectId;
             data(dataiter).blocknr = blocknr;
             eventdata = Data{i}{j};
-            fnames = fieldnames(eventdata);
-            for k=1:length(fnames)
-                eval(sprintf('data(dataiter).%s = eventdata.%s;',fnames{k}, fnames{k}));            
+            if ~isempty(eventdata)
+                fnames = fieldnames(eventdata);
+                for k=1:length(fnames)
+                    eval(sprintf('data(dataiter).%s = eventdata.%s;',fnames{k}, fnames{k}));            
+                end
             end
         end
     end
