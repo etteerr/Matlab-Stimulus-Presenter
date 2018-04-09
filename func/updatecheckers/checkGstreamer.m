@@ -27,7 +27,7 @@ gstreamermsi = 'gstreamer.msi';
 
 disp('Downloading gstreamer client... (may take a while!)');
 try
-    %websave(gstreamermsi, 'https://gstreamer.freedesktop.org/data/pkg/windows/1.14.0.1/gstreamer-1.0-x86_64-1.14.0.1.msi')
+    websave(gstreamermsi, 'https://gstreamer.freedesktop.org/data/pkg/windows/1.14.0.1/gstreamer-1.0-x86_64-1.14.0.1.msi')
 catch e
    return; 
 end
