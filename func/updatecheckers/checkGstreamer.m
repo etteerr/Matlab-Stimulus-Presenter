@@ -1,6 +1,8 @@
 function status = checkGstreamer(showWaitbar)
 %CHECKGSTREAMER Summary of this function goes here
-%   Detailed explanation goes here
+%   when changing check:
+%   - install msi section for feature names
+%   - Download client for version download
 %% Init
 status = -1;
 if nargin == 0
@@ -42,7 +44,13 @@ log = fullfile(cd, 'gstreamer-install.log');
 %installdir = fullfile(cd, 'gstreamer-tmp');
 
 %% install msi
-command = sprintf('msiexec /i "%s" /passive /norestart /L* "%s"', installer, log);
+command = sprintf([...
+    'msiexec /i "%s" /passive /norestart /L* "%s" '...
+    'ADDLOCAL=_gstreamer_1.0_codecs_gpl,'...
+    '_gstreamer_1.0_codecs_restricted,'...
+    '_gstreamer_1.0_libav,'...
+    '_gstreamer_1.0_dvd'...
+    ], installer, log);
 [status, out] = system(command);
 if status
     disp failed
