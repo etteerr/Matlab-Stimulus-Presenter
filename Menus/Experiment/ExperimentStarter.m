@@ -170,25 +170,16 @@ catch e
     waitfor(errordlg(sprintf('Error: Invalid input\n%s',e.message)));
     rethrow(e);
 end
-% Generate experiment
-try
-    h = waitbar(0,'Generating experiment...');
-    [ExperimentData eventNames] = generateExperiment(generatorPackage);
-    compileTrialRunner(eventNames);
-    initEvents(eventNames);
-    clear functions;
-catch e
-    save(sprintf('memdump_%s.mat',strrep(strrep(datestr(clock), ' ', '_'), ':', '-')));
-    delete(h);
-    waitfor(errordlg(sprintf('Error while generating experiment:\n%s', e.message)));
-    rethrow(e);
-end
-delete(h);
 
+
+%% Prevent running exp. if it is running
 if experimentRunning
     fprintf('Experiment is flagged as running. If this is not the case, type clear global in the command window');
     return;
 end
+
+%% If headless is required (video) transfer data and start session
+
 
 if (handles.nojvmmode.Value)
     
@@ -207,6 +198,23 @@ if (handles.nojvmmode.Value)
         rethrow(e); 
     end
 else
+%% If we do a normal run
+    % Generate experiment
+    try
+        h = waitbar(0,'Generating experiment...');
+        [ExperimentData eventNames] = generateExperiment(generatorPackage);
+        compileTrialRunner(eventNames);
+        initEvents(eventNames);
+        clear functions;
+    catch e
+        save(sprintf('memdump_%s.mat',strrep(strrep(datestr(clock), ' ', '_'), ':', '-')));
+        delete(h);
+        waitfor(errordlg(sprintf('Error while generating experiment:\n%s', e.message)));
+        rethrow(e);
+    end
+    delete(h);
+
+
     % Run experiment
     dateNtime = datestr(datetime);
 

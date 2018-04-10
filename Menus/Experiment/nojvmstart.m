@@ -12,6 +12,22 @@ load('statesave.mat');
 warning(w)
 delete 'statesave.mat';
 
+% Init events & generate experiment
+try
+    fprintf('Generating experiment...\n');
+    [ExperimentData eventNames] = generateExperiment(generatorPackage);
+    fprintf('Compiling experient...\n');
+    compileTrialRunner(eventNames);
+    fprintf('Initializing experiment...\n');
+    initEvents(eventNames);
+    fprintf('Cleaning functions...\n');
+    clear functions;
+catch e
+    save(sprintf('memdump_%s.mat',strrep(strrep(datestr(clock), ' ', '_'), ':', '-')));
+    fprintf('Error while generating experiment:\n%s', e.message);
+    rethrow(e);
+end
+
 % message
 fprintf('--------------------------------------------------------------------\n');
 fprintf('Done loading, if anything goes wrong, close this window to get out!\n');

@@ -59,173 +59,169 @@ switch(nargin)
     otherwise
         error('incorrect usage of runTrial...');
 end
+try
+    %% initialisation
+    data = {};
+    nEvents = length(events); % the amount of events (show image, present sound, delay etc)
+    audioHandles = zeros(1,40);
+    replyData = cell(1,nEvents);
 
-%% initialisation
-data = {};
-nEvents = length(events); % the amount of events (show image, present sound, delay etc)
-audioHandles = zeros(1,40);
-replyData = cell(1,nEvents);
+    %% Trial Loops
+    switch mode
+        %% no preload
+        case 0
+            replyIter = 1;
+            eventIter = 1;
+            startTime = GetSecs();
+            while eventIter <= nEvents
+                % Craete data
+                event = events{eventIter};
+                reply = struct;
+                reply.name = event.name;
+                eventName = event.name;
+                reply.timeEventStart = GetSecs() - startTime;
+                % Run event
+% generated script "DIO event" from DIO_event.m
+if strcmp(eventName,'DIO event')
+global diosessions;
+event.s = diosessions(event.devname);
+event.s.outState(event.ch) = event.value;
+diosessions(event.devname) = event.s;
+event.s.session.outputSingleScan(event.s.outState);
+end
+% generated script "Movie" from Video.m
+if strcmp(eventName,'Movie')
+disp(event)
+[event.pVideo, event.duration] = Screen('OpenMovie', windowPtr, event.data);
 
-%% Trial Loops
-switch mode
-    %% no preload
-    case 0
-        replyIter = 1;
-        eventIter = 1;
-        startTime = GetSecs();
-        while eventIter <= nEvents
-            % Craete data
-            event = events{eventIter};
-            reply = struct;
-            reply.name = event.name;
-            eventName = event.name;
-            reply.timeEventStart = GetSecs() - startTime;
-            % Run event
-% generated script "Load sound dataset" from LoadSoundDataset.m
-if strcmp(eventName,'Load sound dataset')
-if ~exist('SoundDataset', 'var')
- SoundDataset = struct;
-end
-eval(sprintf('[SoundDataset.%s.Sounds SoundDataset.%s.Files] = loadSoundDatasetSounds(event.datasetname);',event.datasetname, event.datasetname));
-eval(sprintf('SoundDataset.%s.ids=1:length(SoundDataset.%s.Sounds);',event.datasetname, event.datasetname));
-
-
-end
-% generated script "Play dataset sound" from PlaySoundDataset.m
-if strcmp(eventName,'Play dataset sound')
-if event.random
-    event.soundID = eval(sprintf('SoundDataset.%s.ids(randi(length(SoundDataset.%s.ids)));', event.datasetname, event.datasetname));
-end
-if ~event.putBack
-    eval(sprintf('SoundDataset.%s.ids(SoundDataset.%s.ids==event.soundID)= [];', event.datasetname, event.datasetname));
-end
-event.sHandle = eval(sprintf('SoundDataset.%s.Sounds{event.soundID};', event.datasetname));
-
-reply.soundStartTime = PsychPortAudio('Start', event.sHandle, event.repetitions, 0 , event.waitForStart , event.stopTime , 0);
-reply.soundID = event.soundID;
-
-
-end
-% generated script "Show Image" from showImage.m
-if strcmp(eventName,'Show Image')
-event.im = imread(event.data);
-Screen('PutImage', windowPtr, event.im);
-Screen('Flip', windowPtr, event.delay, double(~event.clear));
-reply.data = event.data;
-end
-% generated script "Wait" from wait.m
-if strcmp(eventName,'Wait')
-
-WaitSecs(event.time);
-reply.waittime = event.time;
-end
-% generated script "Repeat x events" from flowEvent_repeat.m
-if strcmp(eventName,'Repeat x events')
-
-
-end
-            % Save
-            reply.timeEventEnd = GetSecs() - startTime;
-            reply.blockname = event.blockname;
-            replyData{replyIter} = reply;
-            % Iter
-            replyIter = replyIter + 1;
-            eventIter = eventIter + 1;
-        end
-    %% preload  
-    case 1
-        for i=1:nEvents % load
-            event = events{i};
-            eventName = event.name;
-% generated script "Load sound dataset" from LoadSoundDataset.m
-if strcmp(eventName,'Load sound dataset')
-if ~exist('SoundDataset', 'var')
- SoundDataset = struct;
-end
-eval(sprintf('[SoundDataset.%s.Sounds SoundDataset.%s.Files] = loadSoundDatasetSounds(event.datasetname);',event.datasetname, event.datasetname));
-eval(sprintf('SoundDataset.%s.ids=1:length(SoundDataset.%s.Sounds);',event.datasetname, event.datasetname));
-
-end
-% generated script "Play dataset sound" from PlaySoundDataset.m
-if strcmp(eventName,'Play dataset sound')
-if event.random
-    event.soundID = eval(sprintf('SoundDataset.%s.ids(randi(length(SoundDataset.%s.ids)));', event.datasetname, event.datasetname));
-end
-if ~event.putBack
-    eval(sprintf('SoundDataset.%s.ids(SoundDataset.%s.ids==event.soundID)= [];', event.datasetname, event.datasetname));
-end
-event.sHandle = eval(sprintf('SoundDataset.%s.Sounds{event.soundID};', event.datasetname));
-
-end
-% generated script "Show Image" from showImage.m
-if strcmp(eventName,'Show Image')
-event.im = imread(event.data);
-end
-% event Wait has no load function. (wait)
-% event Repeat x events has no load function. (flowEvent_repeat)
-            events{i} = event; % save event data (that is loaded for the run fun)
-        end
-        replyIter = 1;
-        eventIter = 1;
-        startTime = GetSecs();
-        while eventIter <= nEvents % run
-            event = events{eventIter};
-            % Create data
-            reply = struct;
-            reply.name = event.name;
-            eventName = event.name;
-            reply.timeEventStart = GetSecs() - startTime;
-            % Run event
-% generated script "Load sound dataset" from LoadSoundDataset.m
-if strcmp(eventName,'Load sound dataset')
-
-end
-% generated script "Play dataset sound" from PlaySoundDataset.m
-if strcmp(eventName,'Play dataset sound')
-reply.soundStartTime = PsychPortAudio('Start', event.sHandle, event.repetitions, 0 , event.waitForStart , event.stopTime , 0);
-reply.soundID = event.soundID;
-
-
-end
-% generated script "Show Image" from showImage.m
-if strcmp(eventName,'Show Image')
-Screen('PutImage', windowPtr, event.im);
-Screen('Flip', windowPtr, event.delay, double(~event.clear));
-reply.data = event.data;
-end
-% generated script "Wait" from wait.m
-if strcmp(eventName,'Wait')
-WaitSecs(event.time);
-reply.waittime = event.time;
-end
-% generated script "Repeat x events" from flowEvent_repeat.m
-if strcmp(eventName,'Repeat x events')
-
-end
-            % Save data
-            reply.timeEventEnd = GetSecs() - startTime;
-            reply.blockname = event.blockname;
-            if isfield(event, 'alias')
-                reply.alias = event.alias;
-            end
-            replyData{replyIter} = reply;
-            events{eventIter} = event; % save event data (that is loaded for the run fun)
-            % Iters
-            replyIter = replyIter + 1;
-            eventIter = eventIter + 1;
-        end
-    otherwise
-        error('Unknown trial run mode')
-end
-
-%% Clean audio handles
-for i=1:length(audioHandles)
-    if ~(audioHandles(i)==0)
-        PsychPortAudio('Close' , audioHandles(i));
+while (KbCheck) end
+[reply.droppedframes] = Screen('PlayMovie', event.pVideo, event.rate, event.loop, event.vol);
+[~,name,ext] = fileparts(event.data); 
+reply.movie = strcat(name,ext); 
+reply.start = GetSecs;while 1
+    tex = Screen('GetMovieImage', windowPtr, event.pVideo);
+    if tex<=0
+        break;
     end
+[reply.keyIsDown, reply.secs, ~, ~] = KbCheck;
+    if (event.stoponkey && reply.keyIsDown)
+        break;
+    end
+if (event.time && (event.time <= (GetSecs - reply.start)))
+    break;
 end
+    Screen('DrawTexture', windowPtr, tex);
+    Screen('Flip', windowPtr);
+    Screen('Close', tex);
+end
+reply.stop = GetSecs;[reply.droppedframes] = Screen('PlayMovie', event.pVideo, 0, event.loop, event.vol);
 
-%% finish data compile
-% nothing to do here
+end
+                % Save
+                reply.timeEventEnd = GetSecs() - startTime;
+                reply.blockname = event.blockname;
+                if isfield(event, 'alias')
+                    reply.alias = event.alias;
+                end
+                replyData{replyIter} = reply;
+                % Iter
+                replyIter = replyIter + 1;
+                eventIter = eventIter + 1;
+            end
+        %% preload  
+        case 1
+            for iteratorwhichnamecannotbedupe=1:nEvents % load
+                event = events{iteratorwhichnamecannotbedupe};
+                eventName = event.name;
+% generated script "DIO event" from DIO_event.m
+if strcmp(eventName,'DIO event')
+global diosessions;
+event.s = diosessions(event.devname);
+event.s.outState(event.ch) = event.value;
+diosessions(event.devname) = event.s;
+end
+% generated script "Movie" from Video.m
+if strcmp(eventName,'Movie')
+disp(event)
+[event.pVideo, event.duration] = Screen('OpenMovie', windowPtr, event.data);
+
+end
+                events{iteratorwhichnamecannotbedupe} = event; % save event data (that is loaded for the run fun)
+            end
+            replyIter = 1;
+            eventIter = 1;
+            startTime = GetSecs();
+            while eventIter <= nEvents % run
+                event = events{eventIter};
+                % Create data
+                reply = struct;
+                reply.name = event.name;
+                eventName = event.name;
+                reply.timeEventStart = GetSecs() - startTime;
+                % Run event
+% generated script "DIO event" from DIO_event.m
+if strcmp(eventName,'DIO event')
+event.s.session.outputSingleScan(event.s.outState);
+end
+% generated script "Movie" from Video.m
+if strcmp(eventName,'Movie')
+while (KbCheck) end
+[reply.droppedframes] = Screen('PlayMovie', event.pVideo, event.rate, event.loop, event.vol);
+[~,name,ext] = fileparts(event.data); 
+reply.movie = strcat(name,ext); 
+reply.start = GetSecs;while 1
+    tex = Screen('GetMovieImage', windowPtr, event.pVideo);
+    if tex<=0
+        break;
+    end
+[reply.keyIsDown, reply.secs, ~, ~] = KbCheck;
+    if (event.stoponkey && reply.keyIsDown)
+        break;
+    end
+if (event.time && (event.time <= (GetSecs - reply.start)))
+    break;
+end
+    Screen('DrawTexture', windowPtr, tex);
+    Screen('Flip', windowPtr);
+    Screen('Close', tex);
+end
+reply.stop = GetSecs;[reply.droppedframes] = Screen('PlayMovie', event.pVideo, 0, event.loop, event.vol);
+
+end
+                % Save data
+                reply.timeEventEnd = GetSecs() - startTime;
+                reply.blockname = event.blockname;
+                if isfield(event, 'alias')
+                    reply.alias = event.alias;
+                end
+                replyData{replyIter} = reply;
+                events{eventIter} = event; % save event data (that is loaded for the run fun)
+                % Iters
+                replyIter = replyIter + 1;
+                eventIter = eventIter + 1;
+            end
+        otherwise
+            error('Unknown trial run mode')
+    end
+
+    %% Clean audio handles
+    for iteratorwhichnamecannotbedupe=1:length(audioHandles)
+        if ~(audioHandles(iteratorwhichnamecannotbedupe)==0)
+            PsychPortAudio('Close' , audioHandles(iteratorwhichnamecannotbedupe));
+        end
+    end
+
+    %% finish data compile
+    % nothing to do here
+catch e
+    % Dump function workspace for later analysis
+    save(sprintf('memdump_%s.mat',strrep(strrep(datestr(clock), ' ', '_'), ':', '-')));
+    try
+        assignin('base', 'event_that_caused_error', event);
+        openvar('event_that_caused_error');
+    catch b
+    end
+    rethrow(e);
+end
 end
 

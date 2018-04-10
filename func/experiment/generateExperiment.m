@@ -49,7 +49,7 @@ eventNamesIter = 0;
 eventNames = {};
 for i=1:length(creator) %For block in blocks
     block = creator{i}; %block struct
-    events = block.events; %Êvent cell
+    events = block.events; %?vent cell
     for j=1:length(events)
         event = events{j};
         if sum(strcmp(event.name, eventNames)) == 0
@@ -91,7 +91,7 @@ rte.trials = {}; %Blocks
 %rte.trials(1).events = {};
 for i=1:length(creator) %For block in blocks
     block = creator{i}; %block struct
-    events = block.events; %Êvent cell
+    events = block.events; %?vent cell
     trial = {};
     tmp = cell(1,length(events));
 %     for j=1:length(events)
@@ -140,7 +140,7 @@ for i=1:length(creator) %For block in blocks
                 if ~event.randomData % Then shift back the index
                     datasetIters(event.dataset) = datasetIters(event.dataset) - 1;
                     if (datasetIters(event.dataset) < 1)
-                        datasetIters(event.dataset) = 1;
+                        datasetIters(event.dataset) = 0;
                     end
                 end
             end
