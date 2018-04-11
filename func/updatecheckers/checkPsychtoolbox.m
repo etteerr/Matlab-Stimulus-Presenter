@@ -101,8 +101,8 @@ else
             end
             if psychtoolboxExists
                 installed = true;
-                waitfor(msgbox('Psychtoolbox succesfully installed. MatLab will restart.'));
-                system('matlab -r start &'); exit;
+                waitfor(msgbox('Psychtoolbox succesfully installed. MatLab will shutdown (please reopen).'));
+                exit;
             end
             
         else
