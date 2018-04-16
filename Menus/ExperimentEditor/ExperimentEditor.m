@@ -133,7 +133,7 @@ elseif handles.blockList.Value > length(handles.blockList.String)
 end
 % Selected block info
 idx = handles.blockList.Value;
-if idx > length(handles.blockList.String) || idx == 0;
+if idx > length(handles.blockList.String) || idx == 0
     idx = length(handles.blockList.String);
     if idx == 0
         idx = 1;
@@ -232,6 +232,7 @@ if exist(fullfile(path, file),'file')
         guiUpdate(handles);
         
     catch e
+        save(sprintf('memdump_%s.mat',strrep(strrep(datestr(clock), ' ', '_'), ':', '-')));
         errordlg(e.message);
         rethrow(e);
     end
@@ -270,6 +271,7 @@ function figure1_CloseRequestFcn(hObject, eventdata, handles)
 try
     updateExperiment(handles.experiment.name, handles.experiment);
 catch e
+    save(sprintf('memdump_%s.mat',strrep(strrep(datestr(clock), ' ', '_'), ':', '-')));
     try
         global experiment
         experiment = handles.experiment;

@@ -72,11 +72,11 @@ function res = gateway(varargin)
 end
 %% Do edit the following
 function out = getEventName()
-    out = 'Load sound dataset'; % The displayed event name
+    out = 'Jump'; % The displayed event name
 end
 
 function out = getDescription()
-    out = 'Loads All sounds from a dataset for imediate playback';
+    out = 'Jumps a number of events ahead or back';
 end
 
 function out = dataType()
@@ -88,7 +88,7 @@ function out = init()
 end
 
 function out = enabled()
-	out = false; %If this function returns false, it will not be included.
+	out = true; %If this function returns false, it will not be included.
 end
 
 function out = getLoadFunction()
@@ -100,9 +100,7 @@ function out = getLoadFunction()
 %               'Still the second line!\r\nThe Third line!'];
 % if out == '', no load function will be written.
 % Any change to event will be saved for the runFunction
-    out = ['if ~exist(''SoundDataset'', ''var'')\r\n SoundDataset = struct;\r\nend\r\n'... %may be multiline!
-           'eval(sprintf(''[SoundDataset.%%s.Sounds SoundDataset.%%s.Files] = loadSoundDatasetSounds(event.datasetname);'',event.datasetname, event.datasetname));\r\n'...
-           'eval(sprintf(''SoundDataset.%%s.ids=1:length(SoundDataset.%%s.Sounds);'',event.datasetname, event.datasetname));\r\n'];
+    out = ''; %may be multiline!
 end
 
 function out = getRunFunction()
@@ -111,15 +109,18 @@ function out = getRunFunction()
 %reply is the struct in which you can create fields to save data
 %reply.timeEventStart contains the time passed since the start of the event
 %startTime contains the time since the start of the block (excl. loading)
+% To change the flow of the events (eg: go 2 events back)
+% you can use variable: eventIter
+% Also nEvents variable might come in handy
 % use \r\n for a new line.
 % tip: You can write multiple lines by using:
 %     string = ['My long strings first line\r\n', ...
 %               'The second line!', ...
 %               'Still the second line!\r\nThe Third line!'];
-    out = '';
+    out = 'eventIter = eventIter + event.jump; reply.jump = event.jump;';
 end
 
-function out = getQuestStruct()
+function q = getQuestStruct()
 % questionStruct(1).name = 'event Type';
 % questionStruct(1).sort = 'text';
 % questionStruct(1).data = 'EventName';
@@ -133,12 +134,11 @@ function out = getQuestStruct()
 % If out == 0: No question dialog will popup and no questions are asked.
 % getEventStruct will be called regardless.
     q = struct;
-    
-    q(1).name = 'Select Dataset:';
-    q(1).sort = 'popupmenu';
-    q(1).data = getDatasets();
-    
-    out = q; %See eventEditor
+    q(1).name = 'Jump';
+    q(1).sort = 'edit';
+    q(1).data = '1';
+    q(1).toolTip = 'Jumps x events ahead (-1 mean repeat this event, -2 means go back to previous event)';
+
 end
 
 function out = getEventStruct(data)
@@ -154,8 +154,10 @@ function out = getEventStruct(data)
 % lenght + 2 will contain whether data selection is random (read only)
 % length + 3 will contain whether to put back a selected file after using
 % it.
-    e = struct;
-    e.datasetname = data(1).Answer;
-    e.alias = data(1).Answer;
-    out = e;
+% The following variables can be used to influence the experiment
+% generation. 
+%         out.generatorRepeat => repeats the previous events
+%         out.generatorNBack  => repeats go n back
+    out = struct;
+    out.jump = str2double(data(1).Answer);
 end

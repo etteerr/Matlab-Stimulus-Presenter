@@ -85,6 +85,9 @@ try
                 % Save
                 reply.timeEventEnd = GetSecs() - startTime;
                 reply.blockname = event.blockname;
+                if isfield(event, 'alias')
+                    reply.alias = event.alias;
+                end
                 replyData{replyIter} = reply;
                 % Iter
                 replyIter = replyIter + 1;
@@ -103,6 +106,7 @@ try
             startTime = GetSecs();
             while eventIter <= nEvents % run
                 event = events{eventIter};
+                eventTrueIt = eventIter;
                 % Create data
                 reply = struct;
                 reply.name = event.name;
@@ -117,7 +121,7 @@ try
                     reply.alias = event.alias;
                 end
                 replyData{replyIter} = reply;
-                events{eventIter} = event; % save event data (that is loaded for the run fun)
+                events{eventTrueIt} = event; % save event data (that is loaded for the run fun)
                 % Iters
                 replyIter = replyIter + 1;
                 eventIter = eventIter + 1;
@@ -137,7 +141,12 @@ try
     % nothing to do here
 catch e
     % Dump function workspace for later analysis
-    save('memdump.mat');
+    save(sprintf('memdump_%s.mat',strrep(strrep(datestr(clock), ' ', '_'), ':', '-')));
+    try
+        assignin('base', 'event_that_caused_error', event);
+        openvar('event_that_caused_error');
+    catch b
+    end
     rethrow(e);
 end
 end

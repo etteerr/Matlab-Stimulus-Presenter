@@ -8,7 +8,7 @@ function res = gateway(varargin)
 %   commands beginning with 'get' will need specific output as requested.
 % Commands:
 %     doInit:         This will be run before the experiment starts
-%     getLoadFun:     should return the function to load your data that needs to be displayed. can be a empty string.
+%     getLoad@Fun:     should return the function to load your data that needs to be displayed. can be a empty string.
 %     getRunFun:      should return the function that does something with the loaded data, like displaying it. can be empty string.
 %     getQuestStruct: should return a eventEditor compatible struct. if 0, no questions asked. Empty struct will be passed to getEventStruct
 %     getEventStruct: given the resulting questStruct (named answerStruct), create a eventStruct you can use.
@@ -72,11 +72,11 @@ function res = gateway(varargin)
 end
 %% Do edit the following
 function out = getEventName()
-    out = 'Load sound dataset'; % The displayed event name
+    out = 'Ask and Branch'; % The displayed event name
 end
 
 function out = getDescription()
-    out = 'Loads All sounds from a dataset for imediate playback';
+    out = 'Ask a question, get a reply and jump ahead x events';
 end
 
 function out = dataType()
@@ -88,7 +88,7 @@ function out = init()
 end
 
 function out = enabled()
-	out = false; %If this function returns false, it will not be included.
+	out = true; %If this function returns false, it will not be included.
 end
 
 function out = getLoadFunction()
@@ -100,23 +100,37 @@ function out = getLoadFunction()
 %               'Still the second line!\r\nThe Third line!'];
 % if out == '', no load function will be written.
 % Any change to event will be saved for the runFunction
-    out = ['if ~exist(''SoundDataset'', ''var'')\r\n SoundDataset = struct;\r\nend\r\n'... %may be multiline!
-           'eval(sprintf(''[SoundDataset.%%s.Sounds SoundDataset.%%s.Files] = loadSoundDatasetSounds(event.datasetname);'',event.datasetname, event.datasetname));\r\n'...
-           'eval(sprintf(''SoundDataset.%%s.ids=1:length(SoundDataset.%%s.Sounds);'',event.datasetname, event.datasetname));\r\n'];
+% [width, height]=Screen('WindowSize', windowPointerOrScreenNumber [, realFBSize=0]);
+    out = ['[width, height]=Screen(''WindowSize'', windowPtr);'...
+           'event.width = width; event.height=height;']; %may be multiline!
 end
 
 function out = getRunFunction()
 %event.eventData contains your requested data type from a dataset.
-%windowPtr contains the Psychtoolbox window pointer (handle)
-%reply is the struct in which you can create fields to save data
-%reply.timeEventStart contains the time passed since the start of the event
-%startTime contains the time since the start of the block (excl. loading)
 % use \r\n for a new line.
 % tip: You can write multiple lines by using:
 %     string = ['My long strings first line\r\n', ...
 %               'The second line!', ...
 %               'Still the second line!\r\nThe Third line!'];
-    out = '';
+% Screen('DrawText', windowPtr, text [,x] [,y] [,color] [,backgroundColor] [,yPositionIsBaseline] [,swapTextDirection]);
+% Screen('Flip', windowPtr [, when] [, dontclear] [, dontsync] [, multiflip]);
+%[newX,newY]=Screen('DrawText', windowPtr, text [,x] [,y] [,color] [,backgroundColor] [,yPositionIsBaseline] [,swapTextDirection]);
+
+    out = ['Screen(''Flip'', windowPtr, 0, event.clearscr, 2);\r\n'...
+        'reply.data = AskNoEnter(windowPtr, event.quest, event.textcolor,event.bgcolor,event.mode, ''center'', ''center'');\r\n'...
+        'if (reply.data == event.ans1)\r\n'...
+        '   eventIter = eventIter + event.act1;\r\n'...
+        'elseif (reply.data == event.ans2)\r\n'...
+        '  eventIter = eventIter + event.act2;\r\n'...
+        'elseif (reply.data == event.ans3)\r\n'...
+        '   eventIter = eventIter + event.act3;\r\n'...
+        'else\r\n'...
+        '   eventIter = eventIter + event.act4;\r\n'...
+        'end\r\n'...
+        'Screen(''Flip'', windowPtr, 0, event.clearscr, 2);\r\n'...
+           ];
+
+                   
 end
 
 function out = getQuestStruct()
@@ -134,14 +148,69 @@ function out = getQuestStruct()
 % getEventStruct will be called regardless.
     q = struct;
     
-    q(1).name = 'Select Dataset:';
-    q(1).sort = 'popupmenu';
-    q(1).data = getDatasets();
+    q(1).name = 'Event Alias: ';
+    q(1).sort = 'edit';
+    q(1).data = '';
     
+    q(2).name = 'Question:';
+    q(2).sort = 'edit';
+    q(2).data = 'Type text to be displayed';
+    
+    q(3).name = 'Input sort';
+    q(3).sort = 'popupmenu';
+    q(3).data = { 'GetClicks', 'GetChar', 'GetString' };
+    q(3).toolTip = 'GetClicks: Waits for mouseclick, GetChar: Get keyboard input and shows it on screen, GetString: Gets keyboard input';
+    
+    q(4).name = 'Text Color:';
+    q(4).sort = 'edit';
+    q(4).data = '[255 255 255]';
+    q(4).toolTip = 'RGB triplet: default white. [0 0 0] = black';
+    
+    q(5).name = 'Background color:';
+    q(5).sort = 'edit';
+    q(5).data = '[0 0 0]';
+    q(5).toolTip = 'RGB triplet: default black. [255 255 255] = white';
+    
+    q(6).name = '';
+    q(6).sort = 'checkbox';
+    q(6).data = 'Clear screen';
+    
+    %% Answer 1
+    q(7).name = 'Answer 1';
+    q(7).sort = 'edit';
+    q(7).data = 'a';
+    q(7).toolTip = 'The anwer expected for option 1. A single space is also valid. Empty means unused';
+    
+    q(8).name = 'Skip on answer 1';
+    q(8).sort = 'edit';
+    q(8).data = '0';
+    
+    %% answer 2
+    q(9).name = 'Answer 2';
+    q(9).sort = 'edit';
+    q(9).data = 's';
+    
+    q(10).name = 'Skip on answer 2';
+    q(10).sort = 'edit';
+    q(10).data = '1';
+    %% answer 3
+    q(11).name = 'Answer 3';
+    q(11).sort = 'edit';
+    q(11).data = 'd';
+    
+    q(12).name = 'Skip on answer 3';
+    q(12).sort = 'edit';
+    q(12).data = '3';
+    
+    %% Answer 4 (invalid
+    q(13).name = 'Skip on invalid';
+    q(13).sort = 'edit';
+    q(13).data = '-1';
+    q(13).toolTip = 'Skip if none of the above was pressed. -1 means repeat this event';
     out = q; %See eventEditor
 end
 
-function out = getEventStruct(data)
+function out = getEventStruct(q)
 % This function MUST return a struct.
 % The following struct names are in use and will be overwritten
 %   - .name => Contains getEventName()
@@ -154,8 +223,23 @@ function out = getEventStruct(data)
 % lenght + 2 will contain whether data selection is random (read only)
 % length + 3 will contain whether to put back a selected file after using
 % it.
-    e = struct;
-    e.datasetname = data(1).Answer;
-    e.alias = data(1).Answer;
-    out = e;
+% reply.data = Ask(windowPtr, event.quest, event.textcolor,event.bgcolor,event.mode);';
+    event = struct;
+    event.quest = q(2).Answer;
+    event.mode = q(3).Answer;
+    event.textcolor = eval(q(4).Answer);
+    event.bgcolor = eval(q(5).Answer);
+    event.clearscr = q(6).Value;
+    
+    event.ans1 = q(7).Answer;
+    event.act1 = str2double(q(8).Answer);
+    
+    event.ans2 = q(9).Answer;
+    event.act2 = str2double(q(10).Answer);
+    
+    event.ans3 = q(11).Answer;
+    event.act3 = str2double(q(12).Answer);
+    
+    event.act4 = str2double(q(13).Answer);
+    out = event;
 end

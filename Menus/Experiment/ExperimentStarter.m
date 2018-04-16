@@ -36,7 +36,7 @@ function varargout = ExperimentStarter(varargin)
 
 % Edit the above text to modify the response to help ExperimentStarter
 
-% Last Modified by GUIDE v2.5 31-Mar-2016 18:42:07
+% Last Modified by GUIDE v2.5 28-Sep-2017 11:42:03
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -68,7 +68,14 @@ function ExperimentStarter_OpeningFcn(hObject, eventdata, handles, varargin)
 
 % Choose default command line output for ExperimentStarter
 handles.output = hObject;
-
+%load start message
+try
+    if (exist('startExpMessage.save','file')>0)
+        handles.editStartMessage.String=fileread('startExpMessage.save');
+    end
+catch e
+    warning('Problem with saving start message...\n%s',e.message);
+end
 % Update handles structure
 guidata(hObject, handles);
 guiUpdate(handles);
@@ -102,6 +109,21 @@ function StartExperiment_Callback(hObject, eventdata, handles)
 % hObject    handle to StartExperiment (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+%save start message
+try
+    f = fopen('startExpMessage.save','w');
+    text = handles.editStartMessage.String;
+    fprintf(f,text);
+    fclose(f);
+catch e
+    warning('Problem with saving start message...\n%s',e.message);
+end
+if handles.debugtoggle.Value == 1
+    debug = true;
+else
+    debug = false;
+end
 global experimentRunning;
 if isempty(handles.listExperiments.String)
     %easter
@@ -148,108 +170,144 @@ catch e
     waitfor(errordlg(sprintf('Error: Invalid input\n%s',e.message)));
     rethrow(e);
 end
-% Generate experiment
-try
-    set(handles.StartExperiment, 'Enable', 'off')
-    h = waitbar(0,'Generating experiment...');
-    [ExperimentData eventNames] = generateExperiment(generatorPackage);
-    compileTrialRunner(eventNames);
-    initEvents(eventNames);
-    clear functions;
-catch e
-    set(handles.StartExperiment, 'Enable', 'on')
-    delete(h);
-    waitfor(errordlg(sprintf('Error while generating experiment:\n%s', e.message)));
-    rethrow(e);
-end
-delete(h);
-% Run experiment
-dateNtime = datestr(datetime);
 
-Screen('Preference', 'SkipSyncTests', 0);
-oldLevel = Screen('Preference', 'Verbosity', 0);
-try
-    if experimentRunning
-        set(handles.StartExperiment, 'Enable', 'on')
-        return;
+
+
+%% Prevent running exp. if it is running
+if experimentRunning
+    fprintf('Experiment is flagged as running. If this is not the case, type clear global in the command window');
+    return;
+end
+%% If headless is required (video) transfer data and start session
+
+
+if (handles.nojvmmode.Value)
+    
+    % nojvm gstreamer support mode
+    fprintf('Saving state in preperation of gstreamer support mode... ');
+    save('statesave.mat');
+    fprintf('Done.\n');
+    fprintf('Starting headless matlab session...\n');
+    startfile = fullfile(cd, 'Menus/Experiment/nojvmstart.m');
+    system(['matlab -nosplash -wait -nojvm -r "run(''' startfile ''')"']);
+    try
+        load('returnstate.mat');
+        delete 'returnstate.mat';
+    catch e
+        waitfor(errordlg(sprintf('Error while running experiment in gstreamer mode: Not return value found.\n')));
+        rethrow(e); 
     end
-    experimentRunning = 1;
-    hW = initWindowBlack(ExperimentData.preMessage);
-catch e
-    experimentRunning = 0;
-    set(handles.StartExperiment, 'Enable', 'on')
-    EndofExperiment;
-    if strcmp(e.message,'See error message printed above.')
-        try
-            disp('Warning, skipping sync tests!')
-            Screen('Preference', 'SkipSyncTests', 1);
-            hW = initWindowBlack(ExperimentData.preMessage);
-        catch e
-            rethrow(e)
-        end
-    else
+else
+%% If we do a normal run
+    % Generate experiment
+    try
+        h = waitbar(0,'Generating experiment...');
+        [ExperimentData eventNames] = generateExperiment(generatorPackage);
+        compileTrialRunner(eventNames);
+        initEvents(eventNames);
+        clear functions;
+    catch e
+        save(sprintf('memdump_%s.mat',strrep(strrep(datestr(clock), ' ', '_'), ':', '-')));
+        delete(h);
+        waitfor(errordlg(sprintf('Error while generating experiment:\n%s', e.message)));
         rethrow(e);
     end
-end
-%end of init
-try
-    Data = runExperiment(ExperimentData,hW);
-catch e
-    set(handles.StartExperiment, 'Enable', 'on')
-    experimentRunning = 0;
-    waitfor(errordlg(sprintf('Error while running the experiment! SORRY! More details in the Command Window')));
-    EndofExperiment;
+    delete(h);
+
+
+    % Run experiment
+    dateNtime = datestr(datetime);
+
+    Screen('Preference', 'SkipSyncTests', 0);
+    oldLevel = Screen('Preference', 'Verbosity', 0);
     try
-        %% Process and save data
-            data = struct;
-            global bakdata;
-            Data = bakdata;
-            dataiter = 0;
-            for i=1:length(Data)
-                blocknr = sprintf('Block %i',i);
-                for j=1:length(Data{i})
-                    dataiter = dataiter + 1;
-                    eventdata = Data{i}{j};
-                    fnames = fieldnames(eventdata);
-                    for k=1:length(fnames)
-                        eval(sprintf('data(dataiter).%s = eventdata.%s;',fnames{k}, fnames{k}));            
-                    end
-		    % Add extra collums
-                    data(dataiter).date    = dateNtime;
-                    data(dataiter).subjectId = subjectId;
-                    data(dataiter).blocknr = blocknr;
-                end
-            end
-            exportStructToCSV(data,['Results_' name '.csv'],1);
-            msgbox(sprintf('Results saved (and appended) to: %s', fullfile(cd,['Results_' name '.csv'])));
+        experimentRunning = 1;
+        hW = initWindowBlack(ExperimentData.preMessage, -1, 1, debug);
     catch e
-        waitfor(errordlg(sprintf('failed to save data! Sorry!')));
-    end
-    rethrow(e)
-end
-EndofExperiment(hW,'You have reached the end! Thanks you for participating!');
-Screen('Preference', 'Verbosity', oldLevel);
-%% Process and save data
-data = struct;
-dataiter = 0;
-for i=1:length(Data)
-    blocknr = sprintf('Block %i',i);
-    for j=1:length(Data{i})
-        dataiter = dataiter + 1;
-		% Add extra collums
-        data(dataiter).date    = dateNtime;
-        data(dataiter).subjectId = subjectId;
-		data(dataiter).blocknr = blocknr;
-        eventdata = Data{i}{j};
-        fnames = fieldnames(eventdata);
-        for k=1:length(fnames)
-            eval(sprintf('data(dataiter).%s = eventdata.%s;',fnames{k}, fnames{k}));            
+        experimentRunning = 0;
+        EndofExperiment;
+        if strcmp(e.message,'See error message printed above.')
+            try
+                disp('Warning, skipping sync tests!')
+                Screen('Preference', 'SkipSyncTests', 1);
+                hW = initWindowBlack(ExperimentData.preMessage, -1, 1, debug);
+            catch e
+                rethrow(e)
+            end
+        else
+            rethrow(e);
         end
     end
+    %end of init
+    try
+        Data = runExperiment(ExperimentData,hW);
+    catch e
+        experimentRunning = 0;
+        waitfor(errordlg(sprintf('Error while running the experiment! SORRY! More details in the Command Window')));
+        EndofExperiment;
+        try
+            %% Process and save data
+                data = struct;
+                global bakdata;
+                Data = bakdata;
+                dataiter = 0;
+                for i=1:length(Data)
+                    blocknr = sprintf('Block %i',i);
+                    for j=1:length(Data{i})
+                        dataiter = dataiter + 1;
+                        eventdata = Data{i}{j};
+                        fnames = fieldnames(eventdata);
+                        for k=1:length(fnames)
+                            eval(sprintf('data(dataiter).%s = eventdata.%s;',fnames{k}, fnames{k}));            
+                        end
+                % Add extra collums
+                        data(dataiter).date    = dateNtime;
+                        data(dataiter).subjectId = subjectId;
+                        data(dataiter).blocknr = blocknr;
+                    end
+                end
+                exportStructToCSV(data,['Results_' name '.csv'],1);
+                msgbox(sprintf('Results saved (and appended) to: %s', fullfile(cd,['Results_' name '.csv'])));
+        catch e
+            waitfor(errordlg(sprintf('failed to save data! Sorry!')));
+        end
+        rethrow(e)
+    end
+    EndofExperiment(hW,'You have reached the end! Thanks you for participating!');
+    Screen('Preference', 'Verbosity', oldLevel);
 end
-exportStructToCSV(data,['Results_' name '.csv'],1);
-msgbox(sprintf('Results saved (and appended) to: %s', fullfile(cd,['Results_' name '.csv'])));
-set(handles.StartExperiment, 'Enable', 'on')
+%% Process and save data
+try
+    data = struct;
+    dataiter = 0;
+    for i=1:length(Data)
+        blocknr = sprintf('Block %i',i);
+        for j=1:length(Data{i})
+            dataiter = dataiter + 1;
+            % Add extra collums
+            data(dataiter).date    = dateNtime;
+            data(dataiter).subjectId = subjectId;
+            data(dataiter).blocknr = blocknr;
+            eventdata = Data{i}{j};
+            if ~isempty(eventdata)
+                fnames = fieldnames(eventdata);
+                for k=1:length(fnames)
+                    eval(sprintf('data(dataiter).%s = eventdata.%s;',fnames{k}, fnames{k}));            
+                end
+            end
+        end
+    end
+    if (~(exist(fullfile(cd,'Results'),'dir')==7))
+        mkdir(fullfile(cd,'Results'));
+    end
+    exportStructToCSV(data,fullfile(cd,'Results',['Results_' name '.csv']),1);
+    msgbox(sprintf('Results saved (and appended) to: %s', fullfile(cd,'Results',['Results_' name '.csv'])));
+catch e
+    experimentRunning = 0;
+    save(sprintf('memdump_%s.mat',strrep(strrep(datestr(clock), ' ', '_'), ':', '-')));
+    rethrow(e);
+    %% TODO error handling
+end
 experimentRunning = 0;
 
 
@@ -449,3 +507,21 @@ function editSeed_CreateFcn(hObject, eventdata, handles)
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
 end
+
+
+% --- Executes on button press in debugtoggle.
+function debugtoggle_Callback(hObject, eventdata, handles)
+% hObject    handle to debugtoggle (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of debugtoggle
+
+
+% --- Executes on button press in nojvmmode.
+function nojvmmode_Callback(hObject, eventdata, handles)
+% hObject    handle to nojvmmode (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of nojvmmode
