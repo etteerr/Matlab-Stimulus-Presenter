@@ -10,12 +10,16 @@ if nargin == 0
 end
 
 %% CHeck gstreamer install
-[~, res] = system('set GSTREAMER_1_0_ROOT_X86_64');
-if ~contains(res, 'not defined')
-    status = 0;
-    return;
+try
+	[~, res] = system('set GSTREAMER_1_0_ROOT_X86_64');
+	if ~contains(res, 'not defined')
+		status = 0;
+		return;
+	end
+catch e
+	disp(e.message);
+	waitfor(errordlg('Cannot check for gstreamer. Please do a manual install of Gstreamer if it is not installed'));
 end
-
 %% Install
 
 if showWaitbar
