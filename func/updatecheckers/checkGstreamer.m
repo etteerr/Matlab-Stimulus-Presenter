@@ -19,6 +19,8 @@ try
 catch e
 	disp(e.message);
 	waitfor(errordlg('Cannot check for gstreamer. Please do a manual install of Gstreamer if it is not installed'));
+    status = 0;
+    return;
 end
 %% Install
 
