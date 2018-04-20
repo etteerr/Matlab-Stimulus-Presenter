@@ -12,7 +12,7 @@ end
 %% CHeck gstreamer install
 try
 	[~, res] = system('set GSTREAMER_1_0_ROOT_X86_64');
-	if ~contains(res, 'not defined')
+	if isempty(strfind(res, 'not defined'))
 		status = 0;
 		return;
 	end
