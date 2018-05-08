@@ -141,7 +141,7 @@ function out = getQuestStruct()
     out = struct; %See eventEditor
     out(1).name = 'Device:';
     out(1).sort = 'popupmenu';
-    out(1).data = DioDevices(1).name;
+    out(1).data = {DioDevices.name};
     out(1).toolTip = 'Select one of the supported devices';
     
     out(2).name = 'Channel:';
