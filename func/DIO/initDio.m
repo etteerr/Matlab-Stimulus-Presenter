@@ -67,7 +67,7 @@ try
     for i=1:length(devs)
         dev = devs(i);
         fprintf('Found device: %s\n', dev.Model);
-        idx = find(strcmp('USB-6501',{DioDevices.name}));
+        idx = find(strcmp(dev.Model,{DioDevices.name}));
         if ~isempty(idx)
             nOut = 0;
             nIn = 0;
@@ -115,6 +115,8 @@ try
             devnames = [devnames {dev.Model}];
             sessions = [sessions {sess}];
             succes = 1;
+        else
+            fprintf('No config found for %s.\n', dev.Model);
         end
     end
     diosessions = containers.Map(devnames, sessions);
