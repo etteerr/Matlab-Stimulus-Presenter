@@ -1,3 +1,5 @@
 *.asv
 func/experiment/runTrial.m
 *.stackdump
+Data/auditory targets/
+Data/new/
