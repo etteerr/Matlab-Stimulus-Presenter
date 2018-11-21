@@ -18,4 +18,3 @@ while(experimentRunning)
     pause(0.001);
 end
 end
-
