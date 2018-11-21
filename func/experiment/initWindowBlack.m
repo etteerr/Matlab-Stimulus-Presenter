@@ -12,29 +12,35 @@
 % 
 %     You should have received a copy of the GNU General Public License
 %     along with this program.  If not, see <http://www.gnu.org/licenses/>.
-function [ handle ] = initWindowBlack(Message,priority,hideCursor )
+function [ handle ] = initWindowBlack(Message,priority,hideCursor, debug )
 %initWindowBlack Create the window and returns it handle
 % initWindowBlack([Message][,priority = 2][,hideCursor = 1])
 % String Message: a message to be displayed after creating the window
 % As not to worry the user
 %%%
-% Priority, changes priority of the script. (0 = normal, 1 = high, 2 = max
+% Priority, changes priority of the script. (-1 = highest possible, 0 = normal, 1 = high, 2 = max
 % (realtime))
+% 2 can give rise to system instability
 
 %Black screen
 screenColor = [0 0 0];
 
 n = nargin;
 switch n
+    case 3
+        debug = false;
     case 2
         hideCursor = true;
+        debug = false;
     case 1
-        priority = 2;
+        priority = 1;
         hideCursor = true;
+        debug = false;
     case 0
-        priority = 2;
+        priority = 1;
         Message = 'Welcome to this experiment!';
         hideCursor = true;
+        debug = false;
 end
 screens = Screen('Screens');
 %Get the screen we want
@@ -45,15 +51,35 @@ if length(screens)>1
 else
     screenNumber = max(screens);
 end
-handle = Screen('OpenWindow',screenNumber,screenColor);
+
+if debug
+    handle = Screen('OpenWindow',screenNumber,screenColor, [20 20 800 600]);
+else
+    handle = Screen('OpenWindow',screenNumber,screenColor);
+end
 
 %Hide cursor
-if hideCursor
+if hideCursor && ~debug
     HideCursor;
 end
 
 %Set epic priority for epic timings
-Priority(2);
+% Get max
+maxp = MaxPriority(handle, 'GetSecs', 'WaitSecs', 'KbCheck', 'KbWait', 'GetChar');
+% Set max if requested
+if (priority == -1)
+    priority = maxp;
+end
+% Set max if priority is too high
+if (priority > maxp)
+    priority = maxp;
+end
+% Set to 0 if debug
+if debug
+    Priority(0);
+else
+    Priority(priority);
+end
 
 %Set text settings
 Screen('TextFont',handle, 'Courier New');
@@ -73,10 +99,10 @@ Screen('Flip',handle);
 
 [secs] = KbWait(-1);
 if secs < 0.1
-    error('Keywait function not working correctly. Please try again...');
     clear all
     clear mex
     clear functions
+    error('Keywait function not working correctly. Please try again...');
 end
 Screen('Flip',handle);
 end

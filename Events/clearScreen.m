@@ -108,10 +108,7 @@ function out = getRunFunction()
 %               'The second line!', ...
 %               'Still the second line!\r\nThe Third line!'];
 % Screen('Flip', windowPtr [, when] [, dontclear] [, dontsync] [, multiflip]);
-    out = [ ...
-        'Screen(''Flip'',windowPtr, 0, 0); \r\n' ...
-        'Screen(''Flip'',windowPtr, 0, 1); \r\n' ...
-        ];
+    out = 'Screen(''Flip'',windowPtr, 0, 0);';
 end
 
 function out = getQuestStruct()
@@ -128,9 +125,7 @@ function out = getQuestStruct()
     q = struct;
     q(1).name = 'Clear:';
     q(1).sort = 'text';
-    q(1).data = 'This function clears all images from the screen';
-    q(1).tooltip = '';
-    
+    q(1).data = 'This function clear all images from the screen';
     out = q; %See eventEditor
 end
 

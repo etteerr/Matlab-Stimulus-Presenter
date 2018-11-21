@@ -1,0 +1,112 @@
+date;subjectId;blocknr;name;timeEventStart;image;timeEventEnd;blockname;alias;waittime;line;RT;key
+01-Dec-2016 13:19:10;;Block 1;Show Image;0.0011831;Big_Fixation.JPG;0.035797;Bloop1;Draw Image;;;;
+01-Dec-2016 13:19:10;;Block 1;Wait;0.036226;;0.33657;Bloop1;;0.3;;;
+01-Dec-2016 13:19:10;;Block 1;Clear screen;0.33677;;0.4066;Bloop1;;;;;
+01-Dec-2016 13:19:10;;Block 1;Show Text;0.40668;;0.42324;Bloop1;Show text;;hello;;
+01-Dec-2016 13:19:10;;Block 1;WaitForKeyPress;0.42333;;3.4569;Bloop1;;;;NaN;NaN
+01-Dec-2016 13:19:10;;Block 1;Clear screen;3.4571;;3.4902;Bloop1;;;;;
+01-Dec-2016 13:19:10;;Block 1;Show Image;3.4904;Big_Fixation.JPG;3.5089;Bloop1;Draw Image;;;;
+01-Dec-2016 13:19:10;;Block 1;Wait;3.5091;;3.8093;Bloop1;;0.3;;;
+01-Dec-2016 13:19:10;;Block 1;Repeat x events;3.8095;;3.8096;Bloop1;;;;;
+01-Dec-2016 13:19:10;;Block 1;Clear screen;3.8098;;3.8401;Bloop1;;;;;
+01-Dec-2016 13:19:10;;Block 1;Show Text;3.8404;;3.8569;Bloop1;Show text;;world;;
+01-Dec-2016 13:19:10;;Block 1;WaitForKeyPress;3.8571;;4.8277;Bloop1;;;;0.87609;space
+01-Dec-2016 13:19:10;;Block 1;Clear screen;4.8278;;4.8563;Bloop1;;;;;
+01-Dec-2016 13:19:10;;Block 1;Show Image;4.8563;Big_Fixation.JPG;4.8734;Bloop1;Draw Image;;;;
+01-Dec-2016 13:19:10;;Block 1;Wait;4.8734;;5.1737;Bloop1;;0.3;;;
+01-Dec-2016 13:19:10;;Block 1;Repeat x events;5.1739;;5.1739;Bloop1;;;;;
+01-Dec-2016 13:19:10;;Block 1;Clear screen;5.1741;;5.2068;Bloop1;;;;;
+01-Dec-2016 13:19:10;;Block 1;Show Text;5.207;;5.2234;Bloop1;Show text;;bla1;;
+01-Dec-2016 13:19:10;;Block 1;WaitForKeyPress;5.2238;;6.2253;Bloop1;;;;0.97706;space
+01-Dec-2016 13:19:10;;Block 1;Clear screen;6.2255;;6.2568;Bloop1;;;;;
+01-Dec-2016 13:19:10;;Block 1;Show Image;6.257;Big_Fixation.JPG;6.2742;Bloop1;Draw Image;;;;
+01-Dec-2016 13:19:10;;Block 1;Wait;6.2744;;6.5748;Bloop1;;0.3;;;
+01-Dec-2016 13:19:10;;Block 1;Repeat x events;6.575;;6.5751;Bloop1;;;;;
+01-Dec-2016 13:19:10;;Block 1;Clear screen;6.5752;;6.6068;Bloop1;;;;;
+01-Dec-2016 13:19:10;;Block 1;Show Text;6.6071;;6.6234;Bloop1;Show text;;bla2;;
+01-Dec-2016 13:19:10;;Block 1;WaitForKeyPress;6.6237;;7.59;Bloop1;;;;0.94944;space
+01-Dec-2016 13:19:10;;Block 1;Clear screen;7.5902;;7.6232;Bloop1;;;;;
+01-Dec-2016 13:19:10;;Block 1;Show Image;7.6233;Big_Fixation.JPG;7.6408;Bloop1;Draw Image;;;;
+01-Dec-2016 13:19:10;;Block 1;Wait;7.641;;7.9413;Bloop1;;0.3;;;
+01-Dec-2016 13:19:10;;Block 1;Repeat x events;7.9415;;7.9416;Bloop1;;;;;
+01-Dec-2016 13:19:10;;Block 1;Clear screen;7.9417;;7.9734;Bloop1;;;;;
+01-Dec-2016 13:19:10;;Block 1;Show Text;7.9736;;8.0068;Bloop1;Show text;;does this also work with sentences?;;
+01-Dec-2016 13:19:10;;Block 1;WaitForKeyPress;8.007;;9.657;Bloop1;;;;1.6323;space
+01-Dec-2016 13:19:10;;Block 1;Clear screen;9.6572;;9.6901;Bloop1;;;;;
+01-Dec-2016 13:19:10;;Block 1;Show Image;9.6903;Big_Fixation.JPG;9.7075;Bloop1;Draw Image;;;;
+01-Dec-2016 13:19:10;;Block 1;Wait;9.7077;;10.008;Bloop1;;0.3;;;
+01-Dec-2016 13:19:10;;Block 1;Repeat x events;10.0082;;10.0082;Bloop1;;;;;
+01-Dec-2016 16:04:53;;Block 1;Show Image;0.0018818;Big_Fixation.JPG;0.028235;Bloop1;Draw Image;;;;
+01-Dec-2016 16:04:53;;Block 1;Wait;0.02878;;0.32919;Bloop1;;0.3;;;
+01-Dec-2016 16:04:53;;Block 1;Clear screen;0.32939;;0.40688;Bloop1;;;;;
+01-Dec-2016 16:04:53;;Block 1;Show Text;0.40697;;0.45614;Bloop1;Show text;;hello;;
+01-Dec-2016 16:04:53;;Block 1;WaitForKeyPress;0.45623;;3.4898;Bloop1;;;;NaN;NaN
+01-Dec-2016 16:04:53;;Block 1;Clear screen;3.49;;3.5232;Bloop1;;;;;
+01-Dec-2016 16:04:53;;Block 1;Show Image;3.5234;Big_Fixation.JPG;3.5418;Bloop1;Draw Image;;;;
+01-Dec-2016 16:04:53;;Block 1;Wait;3.542;;3.8423;Bloop1;;0.3;;;
+01-Dec-2016 16:04:53;;Block 1;Repeat x events;3.8425;;3.8425;Bloop1;;;;;
+01-Dec-2016 16:04:53;;Block 1;Clear screen;3.8427;;3.8732;Bloop1;;;;;
+01-Dec-2016 16:04:53;;Block 1;Show Text;3.8734;;3.8898;Bloop1;Show text;;world;;
+01-Dec-2016 16:04:53;;Block 1;WaitForKeyPress;3.8901;;6.9231;Bloop1;;;;NaN;NaN
+01-Dec-2016 16:04:53;;Block 1;Clear screen;6.9233;;6.9564;Bloop1;;;;;
+01-Dec-2016 16:04:53;;Block 1;Show Image;6.9566;Big_Fixation.JPG;6.9743;Bloop1;Draw Image;;;;
+01-Dec-2016 16:04:53;;Block 1;Wait;6.9745;;7.2747;Bloop1;;0.3;;;
+01-Dec-2016 16:04:53;;Block 1;Repeat x events;7.2749;;7.275;Bloop1;;;;;
+01-Dec-2016 16:04:53;;Block 1;Clear screen;7.2751;;7.3064;Bloop1;;;;;
+01-Dec-2016 16:04:53;;Block 1;Show Text;7.3066;;7.3231;Bloop1;Show text;;bla1;;
+01-Dec-2016 16:04:53;;Block 1;WaitForKeyPress;7.3233;;10.3564;Bloop1;;;;NaN;NaN
+01-Dec-2016 16:04:53;;Block 1;Clear screen;10.3566;;10.3897;Bloop1;;;;;
+01-Dec-2016 16:04:53;;Block 1;Show Image;10.3899;Big_Fixation.JPG;10.4071;Bloop1;Draw Image;;;;
+01-Dec-2016 16:04:53;;Block 1;Wait;10.4073;;10.7076;Bloop1;;0.3;;;
+01-Dec-2016 16:04:53;;Block 1;Repeat x events;10.7078;;10.7079;Bloop1;;;;;
+01-Dec-2016 16:04:53;;Block 1;Clear screen;10.7081;;10.7397;Bloop1;;;;;
+01-Dec-2016 16:04:53;;Block 1;Show Text;10.7399;;10.7563;Bloop1;Show text;;bla2;;
+01-Dec-2016 16:04:53;;Block 1;WaitForKeyPress;10.7566;;13.7896;Bloop1;;;;NaN;NaN
+01-Dec-2016 16:04:53;;Block 1;Clear screen;13.7898;;13.8229;Bloop1;;;;;
+01-Dec-2016 16:04:53;;Block 1;Show Image;13.8231;Big_Fixation.JPG;13.8402;Bloop1;Draw Image;;;;
+01-Dec-2016 16:04:53;;Block 1;Wait;13.8404;;14.1407;Bloop1;;0.3;;;
+01-Dec-2016 16:04:53;;Block 1;Repeat x events;14.1409;;14.141;Bloop1;;;;;
+01-Dec-2016 16:04:53;;Block 1;Clear screen;14.1411;;14.173;Bloop1;;;;;
+01-Dec-2016 16:04:53;;Block 1;Show Text;14.1732;;14.2062;Bloop1;Show text;;does this also work with sentences?;;
+01-Dec-2016 16:04:53;;Block 1;WaitForKeyPress;14.2063;;17.2395;Bloop1;;;;NaN;NaN
+01-Dec-2016 16:04:53;;Block 1;Clear screen;17.2398;;17.2728;Bloop1;;;;;
+01-Dec-2016 16:04:53;;Block 1;Show Image;17.2731;Big_Fixation.JPG;17.2902;Bloop1;Draw Image;;;;
+01-Dec-2016 16:04:53;;Block 1;Wait;17.2904;;17.5907;Bloop1;;0.3;;;
+01-Dec-2016 16:04:53;;Block 1;Repeat x events;17.5909;;17.5909;Bloop1;;;;;
+02-Dec-2016 12:04:42;;Block 1;Show Image;0.0013793;Big_Fixation.JPG;0.041659;Bloop1;Draw Image;;;;
+02-Dec-2016 12:04:42;;Block 1;Wait;0.04209;;0.34244;Bloop1;;0.3;;;
+02-Dec-2016 12:04:42;;Block 1;Clear screen;0.34264;;0.43516;Bloop1;;;;;
+02-Dec-2016 12:04:42;;Block 1;Show Text;0.43525;;0.48438;Bloop1;Show text;;hello;;
+02-Dec-2016 12:04:42;;Block 1;WaitForKeyPress;0.48447;;2.4291;Bloop1;;;;1.8109;space
+02-Dec-2016 12:04:42;;Block 1;Clear screen;2.4292;;2.451;Bloop1;;;;;
+02-Dec-2016 12:04:42;;Block 1;Show Image;2.4511;Big_Fixation.JPG;2.4682;Bloop1;Draw Image;;;;
+02-Dec-2016 12:04:42;;Block 1;Wait;2.4682;;2.7685;Bloop1;;0.3;;;
+02-Dec-2016 12:04:42;;Block 1;Repeat x events;2.7687;;2.7688;Bloop1;;;;;
+02-Dec-2016 12:04:42;;Block 1;Clear screen;2.7689;;2.8011;Bloop1;;;;;
+02-Dec-2016 12:04:42;;Block 1;Show Text;2.8013;;2.8179;Bloop1;Show text;;world;;
+02-Dec-2016 12:04:42;;Block 1;WaitForKeyPress;2.818;;4.0032;Bloop1;;;;1.1638;space
+02-Dec-2016 12:04:42;;Block 1;Clear screen;4.0034;;4.0348;Bloop1;;;;;
+02-Dec-2016 12:04:42;;Block 1;Show Image;4.035;Big_Fixation.JPG;4.0524;Bloop1;Draw Image;;;;
+02-Dec-2016 12:04:42;;Block 1;Wait;4.0526;;4.3528;Bloop1;;0.3;;;
+02-Dec-2016 12:04:42;;Block 1;Repeat x events;4.3529;;4.353;Bloop1;;;;;
+02-Dec-2016 12:04:42;;Block 1;Clear screen;4.3531;;4.3846;Bloop1;;;;;
+02-Dec-2016 12:04:42;;Block 1;Show Text;4.3847;;4.4012;Bloop1;Show text;;bla1;;
+02-Dec-2016 12:04:42;;Block 1;WaitForKeyPress;4.4014;;5.9851;Bloop1;;;;1.5663;space
+02-Dec-2016 12:04:42;;Block 1;Clear screen;5.9853;;6.0181;Bloop1;;;;;
+02-Dec-2016 12:04:42;;Block 1;Show Image;6.0183;Big_Fixation.JPG;6.0354;Bloop1;Draw Image;;;;
+02-Dec-2016 12:04:42;;Block 1;Wait;6.0356;;6.3359;Bloop1;;0.3;;;
+02-Dec-2016 12:04:42;;Block 1;Repeat x events;6.3361;;6.3362;Bloop1;;;;;
+02-Dec-2016 12:04:42;;Block 1;Clear screen;6.3363;;6.3678;Bloop1;;;;;
+02-Dec-2016 12:04:42;;Block 1;Show Text;6.368;;6.3845;Bloop1;Show text;;bla2;;
+02-Dec-2016 12:04:42;;Block 1;WaitForKeyPress;6.3846;;8.0683;Bloop1;;;;1.6664;space
+02-Dec-2016 12:04:42;;Block 1;Clear screen;8.0685;;8.1013;Bloop1;;;;;
+02-Dec-2016 12:04:42;;Block 1;Show Image;8.1016;Big_Fixation.JPG;8.1186;Bloop1;Draw Image;;;;
+02-Dec-2016 12:04:42;;Block 1;Wait;8.1188;;8.4191;Bloop1;;0.3;;;
+02-Dec-2016 12:04:42;;Block 1;Repeat x events;8.4193;;8.4194;Bloop1;;;;;
+02-Dec-2016 12:04:42;;Block 1;Clear screen;8.4195;;8.4514;Bloop1;;;;;
+02-Dec-2016 12:04:42;;Block 1;Show Text;8.4516;;8.4847;Bloop1;Show text;;does this also work with sentences?;;
+02-Dec-2016 12:04:42;;Block 1;WaitForKeyPress;8.4849;;10.3183;Bloop1;;;;1.8158;space
+02-Dec-2016 12:04:42;;Block 1;Clear screen;10.3185;;10.3513;Bloop1;;;;;
+02-Dec-2016 12:04:42;;Block 1;Show Image;10.3515;Big_Fixation.JPG;10.3686;Bloop1;Draw Image;;;;
+02-Dec-2016 12:04:42;;Block 1;Wait;10.3688;;10.6691;Bloop1;;0.3;;;
+02-Dec-2016 12:04:42;;Block 1;Repeat x events;10.6693;;10.6694;Bloop1;;;;;

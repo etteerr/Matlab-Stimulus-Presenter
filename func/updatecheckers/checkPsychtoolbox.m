@@ -27,15 +27,42 @@ function [installed] = checkPsychtoolbox
 %           Though it will prolong the installation of Psychtoolbox, it
 %           should only occour once.
 %           Done :-It might be userfriendly to ask before installing xD
-ppath = addpath('Psychtoolbox');
-addpath('SVN');
+
+%% Check svn
+% C:\Program Files\SlikSvn\
+% Only on windows
+if ispc
+    svnPath = 'C:\Program Files\SlikSvn\bin';
+    svnExec = 'svn.exe';
+    if ~exist(fullfile(svnPath, svnExec),'file')
+        % svn missing
+        status = installSvn;
+        if status
+            waitfor(errordlg(...
+                'Failed to install slikSvn, download and install sliksvn to C:\Program Files\SlikSvn'));
+        end
+    else
+        copyfile(svnPath, 'SVN');
+    end
+end      
+
+%% CHeck gstreamer
+if ispc
+    status = checkGstreamer;
+    if status
+        waitfor(errordlg(...
+            'Failed to install gstreamer, download and install gstreamer if required'));
+    end  
+end
+
+%% Psychtoolbox
 [doesExist, version] = psychtoolboxExists;
 %targetVersion = ''%'Psychtoolbox-3.0.10';
 if ispc
     % We are on windows
-    targetDir = 'c:\\Psychtoolbox';
+    targetDir = 'c:\\';
 else
-    targetDir = '~/Psychtoolbox';
+    targetDir = '~/';
 end
 
 if doesExist
@@ -48,10 +75,9 @@ else
    
        %Psychtoolbox does not Exist! 
     %This calls for: DownloadPsychtoolbox!!
-    if ~exist('Psychtoolbox\\DownloadPsychtoolbox.m','file')
-        %But it does not exist, not even the installer!
-        errordlg('Psychtoolbox tools are not present! Unable to start a experiment!','CALL HELP, RUN! or redownload this...');
-    else
+    websave('DownloadPsychtoolbox.m','https://raw.github.com/Psychtoolbox-3/Psychtoolbox-3/master/Psychtoolbox/DownloadPsychtoolbox.m')
+    
+    if exist('DownloadPsychtoolbox.m','file')
         %The installer exists, luckely!
         if strcmp(questdlg('Do you want to install Psychtoolbox now? (you need it to run experiments!)','Psychtoolbox','Yes','No','Yes'),'Yes')
             msgbox('Now installing Psychtoolbox. Watch the console, questions will be asked by the installer."  This can take a few minutes...','Warning, you need to do stuff');
@@ -62,7 +88,7 @@ else
                 if (v(1) < 7) || ((v(1) == 7) && (v(2) < 4))
                     errordlg(sprintf('Matlab version %i.%i not supported :(', v(1), v(2)), 'Unsupported matlab');
                     error('Matlab version %i.%i not supported :(', v(1), v(2));
-                    DownloadLegacyPsychtoolbox(targetDir);
+                    %DownloadLegacyPsychtoolbox(targetDir);
                 else
                     try
                         DownloadPsychtoolbox(targetDir);
@@ -75,7 +101,8 @@ else
             end
             if psychtoolboxExists
                 installed = true;
-                waitfor(msgbox('Psychtoolbox succesfully installed. Please restart matlab'));
+                waitfor(msgbox('Psychtoolbox succesfully installed. MatLab will shutdown (please reopen).'));
+                exit;
             end
             
         else
@@ -83,6 +110,5 @@ else
         end
     end
 end
-path(ppath);
 end
 

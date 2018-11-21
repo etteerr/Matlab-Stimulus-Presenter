@@ -116,8 +116,7 @@ function out = getRunFunction()
 % Screen('Flip', windowPtr [, when] [, dontclear] [, dontsync] [, multiflip]);
 %[newX,newY]=Screen('DrawText', windowPtr, text [,x] [,y] [,color] [,backgroundColor] [,yPositionIsBaseline] [,swapTextDirection]);
 
-    out = ['Screen(''Flip'', windowPtr, 0, double(~event.clearscr), 2);\r\n' ...
-        'reply.data = Ask(windowPtr, event.quest, event.textcolor,event.bgcolor,event.mode, event.horzpos, event.vertpos, event.fontsize);\r\n'...
+    out = ['Screen(''Flip'', windowPtr, 0, event.clearscr, 2);\r\nreply.data = Ask(windowPtr, event.quest, event.textcolor,event.bgcolor,event.mode, ''center'', ''center'');\r\n'...
            ];
 end
 
@@ -146,7 +145,7 @@ function out = getQuestStruct()
     
     q(3).name = 'Input sort';
     q(3).sort = 'popupmenu';
-    q(3).data = { 'GetChar', 'GetString', 'GetClicks' };
+    q(3).data = { 'GetClicks', 'GetChar', 'GetString' };
     q(3).toolTip = 'GetClicks: Waits for mouseclick, GetChar: Get keyboard input and shows it on screen, GetString: Gets keyboard input';
     
     q(4).name = 'Text Color:';
@@ -159,24 +158,9 @@ function out = getQuestStruct()
     q(5).data = '[0 0 0]';
     q(5).toolTip = 'RGB triplet: default black. [255 255 255] = white';
     
-    q(6).name = 'Horizontal alignment:';
-    q(6).sort = 'popupmenu';
-    q(6).data = {'center', 'left', 'right'};
-    q(6).toolTip = 'determines where the text appears ';
-    
-    q(7).name = 'Vertical alignment:';
-    q(7).sort = 'popupmenu';
-    q(7).data = {'top', 'center', 'bottom'};
-    q(7).toolTip = 'determines where the text appears ';
-    
-    q(8).name = 'Font size:';
-    q(8).sort = 'edit';
-    q(8).data = '30';
-    q(8).toolTip = 'determines where the text appears ';
-    
-    q(9).name = '';
-    q(9).sort = 'checkbox';
-    q(9).data = 'Clear screen';
+    q(6).name = '';
+    q(6).sort = 'checkbox';
+    q(6).data = 'Clear screen';
     out = q; %See eventEditor
 end
 
@@ -199,9 +183,6 @@ function out = getEventStruct(q)
     event.mode = q(3).Answer;
     event.textcolor = eval(q(4).Answer);
     event.bgcolor = eval(q(5).Answer);
-    event.horzpos = q(6).Answer;
-    event.vertpos = q(7).Answer;
-    event.fontsize = eval(q(8).Answer);
-    event.clearscr = q(9).Value;
+    event.clearscr = q(6).Value;
     out = event;
 end

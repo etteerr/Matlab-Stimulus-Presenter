@@ -2,7 +2,9 @@ function [ succes ] = initDio()
 %INITDIO Finds the dio devices and looks through the config to init an
 %configured dio device according to its config file
 %% Start waitbar
-hWait = waitbar(0,'Init DIO...');
+if usejava('jvm')
+    hWait = waitbar(0,'Init DIO...');
+end
 %%
 clear global diosessions
 global diosessions
@@ -28,9 +30,12 @@ configDirs = { '';...
 fprintf('Checking for dio devices...\n');
 
 %% Start waitbar
-waitbar(0,hWait,'Loading dio config...');
+if usejava('jvm')
+    waitbar(0,hWait,'Loading dio config...');
+end
 
 %% Load config
+fprintf('Loading dio config...\n');
 DioDevices = struct;
 iter=0;
 for i=1:length(configDirs)
@@ -51,7 +56,10 @@ for i=1:length(configDirs)
     end
 end
 %% Start looking for the first configured dio device
-waitbar(0,hWait,'Device discovery...');
+fprintf('Device discovery in progress...\n');
+if usejava('jvm')
+    waitbar(0,hWait,'Device discovery...');
+end
 devs = daq.getDevices();
 devnames = {};
 sessions = {};
@@ -59,17 +67,23 @@ try
     for i=1:length(devs)
         dev = devs(i);
         fprintf('Found device: %s\n', dev.Model);
-        idx = find(strcmp('USB-6501',{DioDevices.name}));
+        idx = find(strcmp(dev.Model,{DioDevices.name}));
         if ~isempty(idx)
             nOut = 0;
             nIn = 0;
-            waitbar(0,hWait,'Device init...');
+            if usejava('jvm')
+                waitbar(0,hWait,'Device init...');
+            end
             fprintf('Config match!\n');
             dio = DioDevices(idx);
             fprintf('Creating session: %s\n',dev.Vendor.ID);
             diosession = daq.createSession(dev.Vendor.ID);
             for j=1:length(dio.channels)
-                waitbar(j/length(dio.channels),hWait,sprintf('Adding channels to %s...',dev.Model));
+                if usejava('jvm')
+                    waitbar(j/length(dio.channels),hWait,sprintf('Adding channels to %s...',dev.Model));
+                else
+                   	fprintf('Adding channel %s to %s...\n',dio.channels{j}.id,dev.Model);
+                end
                 addDigitalChannel(diosession, dev.ID, dio.channels{j}.id, dio.channels{j}.direction);
                 if strcmpi(dio.channels{j}.direction,'OutputOnly')
                     nOut = nOut + 1;
@@ -80,11 +94,15 @@ try
                     nOut = nOut + 1;
                 end
             end
-            waitbar(1,hWait,'Finalizing...');
+            fprintf('finalizing...\n');
+            if usejava('jvm')
+                waitbar(1,hWait,'Finalizing...');
+            end
             try
                 startBackground(diosession) % Preferred
             catch
                 %warning('Unable to start background session:\nSession contains channels that only support ondemand opperations');
+                fprintf('Feature unavailable: DIO background sessions.\n');
             end
             sess = struct;
             sess.devname = dev.Model;
@@ -97,6 +115,8 @@ try
             devnames = [devnames {dev.Model}];
             sessions = [sessions {sess}];
             succes = 1;
+        else
+            fprintf('No config found for %s.\n', dev.Model);
         end
     end
     diosessions = containers.Map(devnames, sessions);
@@ -106,4 +126,6 @@ catch e
     warning('Dio init failed!\n%s', e.message);
     succes = 0;
 end
-delete(hWait);
+if usejava('jvm')
+    delete(hWait);
+end

@@ -81,140 +81,48 @@ try
                 eventName = event.name;
                 reply.timeEventStart = GetSecs() - startTime;
                 % Run event
-% generated script "Show Image" from showImage.m
-if strcmp(eventName,'Show Image')
-im = imread(event.data);event.im = Screen('MakeTexture', windowPtr, im); 
-clear im; 
+% generated script "DIO event" from DIO_event.m
+if strcmp(eventName,'DIO event')
+global diosessions;
+event.s = diosessions(event.devname);
+event.s.outState(event.ch) = event.value;
+diosessions(event.devname) = event.s;
+event.s.session.outputSingleScan(event.s.outState);
+end
+% generated script "Movie" from Video.m
+if strcmp(eventName,'Movie')
+disp(event)
+[event.pVideo, event.duration] = Screen('OpenMovie', windowPtr, event.data);
 
-Screen('DrawTexture', windowPtr, event.im); 
-Screen('Flip', windowPtr, 0, double(~event.clear));
+while (KbCheck) end
+[reply.droppedframes] = Screen('PlayMovie', event.pVideo, event.rate, event.loop, event.vol);
 [~,name,ext] = fileparts(event.data); 
-reply.image = strcat(name,ext); 
-image = reply.image; 
-
-end
-% generated script "Jitter" from Jitter.m
-if strcmp(eventName,'Jitter')
-
-wait = event.range(randi(length(event.range))); WaitSecs(wait); reply.waittime = wait; 
-
-end
-% generated script "Clear screen" from clearScreen.m
-if strcmp(eventName,'Clear screen')
-
-Screen('Flip',windowPtr, 0, 0); 
-Screen('Flip',windowPtr, 0, 1); 
-
-end
-% generated script "Show Text" from showTextFromTextSet.m
-if strcmp(eventName,'Show Text')
-if exist('textDatasets')~=1
-    textDatasets={};
-end
-textDatasets 
-event.cdataset 
-if isempty(textDatasets)
-    textDataset = struct;
-    textDataset.name = event.cdataset;
-    textDataset.data = getTextSet(event.cdataset);
-    textDataset.iter = 1;
-    textDatasets{1,1} = event.cdataset;
-    textDatasets{2,1} = textDataset;
-elseif (sum(strcmp(textDatasets{1,:},event.cdataset))<1)
-    textDataset = struct;
-    textDataset.name = event.cdataset;
-    textDataset.data = getTextSet(event.cdataset);
-    textDataset.iter = 1;
-    [~,ind] = size(textDatasets);
-    textDatasets{1,ind+1} = event.cdataset;
-    textDatasets{2,ind+1} = textDataset;
-end
-[~, n] = size(textDatasets);
-for i=1:n
-    if (strcmp(textDatasets(1,i),event.cdataset))
-        dataset = textDatasets{2,i};
-        if (dataset.iter > length(dataset.data))
-            if (isempty(dataset.data))
-                error('textData is out of stimuli! Dataset too small, change settings or increase datasetsize');
-            end
-            dataset.iter = 1;
-        end
-        if (event.random)
-            event.line = dataset.data{randi(length(dataset.data))};
-        else
-            event.line = dataset.data{dataset.iter};
-        end
-        if (~event.putback)
-            dataset.data(dataset.iter) = [];
-        else
-            dataset.iter = dataset.iter+1;
-        end
-        textDatasets{2,i} = dataset;
+reply.movie = strcat(name,ext); 
+reply.start = GetSecs;while 1
+    tex = Screen('GetMovieImage', windowPtr, event.pVideo);
+    if tex<=0
+        break;
     end
+[reply.keyIsDown, reply.secs, ~, ~] = KbCheck;
+    if (event.stoponkey && reply.keyIsDown)
+        break;
+    end
+if (event.time && (event.time <= (GetSecs - reply.start)))
+    break;
 end
-
-reply.line = event.line;DrawFormattedText(windowPtr, reply.line,'center','center',event.color);
-Screen('Flip', windowPtr, 0, double(~event.clear));
-
+    Screen('DrawTexture', windowPtr, tex);
+    Screen('Flip', windowPtr);
+    Screen('Close', tex);
 end
-% generated script "WaitForKeyPress" from waitForPress.m
-if strcmp(eventName,'WaitForKeyPress')
-if length(Screen('Screens'))>1                                  
-screenNumber = 1;                                              
-else                                                               
-screenNumber = max(Screen('Screens'));                       
-end                                                                
-[screenWidth, screenHeight]=Screen('WindowSize', screenNumber);  
-event.barHorOffset    = 15;                                        
-event.barWidth        = screenWidth - 2 * event.barHorOffset;      
-event.barHeight       = 20;                                        
-if strcmp(event.barLocation, 'top')                              
-event.barVerOffset    = 10;                                    
-event.frameDimensions = [event.barHorOffset, event.barVerOffset, event.barHorOffset+event.barWidth, event.barVerOffset+event.barHeight]; 
-else                                                               
-event.barVerOffset    = screenHeight - 10;                     
-event.frameDimensions = [event.barHorOffset, event.barVerOffset-event.barHeight, event.barHorOffset+event.barWidth, event.barVerOffset]; 
-end                                                                
-event.barDimensions 	 = event.frameDimensions;                   
-event.frameColor      = [230 144 255];                             
-event.barColor        = [30 144 255];                              
-
-maxTime     = event.time;                                              
-targetKey   = event.key;                                               
-[keyIsDown] = KbCheck;                                                 
-while keyIsDown; [keyIsDown] = KbCheck; end;                           
-[~, secs, keyCode] = KbCheck;                                          
-startKbCheck   = GetSecs;                                              
-while secs - startKbCheck < maxTime && ~any(keyCode(targetKey))        
-if event.waitBar                                                                       
-percentage          = (GetSecs - startKbCheck) / maxTime;                          
-event.barDimensions(3)    = event.barHorOffset+round(percentage * event.barWidth); 
-Screen('FillRect' , windowPtr, event.barColor,   event.barDimensions);           
-Screen('FrameRect', windowPtr, event.frameColor, event.frameDimensions, 3);      
-Screen('Flip', windowPtr, 0, 1);                                                 
-end   
-[~, secs, keyCode] = KbCheck;                                      
-end                                                                    
-Screen('Flip', windowPtr, 0, 0);                                     
-if any(keyCode(targetKey))                                             
-reply.RT  = secs - startKbCheck;                                   
-reply.key = KbName(keyCode);                                       
-else                                                                   
-reply.RT  = NaN;                                                   
-reply.key = NaN;                                                   
-end                                                                    
-
-end
-% generated script "Ask" from askFeedback.m
-if strcmp(eventName,'Ask')
-[width, height]=Screen('WindowSize', windowPtr);event.width = width; event.height=height;
-Screen('Flip', windowPtr, 0, double(~event.clearscr), 2);
-reply.data = Ask(windowPtr, event.quest, event.textcolor,event.bgcolor,event.mode, event.horzpos, event.vertpos, event.fontsize);
+reply.stop = GetSecs;[reply.droppedframes] = Screen('PlayMovie', event.pVideo, 0, event.loop, event.vol);
 
 end
                 % Save
                 reply.timeEventEnd = GetSecs() - startTime;
                 reply.blockname = event.blockname;
+                if isfield(event, 'alias')
+                    reply.alias = event.alias;
+                end
                 replyData{replyIter} = reply;
                 % Iter
                 replyIter = replyIter + 1;
@@ -225,88 +133,18 @@ end
             for iteratorwhichnamecannotbedupe=1:nEvents % load
                 event = events{iteratorwhichnamecannotbedupe};
                 eventName = event.name;
-% generated script "Show Image" from showImage.m
-if strcmp(eventName,'Show Image')
-im = imread(event.data);event.im = Screen('MakeTexture', windowPtr, im); 
-clear im; 
+% generated script "DIO event" from DIO_event.m
+if strcmp(eventName,'DIO event')
+global diosessions;
+event.s = diosessions(event.devname);
+event.s.outState(event.ch) = event.value;
+diosessions(event.devname) = event.s;
+end
+% generated script "Movie" from Video.m
+if strcmp(eventName,'Movie')
+disp(event)
+[event.pVideo, event.duration] = Screen('OpenMovie', windowPtr, event.data);
 
-end
-% event Jitter has no load function. (Jitter)
-% event Clear screen has no load function. (clearScreen)
-% generated script "Show Text" from showTextFromTextSet.m
-if strcmp(eventName,'Show Text')
-if exist('textDatasets')~=1
-    textDatasets={};
-end
-textDatasets 
-event.cdataset 
-if isempty(textDatasets)
-    textDataset = struct;
-    textDataset.name = event.cdataset;
-    textDataset.data = getTextSet(event.cdataset);
-    textDataset.iter = 1;
-    textDatasets{1,1} = event.cdataset;
-    textDatasets{2,1} = textDataset;
-elseif (sum(strcmp(textDatasets{1,:},event.cdataset))<1)
-    textDataset = struct;
-    textDataset.name = event.cdataset;
-    textDataset.data = getTextSet(event.cdataset);
-    textDataset.iter = 1;
-    [~,ind] = size(textDatasets);
-    textDatasets{1,ind+1} = event.cdataset;
-    textDatasets{2,ind+1} = textDataset;
-end
-[~, n] = size(textDatasets);
-for i=1:n
-    if (strcmp(textDatasets(1,i),event.cdataset))
-        dataset = textDatasets{2,i};
-        if (dataset.iter > length(dataset.data))
-            if (isempty(dataset.data))
-                error('textData is out of stimuli! Dataset too small, change settings or increase datasetsize');
-            end
-            dataset.iter = 1;
-        end
-        if (event.random)
-            event.line = dataset.data{randi(length(dataset.data))};
-        else
-            event.line = dataset.data{dataset.iter};
-        end
-        if (~event.putback)
-            dataset.data(dataset.iter) = [];
-        else
-            dataset.iter = dataset.iter+1;
-        end
-        textDatasets{2,i} = dataset;
-    end
-end
-
-end
-% generated script "WaitForKeyPress" from waitForPress.m
-if strcmp(eventName,'WaitForKeyPress')
-if length(Screen('Screens'))>1                                  
-screenNumber = 1;                                              
-else                                                               
-screenNumber = max(Screen('Screens'));                       
-end                                                                
-[screenWidth, screenHeight]=Screen('WindowSize', screenNumber);  
-event.barHorOffset    = 15;                                        
-event.barWidth        = screenWidth - 2 * event.barHorOffset;      
-event.barHeight       = 20;                                        
-if strcmp(event.barLocation, 'top')                              
-event.barVerOffset    = 10;                                    
-event.frameDimensions = [event.barHorOffset, event.barVerOffset, event.barHorOffset+event.barWidth, event.barVerOffset+event.barHeight]; 
-else                                                               
-event.barVerOffset    = screenHeight - 10;                     
-event.frameDimensions = [event.barHorOffset, event.barVerOffset-event.barHeight, event.barHorOffset+event.barWidth, event.barVerOffset]; 
-end                                                                
-event.barDimensions 	 = event.frameDimensions;                   
-event.frameColor      = [230 144 255];                             
-event.barColor        = [30 144 255];                              
-
-end
-% generated script "Ask" from askFeedback.m
-if strcmp(eventName,'Ask')
-[width, height]=Screen('WindowSize', windowPtr);event.width = width; event.height=height;
 end
                 events{iteratorwhichnamecannotbedupe} = event; % save event data (that is loaded for the run fun)
             end
@@ -321,64 +159,33 @@ end
                 eventName = event.name;
                 reply.timeEventStart = GetSecs() - startTime;
                 % Run event
-% generated script "Show Image" from showImage.m
-if strcmp(eventName,'Show Image')
-Screen('DrawTexture', windowPtr, event.im); 
-Screen('Flip', windowPtr, 0, double(~event.clear));
+% generated script "DIO event" from DIO_event.m
+if strcmp(eventName,'DIO event')
+event.s.session.outputSingleScan(event.s.outState);
+end
+% generated script "Movie" from Video.m
+if strcmp(eventName,'Movie')
+while (KbCheck) end
+[reply.droppedframes] = Screen('PlayMovie', event.pVideo, event.rate, event.loop, event.vol);
 [~,name,ext] = fileparts(event.data); 
-reply.image = strcat(name,ext); 
-image = reply.image; 
-
+reply.movie = strcat(name,ext); 
+reply.start = GetSecs;while 1
+    tex = Screen('GetMovieImage', windowPtr, event.pVideo);
+    if tex<=0
+        break;
+    end
+[reply.keyIsDown, reply.secs, ~, ~] = KbCheck;
+    if (event.stoponkey && reply.keyIsDown)
+        break;
+    end
+if (event.time && (event.time <= (GetSecs - reply.start)))
+    break;
 end
-% generated script "Jitter" from Jitter.m
-if strcmp(eventName,'Jitter')
-wait = event.range(randi(length(event.range))); WaitSecs(wait); reply.waittime = wait; 
-
+    Screen('DrawTexture', windowPtr, tex);
+    Screen('Flip', windowPtr);
+    Screen('Close', tex);
 end
-% generated script "Clear screen" from clearScreen.m
-if strcmp(eventName,'Clear screen')
-Screen('Flip',windowPtr, 0, 0); 
-Screen('Flip',windowPtr, 0, 1); 
-
-end
-% generated script "Show Text" from showTextFromTextSet.m
-if strcmp(eventName,'Show Text')
-reply.line = event.line;DrawFormattedText(windowPtr, reply.line,'center','center',event.color);
-Screen('Flip', windowPtr, 0, double(~event.clear));
-
-end
-% generated script "WaitForKeyPress" from waitForPress.m
-if strcmp(eventName,'WaitForKeyPress')
-maxTime     = event.time;                                              
-targetKey   = event.key;                                               
-[keyIsDown] = KbCheck;                                                 
-while keyIsDown; [keyIsDown] = KbCheck; end;                           
-[~, secs, keyCode] = KbCheck;                                          
-startKbCheck   = GetSecs;                                              
-while secs - startKbCheck < maxTime && ~any(keyCode(targetKey))        
-if event.waitBar                                                                       
-percentage          = (GetSecs - startKbCheck) / maxTime;                          
-event.barDimensions(3)    = event.barHorOffset+round(percentage * event.barWidth); 
-Screen('FillRect' , windowPtr, event.barColor,   event.barDimensions);           
-Screen('FrameRect', windowPtr, event.frameColor, event.frameDimensions, 3);      
-Screen('Flip', windowPtr, 0, 1);                                                 
-end   
-[~, secs, keyCode] = KbCheck;                                      
-end                                                                    
-Screen('Flip', windowPtr, 0, 0);                                     
-if any(keyCode(targetKey))                                             
-reply.RT  = secs - startKbCheck;                                   
-reply.key = KbName(keyCode);                                       
-else                                                                   
-reply.RT  = NaN;                                                   
-reply.key = NaN;                                                   
-end                                                                    
-
-end
-% generated script "Ask" from askFeedback.m
-if strcmp(eventName,'Ask')
-Screen('Flip', windowPtr, 0, double(~event.clearscr), 2);
-reply.data = Ask(windowPtr, event.quest, event.textcolor,event.bgcolor,event.mode, event.horzpos, event.vertpos, event.fontsize);
+reply.stop = GetSecs;[reply.droppedframes] = Screen('PlayMovie', event.pVideo, 0, event.loop, event.vol);
 
 end
                 % Save data
@@ -408,7 +215,12 @@ end
     % nothing to do here
 catch e
     % Dump function workspace for later analysis
-    save('memdump.mat');
+    save(sprintf('memdump_%s.mat',strrep(strrep(datestr(clock), ' ', '_'), ':', '-')));
+    try
+        assignin('base', 'event_that_caused_error', event);
+        openvar('event_that_caused_error');
+    catch b
+    end
     rethrow(e);
 end
 end
