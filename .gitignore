@@ -1,2 +1,11 @@
 *.asv
 func/experiment/runTrial.m
+*.mat
+*.JPG
+*.mp3
+*.txt
+func/experiment/runTrial.m
+Events/PlaySoundDataset.m
+Events/LoadSoundDataset.m
+*.csv
+Data/new/

@@ -59,173 +59,357 @@ switch(nargin)
     otherwise
         error('incorrect usage of runTrial...');
 end
+try
+    %% initialisation
+    data = {};
+    nEvents = length(events); % the amount of events (show image, present sound, delay etc)
+    audioHandles = zeros(1,40);
+    replyData = cell(1,nEvents);
 
-%% initialisation
-data = {};
-nEvents = length(events); % the amount of events (show image, present sound, delay etc)
-audioHandles = zeros(1,40);
-replyData = cell(1,nEvents);
-
-%% Trial Loops
-switch mode
-    %% no preload
-    case 0
-        replyIter = 1;
-        eventIter = 1;
-        startTime = GetSecs();
-        while eventIter <= nEvents
-            % Craete data
-            event = events{eventIter};
-            reply = struct;
-            reply.name = event.name;
-            eventName = event.name;
-            reply.timeEventStart = GetSecs() - startTime;
-            % Run event
-% generated script "Load sound dataset" from LoadSoundDataset.m
-if strcmp(eventName,'Load sound dataset')
-if ~exist('SoundDataset', 'var')
- SoundDataset = struct;
-end
-eval(sprintf('[SoundDataset.%s.Sounds SoundDataset.%s.Files] = loadSoundDatasetSounds(event.datasetname);',event.datasetname, event.datasetname));
-eval(sprintf('SoundDataset.%s.ids=1:length(SoundDataset.%s.Sounds);',event.datasetname, event.datasetname));
-
-
-end
-% generated script "Play dataset sound" from PlaySoundDataset.m
-if strcmp(eventName,'Play dataset sound')
-if event.random
-    event.soundID = eval(sprintf('SoundDataset.%s.ids(randi(length(SoundDataset.%s.ids)));', event.datasetname, event.datasetname));
-end
-if ~event.putBack
-    eval(sprintf('SoundDataset.%s.ids(SoundDataset.%s.ids==event.soundID)= [];', event.datasetname, event.datasetname));
-end
-event.sHandle = eval(sprintf('SoundDataset.%s.Sounds{event.soundID};', event.datasetname));
-
-reply.soundStartTime = PsychPortAudio('Start', event.sHandle, event.repetitions, 0 , event.waitForStart , event.stopTime , 0);
-reply.soundID = event.soundID;
-
-
-end
+    %% Trial Loops
+    switch mode
+        %% no preload
+        case 0
+            replyIter = 1;
+            eventIter = 1;
+            startTime = GetSecs();
+            while eventIter <= nEvents
+                % Craete data
+                event = events{eventIter};
+                reply = struct;
+                reply.name = event.name;
+                eventName = event.name;
+                reply.timeEventStart = GetSecs() - startTime;
+                % Run event
 % generated script "Show Image" from showImage.m
 if strcmp(eventName,'Show Image')
-event.im = imread(event.data);
-Screen('PutImage', windowPtr, event.im);
-Screen('Flip', windowPtr, event.delay, double(~event.clear));
-reply.data = event.data;
-end
-% generated script "Wait" from wait.m
-if strcmp(eventName,'Wait')
+im = imread(event.data);event.im = Screen('MakeTexture', windowPtr, im); 
+clear im; 
 
-WaitSecs(event.time);
-reply.waittime = event.time;
-end
-% generated script "Repeat x events" from flowEvent_repeat.m
-if strcmp(eventName,'Repeat x events')
-
+Screen('DrawTexture', windowPtr, event.im); 
+Screen('Flip', windowPtr, 0, double(~event.clear));
+[~,name,ext] = fileparts(event.data); 
+reply.image = strcat(name,ext); 
+image = reply.image; 
 
 end
-            % Save
-            reply.timeEventEnd = GetSecs() - startTime;
-            reply.blockname = event.blockname;
-            replyData{replyIter} = reply;
-            % Iter
-            replyIter = replyIter + 1;
-            eventIter = eventIter + 1;
-        end
-    %% preload  
-    case 1
-        for i=1:nEvents % load
-            event = events{i};
-            eventName = event.name;
-% generated script "Load sound dataset" from LoadSoundDataset.m
-if strcmp(eventName,'Load sound dataset')
-if ~exist('SoundDataset', 'var')
- SoundDataset = struct;
+% generated script "Jitter" from Jitter.m
+if strcmp(eventName,'Jitter')
+
+wait = event.range(randi(length(event.range))); WaitSecs(wait); reply.waittime = wait; 
+
 end
-eval(sprintf('[SoundDataset.%s.Sounds SoundDataset.%s.Files] = loadSoundDatasetSounds(event.datasetname);',event.datasetname, event.datasetname));
-eval(sprintf('SoundDataset.%s.ids=1:length(SoundDataset.%s.Sounds);',event.datasetname, event.datasetname));
+% generated script "Clear screen" from clearScreen.m
+if strcmp(eventName,'Clear screen')
+
+Screen('Flip',windowPtr, 0, 0); 
+Screen('Flip',windowPtr, 0, 1); 
 
 end
-% generated script "Play dataset sound" from PlaySoundDataset.m
-if strcmp(eventName,'Play dataset sound')
-if event.random
-    event.soundID = eval(sprintf('SoundDataset.%s.ids(randi(length(SoundDataset.%s.ids)));', event.datasetname, event.datasetname));
+% generated script "Show Text" from showTextFromTextSet.m
+if strcmp(eventName,'Show Text')
+if exist('textDatasets')~=1
+    textDatasets={};
 end
-if ~event.putBack
-    eval(sprintf('SoundDataset.%s.ids(SoundDataset.%s.ids==event.soundID)= [];', event.datasetname, event.datasetname));
+textDatasets 
+event.cdataset 
+if isempty(textDatasets)
+    textDataset = struct;
+    textDataset.name = event.cdataset;
+    textDataset.data = getTextSet(event.cdataset);
+    textDataset.iter = 1;
+    textDatasets{1,1} = event.cdataset;
+    textDatasets{2,1} = textDataset;
+elseif (sum(strcmp(textDatasets{1,:},event.cdataset))<1)
+    textDataset = struct;
+    textDataset.name = event.cdataset;
+    textDataset.data = getTextSet(event.cdataset);
+    textDataset.iter = 1;
+    [~,ind] = size(textDatasets);
+    textDatasets{1,ind+1} = event.cdataset;
+    textDatasets{2,ind+1} = textDataset;
 end
-event.sHandle = eval(sprintf('SoundDataset.%s.Sounds{event.soundID};', event.datasetname));
-
-end
-% generated script "Show Image" from showImage.m
-if strcmp(eventName,'Show Image')
-event.im = imread(event.data);
-end
-% event Wait has no load function. (wait)
-% event Repeat x events has no load function. (flowEvent_repeat)
-            events{i} = event; % save event data (that is loaded for the run fun)
-        end
-        replyIter = 1;
-        eventIter = 1;
-        startTime = GetSecs();
-        while eventIter <= nEvents % run
-            event = events{eventIter};
-            % Create data
-            reply = struct;
-            reply.name = event.name;
-            eventName = event.name;
-            reply.timeEventStart = GetSecs() - startTime;
-            % Run event
-% generated script "Load sound dataset" from LoadSoundDataset.m
-if strcmp(eventName,'Load sound dataset')
-
-end
-% generated script "Play dataset sound" from PlaySoundDataset.m
-if strcmp(eventName,'Play dataset sound')
-reply.soundStartTime = PsychPortAudio('Start', event.sHandle, event.repetitions, 0 , event.waitForStart , event.stopTime , 0);
-reply.soundID = event.soundID;
-
-
-end
-% generated script "Show Image" from showImage.m
-if strcmp(eventName,'Show Image')
-Screen('PutImage', windowPtr, event.im);
-Screen('Flip', windowPtr, event.delay, double(~event.clear));
-reply.data = event.data;
-end
-% generated script "Wait" from wait.m
-if strcmp(eventName,'Wait')
-WaitSecs(event.time);
-reply.waittime = event.time;
-end
-% generated script "Repeat x events" from flowEvent_repeat.m
-if strcmp(eventName,'Repeat x events')
-
-end
-            % Save data
-            reply.timeEventEnd = GetSecs() - startTime;
-            reply.blockname = event.blockname;
-            if isfield(event, 'alias')
-                reply.alias = event.alias;
+[~, n] = size(textDatasets);
+for i=1:n
+    if (strcmp(textDatasets(1,i),event.cdataset))
+        dataset = textDatasets{2,i};
+        if (dataset.iter > length(dataset.data))
+            if (isempty(dataset.data))
+                error('textData is out of stimuli! Dataset too small, change settings or increase datasetsize');
             end
-            replyData{replyIter} = reply;
-            events{eventIter} = event; % save event data (that is loaded for the run fun)
-            % Iters
-            replyIter = replyIter + 1;
-            eventIter = eventIter + 1;
+            dataset.iter = 1;
         end
-    otherwise
-        error('Unknown trial run mode')
-end
-
-%% Clean audio handles
-for i=1:length(audioHandles)
-    if ~(audioHandles(i)==0)
-        PsychPortAudio('Close' , audioHandles(i));
+        if (event.random)
+            event.line = dataset.data{randi(length(dataset.data))};
+        else
+            event.line = dataset.data{dataset.iter};
+        end
+        if (~event.putback)
+            dataset.data(dataset.iter) = [];
+        else
+            dataset.iter = dataset.iter+1;
+        end
+        textDatasets{2,i} = dataset;
     end
 end
 
-%% finish data compile
-% nothing to do here
+reply.line = event.line;DrawFormattedText(windowPtr, reply.line,'center','center',event.color);
+Screen('Flip', windowPtr, 0, double(~event.clear));
+
+end
+% generated script "WaitForKeyPress" from waitForPress.m
+if strcmp(eventName,'WaitForKeyPress')
+if length(Screen('Screens'))>1                                  
+screenNumber = 1;                                              
+else                                                               
+screenNumber = max(Screen('Screens'));                       
+end                                                                
+[screenWidth, screenHeight]=Screen('WindowSize', screenNumber);  
+event.barHorOffset    = 15;                                        
+event.barWidth        = screenWidth - 2 * event.barHorOffset;      
+event.barHeight       = 20;                                        
+if strcmp(event.barLocation, 'top')                              
+event.barVerOffset    = 10;                                    
+event.frameDimensions = [event.barHorOffset, event.barVerOffset, event.barHorOffset+event.barWidth, event.barVerOffset+event.barHeight]; 
+else                                                               
+event.barVerOffset    = screenHeight - 10;                     
+event.frameDimensions = [event.barHorOffset, event.barVerOffset-event.barHeight, event.barHorOffset+event.barWidth, event.barVerOffset]; 
+end                                                                
+event.barDimensions 	 = event.frameDimensions;                   
+event.frameColor      = [230 144 255];                             
+event.barColor        = [30 144 255];                              
+
+maxTime     = event.time;                                              
+targetKey   = event.key;                                               
+[keyIsDown] = KbCheck;                                                 
+while keyIsDown; [keyIsDown] = KbCheck; end;                           
+[~, secs, keyCode] = KbCheck;                                          
+startKbCheck   = GetSecs;                                              
+while secs - startKbCheck < maxTime && ~any(keyCode(targetKey))        
+if event.waitBar                                                                       
+percentage          = (GetSecs - startKbCheck) / maxTime;                          
+event.barDimensions(3)    = event.barHorOffset+round(percentage * event.barWidth); 
+Screen('FillRect' , windowPtr, event.barColor,   event.barDimensions);           
+Screen('FrameRect', windowPtr, event.frameColor, event.frameDimensions, 3);      
+Screen('Flip', windowPtr, 0, 1);                                                 
+end   
+[~, secs, keyCode] = KbCheck;                                      
+end                                                                    
+Screen('Flip', windowPtr, 0, 0);                                     
+if any(keyCode(targetKey))                                             
+reply.RT  = secs - startKbCheck;                                   
+reply.key = KbName(keyCode);                                       
+else                                                                   
+reply.RT  = NaN;                                                   
+reply.key = NaN;                                                   
+end                                                                    
+
+end
+% generated script "Ask" from askFeedback.m
+if strcmp(eventName,'Ask')
+[width, height]=Screen('WindowSize', windowPtr);event.width = width; event.height=height;
+Screen('Flip', windowPtr, 0, double(~event.clearscr), 2);
+reply.data = Ask(windowPtr, event.quest, event.textcolor,event.bgcolor,event.mode, event.horzpos, event.vertpos, event.fontsize);
+
+end
+                % Save
+                reply.timeEventEnd = GetSecs() - startTime;
+                reply.blockname = event.blockname;
+                replyData{replyIter} = reply;
+                % Iter
+                replyIter = replyIter + 1;
+                eventIter = eventIter + 1;
+            end
+        %% preload  
+        case 1
+            for iteratorwhichnamecannotbedupe=1:nEvents % load
+                event = events{iteratorwhichnamecannotbedupe};
+                eventName = event.name;
+% generated script "Show Image" from showImage.m
+if strcmp(eventName,'Show Image')
+im = imread(event.data);event.im = Screen('MakeTexture', windowPtr, im); 
+clear im; 
+
+end
+% event Jitter has no load function. (Jitter)
+% event Clear screen has no load function. (clearScreen)
+% generated script "Show Text" from showTextFromTextSet.m
+if strcmp(eventName,'Show Text')
+if exist('textDatasets')~=1
+    textDatasets={};
+end
+textDatasets 
+event.cdataset 
+if isempty(textDatasets)
+    textDataset = struct;
+    textDataset.name = event.cdataset;
+    textDataset.data = getTextSet(event.cdataset);
+    textDataset.iter = 1;
+    textDatasets{1,1} = event.cdataset;
+    textDatasets{2,1} = textDataset;
+elseif (sum(strcmp(textDatasets{1,:},event.cdataset))<1)
+    textDataset = struct;
+    textDataset.name = event.cdataset;
+    textDataset.data = getTextSet(event.cdataset);
+    textDataset.iter = 1;
+    [~,ind] = size(textDatasets);
+    textDatasets{1,ind+1} = event.cdataset;
+    textDatasets{2,ind+1} = textDataset;
+end
+[~, n] = size(textDatasets);
+for i=1:n
+    if (strcmp(textDatasets(1,i),event.cdataset))
+        dataset = textDatasets{2,i};
+        if (dataset.iter > length(dataset.data))
+            if (isempty(dataset.data))
+                error('textData is out of stimuli! Dataset too small, change settings or increase datasetsize');
+            end
+            dataset.iter = 1;
+        end
+        if (event.random)
+            event.line = dataset.data{randi(length(dataset.data))};
+        else
+            event.line = dataset.data{dataset.iter};
+        end
+        if (~event.putback)
+            dataset.data(dataset.iter) = [];
+        else
+            dataset.iter = dataset.iter+1;
+        end
+        textDatasets{2,i} = dataset;
+    end
+end
+
+end
+% generated script "WaitForKeyPress" from waitForPress.m
+if strcmp(eventName,'WaitForKeyPress')
+if length(Screen('Screens'))>1                                  
+screenNumber = 1;                                              
+else                                                               
+screenNumber = max(Screen('Screens'));                       
+end                                                                
+[screenWidth, screenHeight]=Screen('WindowSize', screenNumber);  
+event.barHorOffset    = 15;                                        
+event.barWidth        = screenWidth - 2 * event.barHorOffset;      
+event.barHeight       = 20;                                        
+if strcmp(event.barLocation, 'top')                              
+event.barVerOffset    = 10;                                    
+event.frameDimensions = [event.barHorOffset, event.barVerOffset, event.barHorOffset+event.barWidth, event.barVerOffset+event.barHeight]; 
+else                                                               
+event.barVerOffset    = screenHeight - 10;                     
+event.frameDimensions = [event.barHorOffset, event.barVerOffset-event.barHeight, event.barHorOffset+event.barWidth, event.barVerOffset]; 
+end                                                                
+event.barDimensions 	 = event.frameDimensions;                   
+event.frameColor      = [230 144 255];                             
+event.barColor        = [30 144 255];                              
+
+end
+% generated script "Ask" from askFeedback.m
+if strcmp(eventName,'Ask')
+[width, height]=Screen('WindowSize', windowPtr);event.width = width; event.height=height;
+end
+                events{iteratorwhichnamecannotbedupe} = event; % save event data (that is loaded for the run fun)
+            end
+            replyIter = 1;
+            eventIter = 1;
+            startTime = GetSecs();
+            while eventIter <= nEvents % run
+                event = events{eventIter};
+                % Create data
+                reply = struct;
+                reply.name = event.name;
+                eventName = event.name;
+                reply.timeEventStart = GetSecs() - startTime;
+                % Run event
+% generated script "Show Image" from showImage.m
+if strcmp(eventName,'Show Image')
+Screen('DrawTexture', windowPtr, event.im); 
+Screen('Flip', windowPtr, 0, double(~event.clear));
+[~,name,ext] = fileparts(event.data); 
+reply.image = strcat(name,ext); 
+image = reply.image; 
+
+end
+% generated script "Jitter" from Jitter.m
+if strcmp(eventName,'Jitter')
+wait = event.range(randi(length(event.range))); WaitSecs(wait); reply.waittime = wait; 
+
+end
+% generated script "Clear screen" from clearScreen.m
+if strcmp(eventName,'Clear screen')
+Screen('Flip',windowPtr, 0, 0); 
+Screen('Flip',windowPtr, 0, 1); 
+
+end
+% generated script "Show Text" from showTextFromTextSet.m
+if strcmp(eventName,'Show Text')
+reply.line = event.line;DrawFormattedText(windowPtr, reply.line,'center','center',event.color);
+Screen('Flip', windowPtr, 0, double(~event.clear));
+
+end
+% generated script "WaitForKeyPress" from waitForPress.m
+if strcmp(eventName,'WaitForKeyPress')
+maxTime     = event.time;                                              
+targetKey   = event.key;                                               
+[keyIsDown] = KbCheck;                                                 
+while keyIsDown; [keyIsDown] = KbCheck; end;                           
+[~, secs, keyCode] = KbCheck;                                          
+startKbCheck   = GetSecs;                                              
+while secs - startKbCheck < maxTime && ~any(keyCode(targetKey))        
+if event.waitBar                                                                       
+percentage          = (GetSecs - startKbCheck) / maxTime;                          
+event.barDimensions(3)    = event.barHorOffset+round(percentage * event.barWidth); 
+Screen('FillRect' , windowPtr, event.barColor,   event.barDimensions);           
+Screen('FrameRect', windowPtr, event.frameColor, event.frameDimensions, 3);      
+Screen('Flip', windowPtr, 0, 1);                                                 
+end   
+[~, secs, keyCode] = KbCheck;                                      
+end                                                                    
+Screen('Flip', windowPtr, 0, 0);                                     
+if any(keyCode(targetKey))                                             
+reply.RT  = secs - startKbCheck;                                   
+reply.key = KbName(keyCode);                                       
+else                                                                   
+reply.RT  = NaN;                                                   
+reply.key = NaN;                                                   
+end                                                                    
+
+end
+% generated script "Ask" from askFeedback.m
+if strcmp(eventName,'Ask')
+Screen('Flip', windowPtr, 0, double(~event.clearscr), 2);
+reply.data = Ask(windowPtr, event.quest, event.textcolor,event.bgcolor,event.mode, event.horzpos, event.vertpos, event.fontsize);
+
+end
+                % Save data
+                reply.timeEventEnd = GetSecs() - startTime;
+                reply.blockname = event.blockname;
+                if isfield(event, 'alias')
+                    reply.alias = event.alias;
+                end
+                replyData{replyIter} = reply;
+                events{eventIter} = event; % save event data (that is loaded for the run fun)
+                % Iters
+                replyIter = replyIter + 1;
+                eventIter = eventIter + 1;
+            end
+        otherwise
+            error('Unknown trial run mode')
+    end
+
+    %% Clean audio handles
+    for iteratorwhichnamecannotbedupe=1:length(audioHandles)
+        if ~(audioHandles(iteratorwhichnamecannotbedupe)==0)
+            PsychPortAudio('Close' , audioHandles(iteratorwhichnamecannotbedupe));
+        end
+    end
+
+    %% finish data compile
+    % nothing to do here
+catch e
+    % Dump function workspace for later analysis
+    save('memdump.mat');
+    rethrow(e);
+end
 end
 
