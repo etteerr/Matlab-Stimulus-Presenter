@@ -11,6 +11,7 @@ while(experimentRunning)
         pause(20/1000);
         s.session.outputSingleScan(s.outState);
     end
+
     if any(k==['v' '\'])
         break;
     end
