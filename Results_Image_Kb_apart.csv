@@ -1,0 +1,141 @@
+date;subjectId;blocknr;name;timeEventStart;image;timeEventEnd;blockname;alias;RT;key
+01-Dec-2016 13:09:23;;Block 1;Show Image;0.001206;Slide1.JPG;0.042723;tralala;Draw Image;;
+01-Dec-2016 13:09:23;;Block 1;WaitForKeyPress;0.043156;;0.65404;tralala;;0.5133;space
+01-Dec-2016 13:09:23;;Block 1;Clear screen;0.65417;;0.67866;tralala;;;
+01-Dec-2016 13:09:23;;Block 1;WaitForKeyPress;0.67876;;1.3813;tralala;;0.69854;space
+01-Dec-2016 13:09:23;;Block 1;Repeat x events;1.3815;;1.3816;tralala;;;
+01-Dec-2016 13:09:23;;Block 1;Show Image;1.3817;Slide3.JPG;1.4032;tralala;Draw Image;;
+01-Dec-2016 13:09:23;;Block 1;WaitForKeyPress;1.4035;;4.43;tralala;;NaN;NaN
+01-Dec-2016 13:09:23;;Block 1;Clear screen;4.4302;;4.4622;tralala;;;
+01-Dec-2016 13:09:23;;Block 1;WaitForKeyPress;4.4625;;5.0126;tralala;;0.54867;space
+01-Dec-2016 13:09:23;;Block 1;Repeat x events;5.0127;;5.0127;tralala;;;
+01-Dec-2016 13:09:23;;Block 1;Show Image;5.0128;Slide5.JPG;5.0301;tralala;Draw Image;;
+01-Dec-2016 13:09:23;;Block 1;WaitForKeyPress;5.0303;;6.4297;tralala;;1.3762;space
+01-Dec-2016 13:09:23;;Block 1;Clear screen;6.4299;;6.4621;tralala;;;
+01-Dec-2016 13:09:23;;Block 1;WaitForKeyPress;6.4624;;6.9464;tralala;;0.4766;space
+01-Dec-2016 13:09:23;;Block 1;Repeat x events;6.9466;;6.9467;tralala;;;
+01-Dec-2016 13:09:23;;Block 1;Show Image;6.9468;Slide7.JPG;6.963;tralala;Draw Image;;
+01-Dec-2016 13:09:23;;Block 1;WaitForKeyPress;6.9632;;7.2631;tralala;;0.28075;space
+01-Dec-2016 13:09:23;;Block 1;Clear screen;7.2633;;7.2955;tralala;;;
+01-Dec-2016 13:09:23;;Block 1;WaitForKeyPress;7.2957;;7.7131;tralala;;0.41118;space
+01-Dec-2016 13:09:23;;Block 1;Repeat x events;7.7133;;7.7133;tralala;;;
+01-Dec-2016 13:10:08;;Block 1;Show Image;0.0011985;Slide1.JPG;0.056901;tralala;Draw Image;;
+01-Dec-2016 13:10:08;;Block 1;WaitForKeyPress;0.057434;;1.2778;tralala;;1.1614;space
+01-Dec-2016 13:10:08;;Block 1;Clear screen;1.2779;;1.308;tralala;;;
+01-Dec-2016 13:10:08;;Block 1;WaitForKeyPress;1.3081;;1.8454;tralala;;0.53224;space
+01-Dec-2016 13:10:08;;Block 1;Repeat x events;1.8456;;1.8457;tralala;;;
+01-Dec-2016 13:10:08;;Block 1;Show Image;1.8458;Slide3.JPG;1.8705;tralala;Draw Image;;
+01-Dec-2016 13:10:08;;Block 1;WaitForKeyPress;1.8709;;3.2753;tralala;;1.3996;space
+01-Dec-2016 13:10:08;;Block 1;Clear screen;3.2755;;3.3082;tralala;;;
+01-Dec-2016 13:10:08;;Block 1;WaitForKeyPress;3.3083;;3.6751;tralala;;0.36592;space
+01-Dec-2016 13:10:08;;Block 1;Repeat x events;3.6752;;3.6752;tralala;;;
+01-Dec-2016 13:10:08;;Block 1;Show Image;3.6752;Slide5.JPG;3.6918;tralala;Draw Image;;
+01-Dec-2016 13:10:08;;Block 1;WaitForKeyPress;3.6919;;4.0257;tralala;;0.31835;space
+01-Dec-2016 13:10:08;;Block 1;Clear screen;4.0258;;4.0584;tralala;;;
+01-Dec-2016 13:10:08;;Block 1;WaitForKeyPress;4.0586;;4.3091;tralala;;0.24888;space
+01-Dec-2016 13:10:08;;Block 1;Repeat x events;4.3093;;4.3093;tralala;;;
+01-Dec-2016 13:10:08;;Block 1;Show Image;4.3094;Slide7.JPG;4.3257;tralala;Draw Image;;
+01-Dec-2016 13:10:08;;Block 1;WaitForKeyPress;4.3259;;4.6428;tralala;;0.29468;space
+01-Dec-2016 13:10:08;;Block 1;Clear screen;4.6431;;4.6751;tralala;;;
+01-Dec-2016 13:10:08;;Block 1;WaitForKeyPress;4.6754;;4.9419;tralala;;0.2652;space
+01-Dec-2016 13:10:08;;Block 1;Repeat x events;4.9419;;4.942;tralala;;;
+01-Dec-2016 13:10:23;;Block 1;Show Image;0.0013745;Slide1.JPG;0.064473;tralala;Draw Image;;
+01-Dec-2016 13:10:23;;Block 1;WaitForKeyPress;0.064966;;0.59483;tralala;;0.42231;space
+01-Dec-2016 13:10:23;;Block 1;Clear screen;0.59491;;0.62617;tralala;;;
+01-Dec-2016 13:10:23;;Block 1;WaitForKeyPress;0.62627;;1.6448;tralala;;NaN;NaN
+01-Dec-2016 13:10:23;;Block 1;Repeat x events;1.6455;;1.6456;tralala;;;
+01-Dec-2016 13:10:23;;Block 1;Show Image;1.6457;Slide3.JPG;1.6674;tralala;Draw Image;;
+01-Dec-2016 13:10:23;;Block 1;WaitForKeyPress;1.6676;;4.6771;tralala;;NaN;NaN
+01-Dec-2016 13:10:23;;Block 1;Clear screen;4.6773;;4.7097;tralala;;;
+01-Dec-2016 13:10:23;;Block 1;WaitForKeyPress;4.7099;;5.3783;tralala;;0.66579;space
+01-Dec-2016 13:10:23;;Block 1;Repeat x events;5.3785;;5.3786;tralala;;;
+01-Dec-2016 13:10:23;;Block 1;Show Image;5.3787;Slide5.JPG;5.3942;tralala;Draw Image;;
+01-Dec-2016 13:10:23;;Block 1;WaitForKeyPress;5.3944;;7.9607;tralala;;2.5341;space
+01-Dec-2016 13:10:23;;Block 1;Clear screen;7.9609;;7.993;tralala;;;
+01-Dec-2016 13:10:23;;Block 1;WaitForKeyPress;7.9932;;8.7106;tralala;;0.65965;space
+01-Dec-2016 13:10:23;;Block 1;Repeat x events;8.7108;;8.7108;tralala;;;
+01-Dec-2016 13:10:23;;Block 1;Show Image;8.711;Slide7.JPG;8.7271;tralala;Draw Image;;
+01-Dec-2016 13:10:23;;Block 1;WaitForKeyPress;8.7274;;10.4605;tralala;;1.6664;space
+01-Dec-2016 13:10:23;;Block 1;Clear screen;10.4607;;10.493;tralala;;;
+01-Dec-2016 13:10:23;;Block 1;WaitForKeyPress;10.4932;;11.1439;tralala;;0.63636;space
+01-Dec-2016 13:10:23;;Block 1;Repeat x events;11.1441;;11.1442;tralala;;;
+01-Dec-2016 13:11:31;;Block 1;Show Image;0.0012391;Slide1.JPG;0.045611;tralala;Draw Image;;
+01-Dec-2016 13:11:31;;Block 1;WaitForKeyPress;0.046121;;0.83601;tralala;;0.71145;space
+01-Dec-2016 13:11:31;;Block 1;Clear screen;0.83607;;0.86366;tralala;;;
+01-Dec-2016 13:11:31;;Block 1;WaitForKeyPress;0.86376;;1.4993;tralala;;0.61539;space
+01-Dec-2016 13:11:31;;Block 1;Repeat x events;1.4995;;1.4996;tralala;;;
+01-Dec-2016 13:11:31;;Block 1;Show Image;1.4997;Slide3.JPG;1.5215;tralala;Draw Image;;
+01-Dec-2016 13:11:31;;Block 1;WaitForKeyPress;1.5217;;3.131;tralala;;1.5821;space
+01-Dec-2016 13:11:31;;Block 1;Clear screen;3.1312;;3.164;tralala;;;
+01-Dec-2016 13:11:31;;Block 1;WaitForKeyPress;3.1642;;3.5477;tralala;;0.34223;space
+01-Dec-2016 13:11:31;;Block 1;Repeat x events;3.5479;;3.548;tralala;;;
+01-Dec-2016 13:11:31;;Block 1;Show Image;3.5481;Slide5.JPG;3.5644;tralala;Draw Image;;
+01-Dec-2016 13:11:31;;Block 1;WaitForKeyPress;3.5645;;3.9811;tralala;;0.36893;space
+01-Dec-2016 13:11:31;;Block 1;Clear screen;3.9813;;4.0139;tralala;;;
+01-Dec-2016 13:11:31;;Block 1;WaitForKeyPress;4.0142;;4.2644;tralala;;0.20373;space
+01-Dec-2016 13:11:31;;Block 1;Repeat x events;4.2646;;4.2647;tralala;;;
+01-Dec-2016 13:11:31;;Block 1;Show Image;4.2648;Slide7.JPG;4.2814;tralala;Draw Image;;
+01-Dec-2016 13:11:31;;Block 1;WaitForKeyPress;4.2816;;4.5143;tralala;;0.19743;space
+01-Dec-2016 13:11:31;;Block 1;Clear screen;4.5146;;4.5472;tralala;;;
+01-Dec-2016 13:11:31;;Block 1;WaitForKeyPress;4.5475;;4.7144;tralala;;0.13347;space
+01-Dec-2016 13:11:31;;Block 1;Repeat x events;4.7146;;4.7147;tralala;;;
+01-Dec-2016 13:11:46;;Block 1;Show Image;0.0012569;Slide1.JPG;0.044677;tralala;Draw Image;;
+01-Dec-2016 13:11:46;;Block 1;WaitForKeyPress;0.045131;;0.7356;tralala;;0.56359;space
+01-Dec-2016 13:11:46;;Block 1;Clear screen;0.73571;;0.76384;tralala;;;
+01-Dec-2016 13:11:46;;Block 1;WaitForKeyPress;0.76398;;1.3984;tralala;;0.60737;space
+01-Dec-2016 13:11:46;;Block 1;Repeat x events;1.3986;;1.3986;tralala;;;
+01-Dec-2016 13:11:46;;Block 1;Show Image;1.3987;Slide3.JPG;1.4184;tralala;Draw Image;;
+01-Dec-2016 13:11:46;;Block 1;WaitForKeyPress;1.4185;;4.0146;tralala;;2.5749;space
+01-Dec-2016 13:11:46;;Block 1;Clear screen;4.0148;;4.0475;tralala;;;
+01-Dec-2016 13:11:46;;Block 1;WaitForKeyPress;4.0477;;4.5979;tralala;;0.53242;space
+01-Dec-2016 13:11:46;;Block 1;Repeat x events;4.5981;;4.5982;tralala;;;
+01-Dec-2016 13:11:46;;Block 1;Show Image;4.5983;Slide5.JPG;4.6153;tralala;Draw Image;;
+01-Dec-2016 13:11:46;;Block 1;WaitForKeyPress;4.6155;;6.7146;tralala;;2.0581;space
+01-Dec-2016 13:11:46;;Block 1;Clear screen;6.7148;;6.7474;tralala;;;
+01-Dec-2016 13:11:46;;Block 1;WaitForKeyPress;6.7476;;7.3477;tralala;;0.57916;space
+01-Dec-2016 13:11:46;;Block 1;Repeat x events;7.3479;;7.3479;tralala;;;
+01-Dec-2016 13:11:46;;Block 1;Show Image;7.348;Slide7.JPG;7.3647;tralala;Draw Image;;
+01-Dec-2016 13:11:46;;Block 1;WaitForKeyPress;7.3649;;7.9311;tralala;;0.53131;space
+01-Dec-2016 13:11:46;;Block 1;Clear screen;7.9313;;7.964;tralala;;;
+01-Dec-2016 13:11:46;;Block 1;WaitForKeyPress;7.9643;;8.4645;tralala;;0.433;space
+01-Dec-2016 13:11:46;;Block 1;Repeat x events;8.4647;;8.4648;tralala;;;
+01-Dec-2016 13:12:30;;Block 1;Show Image;0.0011523;Slide1.JPG;0.032683;tralala;Draw Image;;
+01-Dec-2016 13:12:30;;Block 1;WaitForKeyPress;0.033144;;0.84075;tralala;;0.7125;space
+01-Dec-2016 13:12:30;;Block 1;Clear screen;0.84087;;0.8684;tralala;;;
+01-Dec-2016 13:12:30;;Block 1;WaitForKeyPress;0.86852;;1.354;tralala;;0.46436;space
+01-Dec-2016 13:12:30;;Block 1;Repeat x events;1.3542;;1.3542;tralala;;;
+01-Dec-2016 13:12:30;;Block 1;Show Image;1.3544;Slide3.JPG;1.3762;tralala;Draw Image;;
+01-Dec-2016 13:12:30;;Block 1;WaitForKeyPress;1.3764;;1.8024;tralala;;0.39264;space
+01-Dec-2016 13:12:30;;Block 1;Clear screen;1.8026;;1.8353;tralala;;;
+01-Dec-2016 13:12:30;;Block 1;WaitForKeyPress;1.8355;;2.2191;tralala;;0.36127;space
+01-Dec-2016 13:12:30;;Block 1;Repeat x events;2.2193;;2.2194;tralala;;;
+01-Dec-2016 13:12:30;;Block 1;Show Image;2.2195;Slide5.JPG;2.2364;tralala;Draw Image;;
+01-Dec-2016 13:12:30;;Block 1;WaitForKeyPress;2.2366;;2.5857;tralala;;0.31233;space
+01-Dec-2016 13:12:30;;Block 1;Clear screen;2.5859;;2.6186;tralala;;;
+01-Dec-2016 13:12:30;;Block 1;WaitForKeyPress;2.6188;;2.9357;tralala;;0.29912;space
+01-Dec-2016 13:12:30;;Block 1;Repeat x events;2.9359;;2.9359;tralala;;;
+01-Dec-2016 13:12:30;;Block 1;Show Image;2.9361;Slide7.JPG;2.9528;tralala;Draw Image;;
+01-Dec-2016 13:12:30;;Block 1;WaitForKeyPress;2.953;;3.2523;tralala;;0.26707;space
+01-Dec-2016 13:12:30;;Block 1;Clear screen;3.2525;;3.2853;tralala;;;
+01-Dec-2016 13:12:30;;Block 1;WaitForKeyPress;3.2855;;3.6524;tralala;;0.33096;space
+01-Dec-2016 13:12:30;;Block 1;Repeat x events;3.6526;;3.6527;tralala;;;
+01-Dec-2016 13:12:43;;Block 1;Show Image;0.0012131;Slide1.JPG;0.043678;tralala;Draw Image;;
+01-Dec-2016 13:12:43;;Block 1;WaitForKeyPress;0.044162;;0.89881;tralala;;0.74648;space
+01-Dec-2016 13:12:43;;Block 1;Clear screen;0.89893;;0.92958;tralala;;;
+01-Dec-2016 13:12:43;;Block 1;WaitForKeyPress;0.92968;;1.9644;tralala;;NaN;NaN
+01-Dec-2016 13:12:43;;Block 1;Repeat x events;1.9647;;1.9647;tralala;;;
+01-Dec-2016 13:12:43;;Block 1;Show Image;1.9652;Slide3.JPG;1.9876;tralala;Draw Image;;
+01-Dec-2016 13:12:43;;Block 1;WaitForKeyPress;1.9878;;3.1812;tralala;;1.1747;space
+01-Dec-2016 13:12:43;;Block 1;Clear screen;3.1814;;3.2131;tralala;;;
+01-Dec-2016 13:12:43;;Block 1;WaitForKeyPress;3.2134;;4.2466;tralala;;NaN;NaN
+01-Dec-2016 13:12:43;;Block 1;Repeat x events;4.2468;;4.2469;tralala;;;
+01-Dec-2016 13:12:43;;Block 1;Show Image;4.247;Slide5.JPG;4.2643;tralala;Draw Image;;
+01-Dec-2016 13:12:43;;Block 1;WaitForKeyPress;4.2645;;4.8802;tralala;;0.59785;space
+01-Dec-2016 13:12:43;;Block 1;Clear screen;4.8804;;4.9131;tralala;;;
+01-Dec-2016 13:12:43;;Block 1;WaitForKeyPress;4.9134;;6.0129;tralala;;NaN;NaN
+01-Dec-2016 13:12:43;;Block 1;Repeat x events;6.013;;6.0131;tralala;;;
+01-Dec-2016 13:12:43;;Block 1;Show Image;6.0131;Slide7.JPG;6.03;tralala;Draw Image;;
+01-Dec-2016 13:12:43;;Block 1;WaitForKeyPress;6.0301;;6.5134;tralala;;0.46613;space
+01-Dec-2016 13:12:43;;Block 1;Clear screen;6.5136;;6.5465;tralala;;;
+01-Dec-2016 13:12:43;;Block 1;WaitForKeyPress;6.5468;;7.6463;tralala;;NaN;NaN
+01-Dec-2016 13:12:43;;Block 1;Repeat x events;7.6465;;7.6465;tralala;;;

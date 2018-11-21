@@ -1,0 +1,354 @@
+date;subjectId;blocknr;name;timeEventStart;waittime;timeEventEnd;blockname;image;alias;ImOnset;ImOffset;RT;key
+30-Nov-2016 19:20:45;;Block 1;Wait;0.0011298;0.5;0.50255;B1;;;;;;
+30-Nov-2016 19:20:45;;Block 1;Show Image;0.50457;;0.60165;B1;Big_Fixation.JPG;fixation;;;;
+30-Nov-2016 19:20:45;;Block 1;Jitter;0.60182;0.95;1.5521;B1;;;;;;
+30-Nov-2016 19:20:45;;Block 1;Image while KBcheck;1.5523;;2.3435;B1;wovenhandy.jpg;target;0.017816;0.26779;0.61865;k
+30-Nov-2016 19:20:45;;Block 1;Repeat x events;2.3436;;2.3436;B1;;;;;;
+30-Nov-2016 19:20:45;;Block 1;Wait;2.3436;0.5;2.8439;B1;;;;;;
+30-Nov-2016 19:20:45;;Block 1;Show Image;2.8441;;2.874;B1;Big_Fixation.JPG;fixation;;;;
+30-Nov-2016 19:20:45;;Block 1;Jitter;2.8741;0.65;3.5243;B1;;;;;;
+30-Nov-2016 19:20:45;;Block 1;Image while KBcheck;3.5245;;3.9905;B1;jnbsHcl.jpg;target;0.0070154;0.27365;0.37453;o
+30-Nov-2016 19:20:45;;Block 1;Repeat x events;3.9907;;3.9908;B1;;;;;;
+30-Nov-2016 19:20:45;;Block 1;Wait;3.9909;0.5;4.4912;B1;;;;;;
+30-Nov-2016 19:20:45;;Block 1;Show Image;4.4914;;4.523;B1;Big_Fixation.JPG;fixation;;;;
+30-Nov-2016 19:20:45;;Block 1;Jitter;4.5232;0.8;5.3235;B1;;;;;;
+30-Nov-2016 19:20:45;;Block 1;Image while KBcheck;5.3237;;5.7559;B1;jnbsHcl.jpg;target;0.017131;0.26711;0.38451;y
+30-Nov-2016 19:20:45;;Block 1;Repeat x events;5.7561;;5.7562;B1;;;;;;
+30-Nov-2016 19:37:46;;Block 1;Wait;0.0013986;0.5;0.50278;B1;;;;;
+30-Nov-2016 19:37:46;;Block 1;Show Image;0.50475;;0.6043;B1;Big_Fixation.JPG;fixation;;;
+30-Nov-2016 19:37:46;;Block 1;Jitter;0.60448;0.65;1.2548;B1;;;;;
+30-Nov-2016 19:37:46;;Block 1;Image while KBcheck;1.255;;1.6468;B1;wovenhandy.jpg;target;0.011507;0.26165;d
+30-Nov-2016 19:37:46;;Block 1;Show Image;1.6468;;1.6754;B1;Big_Fixation.JPG;fix;;;
+30-Nov-2016 19:37:46;;Block 1;WaitForKeyPress;1.6755;;2.2108;B1;;;;0.53153;f
+
+01-Dec-2016 11:17:21;;Block 1;Show Image;0.0011262;Big_Fixation.JPG;0.061058;B100;fix;;;;
+01-Dec-2016 11:17:21;;Block 1;Jitter;0.061921;;1.0623;B100;;1;;;
+01-Dec-2016 11:17:21;;Block 1;Clear screen;1.0625;;1.066;B100;;;;;
+01-Dec-2016 11:17:21;;Block 1;Show Text;1.0662;;1.1327;B100;Show text;;First sentence displayed;;
+01-Dec-2016 11:17:21;;Block 1;WaitForKeyPress;1.1329;;3.7549;B100;;;;2.5112;d
+01-Dec-2016 11:17:21;;Block 1;Clear screen;3.755;;3.7658;B100;;;;;
+01-Dec-2016 11:19:39;;Block 1;Show Image;0.00092687;Big_Fixation.JPG;0.073805;B100;fix;;
+01-Dec-2016 11:19:39;;Block 1;Jitter;0.074552;;1.0749;B100;;1;
+01-Dec-2016 11:19:39;;Block 1;Clear screen;1.0751;;1.0783;B100;;;
+01-Dec-2016 11:19:39;;Block 1;Show Text;1.0785;;1.1278;B100;Show text;;First sentence displayed
+01-Dec-2016 11:19:39;;Block 1;Wait;1.1279;;3.1283;B100;;2;
+01-Dec-2016 11:19:39;;Block 1;Clear screen;3.1285;;3.145;B100;;;
+01-Dec-2016 11:33:00;;Block 1;Show Image;0.001009;Big_Fixation.JPG;0.054058;B100;fix;;
+01-Dec-2016 11:33:00;;Block 1;Jitter;0.054858;;0.25519;B100;;0.2;
+01-Dec-2016 11:33:00;;Block 1;Clear screen;0.25543;;0.25873;B100;;;
+01-Dec-2016 11:33:00;;Block 1;Show Text;0.25894;;0.30869;B100;Show text;;Awesome
+01-Dec-2016 11:33:00;;Block 1;Wait;0.30887;;2.3095;B100;;2;
+01-Dec-2016 11:33:00;;Block 1;Clear screen;2.3096;;2.3253;B100;;;
+01-Dec-2016 11:34:10;;Block 1;Show Image;0.0009324;Big_Fixation.JPG;0.048319;B100;fix;;
+01-Dec-2016 11:34:10;;Block 1;Jitter;0.049132;;0.64947;B100;;0.6;
+01-Dec-2016 11:34:10;;Block 1;Clear screen;0.64968;;0.65287;B100;;;
+01-Dec-2016 11:34:10;;Block 1;Show Text;0.65309;;0.68599;B100;Show text;;Awesome
+01-Dec-2016 11:34:10;;Block 1;Wait;0.68611;;1.2866;B100;;0.6;
+01-Dec-2016 11:34:10;;Block 1;Clear screen;1.2868;;1.3028;B100;;;
+01-Dec-2016 11:34:10;;Block 1;Repeat x events;1.3031;;1.3032;B100;;;
+01-Dec-2016 11:34:10;;Block 1;Show Text;1.3033;;1.3195;B100;Show text;;bla1
+01-Dec-2016 11:34:10;;Block 1;Wait;1.3198;;1.92;B100;;0.6;
+01-Dec-2016 11:34:10;;Block 1;Clear screen;1.9202;;1.9362;B100;;;
+01-Dec-2016 11:34:10;;Block 1;Repeat x events;1.9364;;1.9365;B100;;;
+01-Dec-2016 11:34:10;;Block 1;Show Text;1.9366;;1.9527;B100;Show text;;bla2
+01-Dec-2016 11:34:10;;Block 1;Wait;1.953;;2.5533;B100;;0.6;
+01-Dec-2016 11:34:10;;Block 1;Clear screen;2.5535;;2.5695;B100;;;
+01-Dec-2016 11:34:10;;Block 1;Repeat x events;2.5697;;2.5698;B100;;;
+01-Dec-2016 11:34:10;;Block 1;Show Text;2.57;;2.5862;B100;Show text;;Awesome
+01-Dec-2016 11:34:10;;Block 1;Wait;2.5864;;3.1867;B100;;0.6;
+01-Dec-2016 11:34:10;;Block 1;Clear screen;3.1869;;3.2028;B100;;;
+01-Dec-2016 11:34:10;;Block 1;Repeat x events;3.203;;3.2031;B100;;;
+01-Dec-2016 11:34:10;;Block 1;Show Text;3.2032;;3.2362;B100;Show text;;does this also work with sentences?
+01-Dec-2016 11:34:10;;Block 1;Wait;3.2364;;3.8367;B100;;0.6;
+01-Dec-2016 11:34:10;;Block 1;Clear screen;3.8369;;3.8528;B100;;;
+01-Dec-2016 11:34:10;;Block 1;Repeat x events;3.853;;3.853;B100;;;
+01-Dec-2016 11:34:10;;Block 1;Show Text;3.8532;;3.8695;B100;Show text;;Awesome
+01-Dec-2016 11:34:10;;Block 1;Wait;3.8698;;4.47;B100;;0.6;
+01-Dec-2016 11:34:10;;Block 1;Clear screen;4.4702;;4.4861;B100;;;
+01-Dec-2016 11:34:10;;Block 1;Repeat x events;4.4864;;4.4865;B100;;;
+01-Dec-2016 11:34:10;;Block 1;Show Text;4.4866;;4.5028;B100;Show text;;Awesome
+01-Dec-2016 11:34:10;;Block 1;Wait;4.503;;5.1033;B100;;0.6;
+01-Dec-2016 11:34:10;;Block 1;Clear screen;5.1035;;5.1194;B100;;;
+01-Dec-2016 11:34:10;;Block 1;Repeat x events;5.1196;;5.1197;B100;;;
+01-Dec-2016 11:34:53;;Block 1;Show Image;0.00095135;Big_Fixation.JPG;0.061971;B100;fix;;
+01-Dec-2016 11:34:53;;Block 1;Jitter;0.062725;;1.063;B100;;1;
+01-Dec-2016 11:34:53;;Block 1;Clear screen;1.0632;;1.067;B100;;;
+01-Dec-2016 11:34:53;;Block 1;Show Text;1.0672;;1.1168;B100;Show text;;hello
+01-Dec-2016 11:34:53;;Block 1;Wait;1.1169;;1.7174;B100;;0.6;
+01-Dec-2016 11:34:53;;Block 1;Clear screen;1.7176;;1.7337;B100;;;
+01-Dec-2016 11:34:53;;Block 1;Repeat x events;1.7339;;1.734;B100;;;
+01-Dec-2016 11:34:53;;Block 1;Show Text;1.7341;;1.7504;B100;Show text;;world
+01-Dec-2016 11:34:53;;Block 1;Wait;1.7506;;2.3508;B100;;0.6;
+01-Dec-2016 11:34:53;;Block 1;Clear screen;2.351;;2.3667;B100;;;
+01-Dec-2016 11:34:53;;Block 1;Repeat x events;2.3668;;2.3669;B100;;;
+01-Dec-2016 11:34:53;;Block 1;Show Text;2.367;;2.3835;B100;Show text;;bla1
+01-Dec-2016 11:34:53;;Block 1;Wait;2.3836;;2.9839;B100;;0.6;
+01-Dec-2016 11:34:53;;Block 1;Clear screen;2.9841;;3.0003;B100;;;
+01-Dec-2016 11:34:53;;Block 1;Repeat x events;3.0005;;3.0006;B100;;;
+01-Dec-2016 11:34:53;;Block 1;Show Text;3.0007;;3.0243;B100;Show text;;bla2
+01-Dec-2016 11:34:53;;Block 1;Wait;3.0245;;3.6247;B100;;0.6;
+01-Dec-2016 11:34:53;;Block 1;Clear screen;3.6249;;3.6337;B100;;;
+01-Dec-2016 11:34:53;;Block 1;Repeat x events;3.6339;;3.634;B100;;;
+01-Dec-2016 11:34:53;;Block 1;Show Text;3.6341;;3.6668;B100;Show text;;does this also work with sentences?
+01-Dec-2016 11:34:53;;Block 1;Wait;3.6669;;4.2675;B100;;0.6;
+01-Dec-2016 11:34:53;;Block 1;Clear screen;4.2685;;4.2835;B100;;;
+01-Dec-2016 11:34:53;;Block 1;Repeat x events;4.2838;;4.2839;B100;;;
+01-Dec-2016 11:34:53;;Block 1;Show Text;4.284;;4.317;B100;Show text;;and with weird characters? !! _ '' " * // - +
+01-Dec-2016 11:34:53;;Block 1;Wait;4.3172;;4.9175;B100;;0.6;
+01-Dec-2016 11:34:53;;Block 1;Clear screen;4.9177;;4.9336;B100;;;
+01-Dec-2016 11:34:53;;Block 1;Repeat x events;4.9339;;4.9339;B100;;;
+01-Dec-2016 11:34:53;;Block 1;Show Text;4.9341;;4.9502;B100;Show text;;Awesome
+01-Dec-2016 11:34:53;;Block 1;Wait;4.9504;;5.5507;B100;;0.6;
+01-Dec-2016 11:34:53;;Block 1;Clear screen;5.5509;;5.567;B100;;;
+01-Dec-2016 11:34:53;;Block 1;Repeat x events;5.5672;;5.5672;B100;;;
+01-Dec-2016 11:35:33;;Block 1;Show Image;0.00094029;Big_Fixation.JPG;0.060146;B100;fix;;
+01-Dec-2016 11:35:33;;Block 1;Jitter;0.060907;;1.0612;B100;;1;
+01-Dec-2016 11:35:33;;Block 1;Clear screen;1.0614;;1.0643;B100;;;
+01-Dec-2016 11:35:33;;Block 1;Show Text;1.0646;;1.0975;B100;Show text;;hello
+01-Dec-2016 11:35:33;;Block 1;Wait;1.0976;;1.6982;B100;;0.6;
+01-Dec-2016 11:35:33;;Block 1;Clear screen;1.6984;;1.7147;B100;;;
+01-Dec-2016 11:35:33;;Block 1;Repeat x events;1.715;;1.715;B100;;;
+01-Dec-2016 11:35:33;;Block 1;Show Text;1.7152;;1.731;B100;Show text;;world
+01-Dec-2016 11:35:33;;Block 1;Wait;1.7313;;2.3315;B100;;0.6;
+01-Dec-2016 11:35:33;;Block 1;Clear screen;2.3317;;2.3476;B100;;;
+01-Dec-2016 11:35:33;;Block 1;Repeat x events;2.3479;;2.3479;B100;;;
+01-Dec-2016 11:35:33;;Block 1;Show Text;2.3481;;2.3643;B100;Show text;;bla1
+01-Dec-2016 11:35:33;;Block 1;Wait;2.3645;;2.9648;B100;;0.6;
+01-Dec-2016 11:35:33;;Block 1;Clear screen;2.965;;2.981;B100;;;
+01-Dec-2016 11:35:33;;Block 1;Repeat x events;2.9812;;2.9813;B100;;;
+01-Dec-2016 11:35:33;;Block 1;Show Text;2.9814;;2.9976;B100;Show text;;bla2
+01-Dec-2016 11:35:33;;Block 1;Wait;2.9979;;3.5981;B100;;0.6;
+01-Dec-2016 11:35:33;;Block 1;Clear screen;3.5983;;3.6143;B100;;;
+01-Dec-2016 11:35:33;;Block 1;Repeat x events;3.6146;;3.6146;B100;;;
+01-Dec-2016 11:35:33;;Block 1;Show Text;3.6148;;3.6475;B100;Show text;;does this also work with sentences?
+01-Dec-2016 11:35:33;;Block 1;Wait;3.6476;;4.2478;B100;;0.6;
+01-Dec-2016 11:35:33;;Block 1;Clear screen;4.248;;4.2643;B100;;;
+01-Dec-2016 11:35:33;;Block 1;Repeat x events;4.2645;;4.2646;B100;;;
+01-Dec-2016 11:35:33;;Block 1;Show Text;4.2647;;4.2975;B100;Show text;;and with weird characters? !! _ '' " * // - +
+01-Dec-2016 11:35:33;;Block 1;Wait;4.2976;;4.8979;B100;;0.6;
+01-Dec-2016 11:35:33;;Block 1;Clear screen;4.8981;;4.9142;B100;;;
+01-Dec-2016 11:35:33;;Block 1;Repeat x events;4.9144;;4.9145;B100;;;
+01-Dec-2016 11:35:33;;Block 1;Show Text;4.9146;;4.931;B100;Show text;;Awesome
+01-Dec-2016 11:35:33;;Block 1;Wait;4.9312;;5.5315;B100;;0.6;
+01-Dec-2016 11:35:33;;Block 1;Clear screen;5.5317;;5.5476;B100;;;
+01-Dec-2016 11:35:33;;Block 1;Repeat x events;5.5478;;5.5479;B100;;;
+01-Dec-2016 11:36:09;;Block 1;Show Image;0.00095174;Big_Fixation.JPG;0.049975;B100;fix;;
+01-Dec-2016 11:36:09;;Block 1;Jitter;0.050805;;0.65117;B100;;0.6;
+01-Dec-2016 11:36:09;;Block 1;Clear screen;0.65138;;0.65454;B100;;;
+01-Dec-2016 11:36:09;;Block 1;Show Text;0.65476;;0.70425;B100;Show text;;Awesome
+01-Dec-2016 11:36:09;;Block 1;Wait;0.70435;;1.3048;B100;;0.6;
+01-Dec-2016 11:36:09;;Block 1;Clear screen;1.305;;1.3212;B100;;;
+01-Dec-2016 11:36:09;;Block 1;Repeat x events;1.3214;;1.3215;B100;;;
+01-Dec-2016 11:36:09;;Block 1;Show Text;1.3216;;1.3378;B100;Show text;;bla1
+01-Dec-2016 11:36:09;;Block 1;Wait;1.3381;;1.9383;B100;;0.6;
+01-Dec-2016 11:36:09;;Block 1;Clear screen;1.9385;;1.9545;B100;;;
+01-Dec-2016 11:36:09;;Block 1;Repeat x events;1.9547;;1.9548;B100;;;
+01-Dec-2016 11:36:09;;Block 1;Show Text;1.9549;;1.9712;B100;Show text;;bla2
+01-Dec-2016 11:36:09;;Block 1;Wait;1.9715;;2.5717;B100;;0.6;
+01-Dec-2016 11:36:09;;Block 1;Clear screen;2.5719;;2.5878;B100;;;
+01-Dec-2016 11:36:09;;Block 1;Repeat x events;2.588;;2.5881;B100;;;
+01-Dec-2016 11:36:09;;Block 1;Show Text;2.5882;;2.6044;B100;Show text;;Awesome
+01-Dec-2016 11:36:09;;Block 1;Wait;2.6046;;3.2048;B100;;0.6;
+01-Dec-2016 11:36:09;;Block 1;Clear screen;3.205;;3.2212;B100;;;
+01-Dec-2016 11:36:09;;Block 1;Repeat x events;3.2214;;3.2215;B100;;;
+01-Dec-2016 11:36:09;;Block 1;Show Text;3.2216;;3.2544;B100;Show text;;does this also work with sentences?
+01-Dec-2016 11:36:09;;Block 1;Wait;3.2547;;3.8549;B100;;0.6;
+01-Dec-2016 11:36:09;;Block 1;Clear screen;3.8551;;3.8711;B100;;;
+01-Dec-2016 11:36:09;;Block 1;Repeat x events;3.8714;;3.8715;B100;;;
+01-Dec-2016 11:36:09;;Block 1;Show Text;3.8716;;3.8878;B100;Show text;;Awesome
+01-Dec-2016 11:36:09;;Block 1;Wait;3.888;;4.4883;B100;;0.6;
+01-Dec-2016 11:36:09;;Block 1;Clear screen;4.4885;;4.5044;B100;;;
+01-Dec-2016 11:36:09;;Block 1;Repeat x events;4.5046;;4.5047;B100;;;
+01-Dec-2016 11:36:09;;Block 1;Show Text;4.5048;;4.5211;B100;Show text;;Awesome
+01-Dec-2016 11:36:09;;Block 1;Wait;4.5214;;5.1216;B100;;0.6;
+01-Dec-2016 11:36:09;;Block 1;Clear screen;5.1218;;5.1378;B100;;;
+01-Dec-2016 11:36:09;;Block 1;Repeat x events;5.138;;5.1381;B100;;;
+01-Dec-2016 11:37:21;;Block 1;Show Image;0.0011412;Big_Fixation.JPG;0.05429;B100;fix;;;;
+01-Dec-2016 11:37:21;;Block 1;Jitter;0.055118;;0.45545;B100;;0.4;;;
+01-Dec-2016 11:37:21;;Block 1;Clear screen;0.45566;;0.4589;B100;;;;;
+01-Dec-2016 11:37:21;;Block 1;Show Text;0.45912;;0.50854;B100;Show text;;Awesome;;
+01-Dec-2016 11:37:21;;Block 1;WaitForKeyPress;0.50865;;1.5187;B100;;;;NaN;NaN
+01-Dec-2016 11:37:21;;Block 1;Clear screen;1.5187;;1.525;B100;;;;;
+01-Dec-2016 11:37:21;;Block 1;Show Text;1.5251;;1.5417;B100;Show text;;bla1;;
+01-Dec-2016 11:37:21;;Block 1;WaitForKeyPress;1.5418;;2.5441;B100;;;;NaN;NaN
+01-Dec-2016 11:37:21;;Block 1;Clear screen;2.5442;;2.5585;B100;;;;;
+01-Dec-2016 11:37:21;;Block 1;Show Text;2.5585;;2.575;B100;Show text;;bla2;;
+01-Dec-2016 11:37:21;;Block 1;WaitForKeyPress;2.5751;;3.5756;B100;;;;NaN;NaN
+01-Dec-2016 11:37:21;;Block 1;Clear screen;3.5757;;3.5917;B100;;;;;
+01-Dec-2016 11:37:21;;Block 1;Show Text;3.5917;;3.6085;B100;Show text;;Awesome;;
+01-Dec-2016 11:37:21;;Block 1;WaitForKeyPress;3.6088;;4.6099;B100;;;;NaN;NaN
+01-Dec-2016 11:37:21;;Block 1;Clear screen;4.6099;;4.625;B100;;;;;
+01-Dec-2016 11:37:21;;Block 1;Show Text;4.625;;4.6417;B100;Show text;;does this also work with sentences?;;
+01-Dec-2016 11:37:21;;Block 1;WaitForKeyPress;4.6418;;5.6422;B100;;;;NaN;NaN
+01-Dec-2016 11:37:21;;Block 1;Clear screen;5.6423;;5.6583;B100;;;;;
+01-Dec-2016 11:37:21;;Block 1;Show Text;5.6584;;5.6749;B100;Show text;;Awesome;;
+01-Dec-2016 11:37:21;;Block 1;WaitForKeyPress;5.675;;6.6755;B100;;;;NaN;NaN
+01-Dec-2016 11:37:21;;Block 1;Clear screen;6.6755;;6.6916;B100;;;;;
+01-Dec-2016 11:45:04;;Block 1;Show Image;0.0011724;Big_Fixation.JPG;0.047009;B100;fix;;;;
+01-Dec-2016 11:45:04;;Block 1;Jitter;0.0478;;0.44814;B100;;0.4;;;
+01-Dec-2016 11:45:04;;Block 1;Clear screen;0.44835;;0.45199;B100;;;;;
+01-Dec-2016 11:45:04;;Block 1;Show Text;0.45222;;0.4851;B100;Show text;;Awesome;;
+01-Dec-2016 11:45:04;;Block 1;WaitForKeyPress;0.48523;;1.4967;B100;;;;NaN;NaN
+01-Dec-2016 11:45:04;;Block 1;Clear screen;1.4967;;1.5015;B100;;;;;
+01-Dec-2016 11:45:04;;Block 1;Show Text;1.5015;;1.5183;B100;Show text;;bla1;;
+01-Dec-2016 11:45:04;;Block 1;WaitForKeyPress;1.5184;;2.5207;B100;;;;NaN;NaN
+01-Dec-2016 11:45:04;;Block 1;Clear screen;2.5207;;2.5348;B100;;;;;
+01-Dec-2016 11:45:04;;Block 1;Show Text;2.5348;;2.5514;B100;Show text;;bla2;;
+01-Dec-2016 11:45:04;;Block 1;WaitForKeyPress;2.5515;;5.552;B100;;;;NaN;NaN
+01-Dec-2016 11:45:04;;Block 1;Clear screen;5.5521;;5.5683;B100;;;;;
+01-Dec-2016 11:45:04;;Block 1;Show Text;5.5684;;5.5849;B100;Show text;;Awesome;;
+01-Dec-2016 11:45:04;;Block 1;WaitForKeyPress;5.585;;6.5855;B100;;;;NaN;NaN
+01-Dec-2016 11:45:04;;Block 1;Clear screen;6.5856;;6.6014;B100;;;;;
+01-Dec-2016 11:45:04;;Block 1;Show Text;6.6015;;6.618;B100;Show text;;does this also work with sentences?;;
+01-Dec-2016 11:45:04;;Block 1;WaitForKeyPress;6.6181;;7.6186;B100;;;;NaN;NaN
+01-Dec-2016 11:45:04;;Block 1;Clear screen;7.6187;;7.6347;B100;;;;;
+01-Dec-2016 11:45:04;;Block 1;Show Text;7.6347;;7.6513;B100;Show text;;Awesome;;
+01-Dec-2016 11:45:04;;Block 1;WaitForKeyPress;7.6514;;8.6519;B100;;;;NaN;NaN
+01-Dec-2016 11:45:04;;Block 1;Clear screen;8.6519;;8.668;B100;;;;;
+01-Dec-2016 11:46:22;;Block 1;Show Image;0.0011527;Big_Fixation.JPG;0.055502;B100;fix;;;;
+01-Dec-2016 11:46:22;;Block 1;Jitter;0.056238;;0.25658;B100;;0.2;;;
+01-Dec-2016 11:46:22;;Block 1;Clear screen;0.25678;;0.26051;B100;;;;;
+01-Dec-2016 11:46:22;;Block 1;Show Text;0.26074;;0.29352;B100;Show text;;Awesome;;
+01-Dec-2016 11:46:22;;Block 1;WaitForKeyPress;0.29361;;0.73926;B100;;;;0.40172;j
+01-Dec-2016 11:46:22;;Block 1;Clear screen;0.73932;;0.74333;B100;;;;;
+01-Dec-2016 11:46:22;;Block 1;Show Text;0.74339;;0.76001;B100;Show text;;bla1;;
+01-Dec-2016 11:46:22;;Block 1;WaitForKeyPress;0.76009;;1.8284;B100;;;;NaN;NaN
+01-Dec-2016 11:46:22;;Block 1;Clear screen;1.8286;;1.8438;B100;;;;;
+01-Dec-2016 11:48:28;;Block 1;Show Image;0.0011302;Big_Fixation.JPG;0.048804;B100;fix;;;;
+01-Dec-2016 11:48:28;;Block 1;Jitter;0.04955;;0.24987;B100;;0.2;;;
+01-Dec-2016 11:48:28;;Block 1;Clear screen;0.25008;;0.25375;B100;;;;;
+01-Dec-2016 11:48:28;;Block 1;Show Text;0.25399;;0.30352;B100;Show text;;Awesome;;
+01-Dec-2016 11:48:28;;Block 1;WaitForKeyPress;0.30363;;1.3137;B100;;;;NaN;NaN
+01-Dec-2016 11:48:28;;Block 1;Clear screen;1.3138;;1.3199;B100;;;;;
+01-Dec-2016 11:48:28;;Block 1;Show Text;1.32;;1.3366;B100;Show text;;bla1;;
+01-Dec-2016 11:48:28;;Block 1;WaitForKeyPress;1.3366;;2.3544;B100;;;;NaN;NaN
+01-Dec-2016 11:48:28;;Block 1;Clear screen;2.3546;;2.3704;B100;;;;;
+01-Dec-2016 11:49:27;;Block 1;Show Image;0.0012;Big_Fixation.JPG;0.065826;B100;fix;;;;
+01-Dec-2016 11:49:27;;Block 1;Jitter;0.066717;;0.26706;B100;;0.2;;;
+01-Dec-2016 11:49:27;;Block 1;Clear screen;0.26727;;0.27094;B100;;;;;
+01-Dec-2016 11:49:27;;Block 1;Show Text;0.27116;;0.30402;B100;Show text;;Awesome;;
+01-Dec-2016 11:49:27;;Block 1;WaitForKeyPress;0.30416;;0.53659;B100;;;;0.18638;d
+01-Dec-2016 11:49:27;;Block 1;Clear screen;0.53666;;0.55376;B100;;;;;
+01-Dec-2016 11:49:27;;Block 1;Show Text;0.55382;;0.58786;B100;Show text;;bla1;;
+01-Dec-2016 11:49:27;;Block 1;WaitForKeyPress;0.58795;;1.6054;B100;;;;NaN;NaN
+01-Dec-2016 11:49:27;;Block 1;Clear screen;1.6057;;1.6208;B100;;;;;
+01-Dec-2016 12:12:07;;Block 1;Show Image;0.001065;Big_Fixation.JPG;0.076574;B100;fix;;;;
+01-Dec-2016 12:12:07;;Block 1;Jitter;0.077359;;0.27768;B100;;0.2;;;
+01-Dec-2016 12:12:07;;Block 1;Clear screen;0.2779;;0.3966;B100;;;;;
+01-Dec-2016 12:12:07;;Block 1;Show Text;0.39669;;0.41321;B100;Show text;;Awesome;;
+01-Dec-2016 12:12:07;;Block 1;WaitForKeyPress;0.41331;;1.42;B100;;;;NaN;NaN
+01-Dec-2016 12:12:07;;Block 1;Clear screen;1.4201;;1.4465;B100;;;;;
+01-Dec-2016 12:12:07;;Block 1;Show Text;1.4466;;1.4634;B100;Show text;;bla1;;
+01-Dec-2016 12:12:07;;Block 1;WaitForKeyPress;1.4636;;2.481;B100;;;;NaN;NaN
+01-Dec-2016 12:12:07;;Block 1;Clear screen;2.4812;;2.5137;B100;;;;;
+01-Dec-2016 12:13:17;;Block 1;Show Image;0.0012265;Big_Fixation.JPG;0.11236;B100;fix;;;;
+01-Dec-2016 12:13:17;;Block 1;Jitter;0.11311;;0.31343;B100;;0.2;;;
+01-Dec-2016 12:13:17;;Block 1;Clear screen;0.31364;;0.41552;B100;;;;;
+01-Dec-2016 12:13:17;;Block 1;Show Text;0.41561;;0.43211;B100;Show text;;Awesome;;
+01-Dec-2016 12:13:17;;Block 1;WaitForKeyPress;0.4322;;1.439;B100;;;;NaN;NaN
+01-Dec-2016 12:13:17;;Block 1;Clear screen;1.4391;;1.4654;B100;;;;;
+01-Dec-2016 12:13:17;;Block 1;Show Text;1.4655;;1.4824;B100;Show text;;bla1;;
+01-Dec-2016 12:13:17;;Block 1;WaitForKeyPress;1.4827;;2.4993;B100;;;;NaN;NaN
+01-Dec-2016 12:13:17;;Block 1;Clear screen;2.4994;;2.5326;B100;;;;;
+01-Dec-2016 12:13:17;;Block 1;Show Image;2.5328;jnbsHcl.jpg;2.6331;B100;Draw Image;;;;
+01-Dec-2016 12:13:17;;Block 1;WaitForKeyPress;2.6332;;5.6358;B100;;;;NaN;NaN
+01-Dec-2016 12:13:51;;Block 1;Show Image;0.0012964;Big_Fixation.JPG;0.066753;B100;fix;;;;
+01-Dec-2016 12:13:51;;Block 1;Jitter;0.067484;;0.2678;B100;;0.2;;;
+01-Dec-2016 12:13:51;;Block 1;Clear screen;0.26801;;0.30404;B100;;;;;
+01-Dec-2016 12:13:51;;Block 1;Show Text;0.30415;;0.33724;B100;Show text;;Awesome;;
+01-Dec-2016 12:13:51;;Block 1;WaitForKeyPress;0.33733;;1.3455;B100;;;;NaN;NaN
+01-Dec-2016 12:13:51;;Block 1;Clear screen;1.3456;;1.3704;B100;;;;;
+01-Dec-2016 12:13:51;;Block 1;Show Text;1.3705;;1.3871;B100;Show text;;bla1;;
+01-Dec-2016 12:13:51;;Block 1;WaitForKeyPress;1.3872;;2.0405;B100;;;;0.56517;k
+01-Dec-2016 12:13:51;;Block 1;Clear screen;2.0405;;2.0704;B100;;;;;
+01-Dec-2016 12:13:51;;Block 1;Show Image;2.0705;jnbsHcl.jpg;2.1212;B100;Draw Image;;;;
+01-Dec-2016 12:13:51;;Block 1;WaitForKeyPress;2.1212;;5.1382;B100;;;;NaN;NaN
+06-Dec-2016 10:44:11;;Block 1;Show Image;0.0012675;Big_Fixation.JPG;0.035878;B100;fix;;;;
+06-Dec-2016 10:44:11;;Block 1;Jitter;0.03634;;0.23666;B100;;0.2;;;
+06-Dec-2016 10:44:11;;Block 1;Clear screen;0.23686;;0.28946;B100;;;;;
+06-Dec-2016 10:44:11;;Block 1;Show Text;0.28957;;0.3217;B100;Show text;;Awesome;;
+06-Dec-2016 10:44:11;;Block 1;WaitForKeyPress;0.32182;;1.3382;B100;;;;NaN;NaN
+06-Dec-2016 10:44:11;;Block 1;Clear screen;1.3383;;1.3865;B100;;;;;
+06-Dec-2016 10:44:11;;Block 1;Show Text;1.3866;;1.4049;B100;Show text;;bla1;;
+06-Dec-2016 10:44:11;;Block 1;WaitForKeyPress;1.405;;2.2287;B100;;;;0.67745;space
+06-Dec-2016 10:44:11;;Block 1;Clear screen;2.2288;;2.2549;B100;;;;;
+06-Dec-2016 10:44:11;;Block 1;Show Image;2.255;jnbsHcl.jpg;2.2725;B100;Draw Image;;;;
+06-Dec-2016 10:44:11;;Block 1;WaitForKeyPress;2.2726;;4.1233;B100;;;;1.8301;space
+27-Mar-2018 13:19:00;;Block 1;Show Image;0.0012529;Big_Fixation.JPG;0.044182;B100;fix;;;;
+27-Mar-2018 13:19:00;;Block 1;Jitter;0.044666;;0.24495;B100;;0.2;;;
+27-Mar-2018 13:19:00;;Block 1;Clear screen;0.24527;;0.29346;B100;;;;;
+27-Mar-2018 13:19:00;;Block 1;Show Text;0.2936;;0.31447;B100;Show text;;Awesome;;
+27-Mar-2018 13:19:00;;Block 1;WaitForKeyPress;0.31456;;1.331;B100;;;;NaN;NaN
+27-Mar-2018 13:19:00;;Block 1;Clear screen;1.3311;;1.3882;B100;;;;;
+27-Mar-2018 13:19:00;;Block 1;Show Text;1.3883;;1.3977;B100;Show text;;bla1;;
+27-Mar-2018 13:19:00;;Block 1;WaitForKeyPress;1.3978;;2.4313;B100;;;;NaN;NaN
+27-Mar-2018 13:19:00;;Block 1;Clear screen;2.4315;;2.4646;B100;;;;;
+27-Mar-2018 13:19:00;;Block 1;Show Image;2.4648;jnbsHcl.jpg;2.4832;B100;Draw Image;;;;
+27-Mar-2018 13:19:00;;Block 1;WaitForKeyPress;2.4834;;5.514;B100;;;;NaN;NaN
+27-Mar-2018 13:20:35;;Block 1;Show Image;0.0013062;Big_Fixation.JPG;0.026295;B100;fix;;;;
+27-Mar-2018 13:20:35;;Block 1;Jitter;0.026781;;0.22708;B100;;0.2;;;
+27-Mar-2018 13:20:35;;Block 1;Clear screen;0.22729;;0.27509;B100;;;;;
+27-Mar-2018 13:20:35;;Block 1;Show Text;0.27523;;0.31273;B100;Show text;;Awesome;;
+27-Mar-2018 13:20:35;;Block 1;WaitForKeyPress;0.31282;;1.3293;B100;;;;NaN;NaN
+27-Mar-2018 13:20:35;;Block 1;Clear screen;1.3293;;1.3639;B100;;;;;
+27-Mar-2018 13:20:35;;Block 1;Show Text;1.364;;1.3791;B100;Show text;;bla1;;
+27-Mar-2018 13:20:35;;Block 1;WaitForKeyPress;1.3792;;2.4128;B100;;;;NaN;NaN
+27-Mar-2018 13:20:35;;Block 1;Clear screen;2.4131;;2.4462;B100;;;;;
+27-Mar-2018 13:20:35;;Block 1;Show Image;2.4464;jnbsHcl.jpg;2.4648;B100;Draw Image;;;;
+27-Mar-2018 13:20:35;;Block 1;WaitForKeyPress;2.465;;5.4957;B100;;;;NaN;NaN
+27-Mar-2018 13:23:32;;Block 1;Show Image;0.0012557;Big_Fixation.JPG;0.02467;B100;fix;;;;
+27-Mar-2018 13:23:32;;Block 1;Jitter;0.025157;;0.22545;B100;;0.2;;;
+27-Mar-2018 13:23:32;;Block 1;Clear screen;0.22566;;0.28492;B100;;;;;
+27-Mar-2018 13:23:32;;Block 1;Show Text;0.28502;;0.32341;B100;Show text;;Awesome;;
+27-Mar-2018 13:23:32;;Block 1;WaitForKeyPress;0.3235;;1.138;B100;;;;0.71311;e
+27-Mar-2018 13:23:32;;Block 1;Clear screen;1.138;;1.1591;B100;;;;;
+27-Mar-2018 13:23:32;;Block 1;Show Text;1.1592;;1.1732;B100;Show text;;bla1;;
+27-Mar-2018 13:23:32;;Block 1;WaitForKeyPress;1.1733;;1.4085;B100;;;;0.21522;s
+27-Mar-2018 13:23:32;;Block 1;Clear screen;1.4087;;1.4401;B100;;;;;
+27-Mar-2018 13:23:32;;Block 1;Show Image;1.4402;jnbsHcl.jpg;1.4576;B100;Draw Image;;;;
+27-Mar-2018 13:23:32;;Block 1;WaitForKeyPress;1.4577;;4.1576;B100;;;;2.6006;space
+27-Mar-2018 13:24:31;;Block 1;Show Image;0.0013469;Big_Fixation.JPG;0.029588;B100;fix;;;;
+27-Mar-2018 13:24:31;;Block 1;Jitter;0.030089;;0.23047;B100;;0.2;;;
+27-Mar-2018 13:24:31;;Block 1;Clear screen;0.23068;;0.2754;B100;;;;;
+27-Mar-2018 13:24:31;;Block 1;Show Text;0.27554;;0.29976;B100;Show text;;Awesome;;
+27-Mar-2018 13:24:31;;Block 1;WaitForKeyPress;0.29986;;0.75281;B100;;;;0.40649;f
+27-Mar-2018 13:24:31;;Block 1;Clear screen;0.75288;;0.78285;B100;;;;;
+27-Mar-2018 13:24:31;;Block 1;Show Text;0.78293;;0.79955;B100;Show text;;bla1;;
+27-Mar-2018 13:24:31;;Block 1;WaitForKeyPress;0.79964;;1.8839;B100;;;;NaN;NaN
+27-Mar-2018 13:24:31;;Block 1;Clear screen;1.8841;;1.9166;B100;;;;;
+27-Mar-2018 13:24:31;;Block 1;Show Image;1.9168;jnbsHcl.jpg;1.9354;B100;Draw Image;;;;
+27-Mar-2018 13:24:31;;Block 1;WaitForKeyPress;1.9356;;3.3517;B100;;;;1.3915;space
+27-Mar-2018 13:43:35;;Block 1;Show Image;0.0013133;Big_Fixation.JPG;0.031588;B100;fix;;;;
+27-Mar-2018 13:43:35;;Block 1;Jitter;0.032083;;0.2324;B100;;0.2;;;
+27-Mar-2018 13:43:35;;Block 1;Clear screen;0.2326;;0.27853;B100;;;;;
+27-Mar-2018 13:43:35;;Block 1;Show Text;0.27866;;0.30206;B100;Show text;;Awesome;;
+27-Mar-2018 13:43:35;;Block 1;WaitForKeyPress;0.30216;;0.75562;B100;;;;0.39805;shift
+27-Mar-2018 13:43:35;;Block 1;Clear screen;0.75569;;0.78519;B100;;;;;
+27-Mar-2018 13:43:35;;Block 1;Show Text;0.78528;;0.80185;B100;Show text;;bla1;;
+27-Mar-2018 13:43:35;;Block 1;WaitForKeyPress;0.80195;;2.0361;B100;;;;NaN;NaN
+27-Mar-2018 13:43:35;;Block 1;Clear screen;2.0364;;2.0689;B100;;;;;
+27-Mar-2018 13:43:35;;Block 1;Show Image;2.0691;jnbsHcl.jpg;2.0876;B100;Draw Image;;;;
+27-Mar-2018 13:43:35;;Block 1;WaitForKeyPress;2.0878;;3.3541;B100;;;;1.2417;space
+27-Mar-2018 13:45:35;;Block 1;Show Image;0.0012699;Big_Fixation.JPG;0.023518;B100;fix;;;;
+27-Mar-2018 13:45:35;;Block 1;Jitter;0.024;;0.22431;B100;;0.2;;;
+27-Mar-2018 13:45:35;;Block 1;Clear screen;0.22452;;0.27769;B100;;;;;
+27-Mar-2018 13:45:35;;Block 1;Show Text;0.27786;;0.30435;B100;Show text;;Awesome;;
+27-Mar-2018 13:45:35;;Block 1;WaitForKeyPress;0.30446;;1.3207;B100;;;;NaN;NaN
+27-Mar-2018 13:45:35;;Block 1;Clear screen;1.3208;;1.3538;B100;;;;;
+27-Mar-2018 13:45:35;;Block 1;Show Text;1.3539;;1.3706;B100;Show text;;bla1;;
+27-Mar-2018 13:45:35;;Block 1;WaitForKeyPress;1.3707;;2.4041;B100;;;;NaN;NaN
+27-Mar-2018 13:45:35;;Block 1;Clear screen;2.4043;;2.4375;B100;;;;;
+27-Mar-2018 13:45:35;;Block 1;Show Image;2.4377;jnbsHcl.jpg;2.4566;B100;Draw Image;;;;
+27-Mar-2018 13:45:35;;Block 1;WaitForKeyPress;2.4568;;5.4871;B100;;;;NaN;NaN
+27-Mar-2018 14:26:07;;Block 1;Show Image;0.0013591;Big_Fixation.JPG;0.029504;B100;fix;;;;;
+27-Mar-2018 14:26:07;;Block 1;Jitter;0.030008;;0.23031;B100;;0.2;;;;
+27-Mar-2018 14:26:07;;Block 1;Clear screen;0.23053;;0.27252;B100;;;;;;
+27-Mar-2018 14:26:07;;Block 1;Show Text;0.27265;;0.30016;B100;Show text;;Awesome;;;
+27-Mar-2018 14:26:07;;Block 1;WaitForKeyPress;0.30025;;1.0228;B100;;;;0.6046;space;
+27-Mar-2018 14:26:07;;Block 1;Clear screen;1.0228;;1.0544;B100;;;;;;
+27-Mar-2018 14:26:07;;Block 1;Show Text;1.0545;;1.0664;B100;Show text;;bla1;;;
+27-Mar-2018 14:26:07;;Block 1;WaitForKeyPress;1.0665;;1.585;B100;;;;0.48147;space;
+27-Mar-2018 14:26:07;;Block 1;Clear screen;1.5853;;1.6169;B100;;;;;;
+27-Mar-2018 14:26:07;;Block 1;Show Image;1.6171;jnbsHcl.jpg;1.6356;B100;Draw Image;;;;;
+27-Mar-2018 14:26:07;;Block 1;WaitForKeyPress;1.6358;;2.2011;B100;;;;0.51282;space;
+27-Mar-2018 14:26:07;;Block 1;Ask;2.2013;;20.2316;B100;;;;;;

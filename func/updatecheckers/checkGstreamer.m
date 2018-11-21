@@ -12,13 +12,18 @@ end
 %% CHeck gstreamer install
 try
 	[~, res] = system('set GSTREAMER_1_0_ROOT_X86_64');
-	if ~contains(res, 'not defined')
+
+	if isempty(strfind(res, 'not defined'))
+
 		status = 0;
 		return;
 	end
 catch e
 	disp(e.message);
 	waitfor(errordlg('Cannot check for gstreamer. Please do a manual install of Gstreamer if it is not installed'));
+
+    status = 0;
+    return;
 end
 %% Install
 

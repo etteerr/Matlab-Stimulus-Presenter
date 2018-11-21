@@ -1,0 +1,11 @@
+date;subjectId;blocknr;name;timeEventStart;image;timeEventEnd;blockname;alias;waittime;RT;key
+05-Dec-2016 19:04:42;;Block 1;Show Image;0.0016473;Big_Fixation.JPG;0.084016;tralala;Draw Image;;;
+05-Dec-2016 19:04:42;;Block 1;Wait;0.084461;;0.38479;tralala;;0.3;;
+05-Dec-2016 19:04:42;;Block 1;Clear screen;0.385;;0.43145;tralala;;;;
+05-Dec-2016 19:04:42;;Block 1;Show Image;0.43154;Slide9.JPG;0.45025;tralala;Draw Image;;;
+05-Dec-2016 19:04:42;;Block 1;WaitForKeyPress;0.45033;;1.317;tralala;;;0.72607;g
+05-Dec-2016 19:06:33;;Block 1;Show Image;0.0013512;Big_Fixation.JPG;0.049262;tralala;Draw Image;;;
+05-Dec-2016 19:06:33;;Block 1;Wait;0.049725;;0.35006;tralala;;0.3;;
+05-Dec-2016 19:06:33;;Block 1;Clear screen;0.35027;;0.43444;tralala;;;;
+05-Dec-2016 19:06:33;;Block 1;Show Image;0.43452;Slide9.JPG;0.45866;tralala;Draw Image;;;
+05-Dec-2016 19:06:33;;Block 1;WaitForKeyPress;0.45886;;0.62289;tralala;;;0.071607;j
