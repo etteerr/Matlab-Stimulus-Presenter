@@ -1,7 +1,0 @@
-hello
-world
-bla1
-bla2
-does this also work with sentences?
-and with weird characters? !! _ '' " * // - +
-Awesome
