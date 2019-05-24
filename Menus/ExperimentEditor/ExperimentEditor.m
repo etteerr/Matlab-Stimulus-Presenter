@@ -397,7 +397,7 @@ if isempty(handles.blockList.String)
 end
 experi = handles.experiment;
 sel = experi.creator{handles.blockList.Value};
-experi.creator = [experi.creator; {sel}];
+experi.creator = [experi.creator(:); {sel}];
 handles.experiment = experi;
 guidata(handles.figure1, handles);
 guiUpdate(handles);
