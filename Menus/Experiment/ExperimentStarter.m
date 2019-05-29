@@ -205,7 +205,8 @@ else
         [ExperimentData eventNames] = generateExperiment(generatorPackage);
         compileTrialRunner(eventNames);
         initEvents(eventNames);
-        clear functions;
+        % Clear functions, global or any other persistant clear WILL BREAK
+        % DIO FUNCTIONALITY FROM THIS POINT ON
     catch e
         save(sprintf('memdump_%s.mat',strrep(strrep(datestr(clock), ' ', '_'), ':', '-')));
         delete(h);
