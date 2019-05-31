@@ -281,7 +281,7 @@ if loc==1 %Already in top
 end
 res = handles.listbox.String;
 res(loc) = [];
-newOrder = [{selected}; res];
+newOrder = [{selected}; res(:)];
 updateDataset(handles.myData.databaseName,{}, {}, 0, newOrder);
 guiUpdate(handles);
 handles.listbox.Value = 1;
@@ -298,7 +298,7 @@ if loc==length(handles.listbox.String) %Already in bot
 end
 res = handles.listbox.String;
 res(loc) = [];
-newOrder = [res; {selected}];
+newOrder = [res(:); {selected}];
 updateDataset(handles.myData.databaseName,{}, {}, 0, newOrder);
 guiUpdate(handles);
 handles.listbox.Value = length(handles.listbox.String);
