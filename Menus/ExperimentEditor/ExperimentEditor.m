@@ -307,7 +307,7 @@ end
 selected = handles.experiment.creator{handles.blockList.Value};
 res = handles.experiment.creator;
 res(loc) = [];
-newOrder = [res(1:loc-2) {selected} res(loc-1:end)];
+newOrder = [res(1:loc-2); {selected}; res(loc-1:end)];
 handles.experiment.creator = newOrder;
 handles.blockList.Value = handles.blockList.Value - 1;
 guidata(handles.figure1, handles);
@@ -328,7 +328,7 @@ end
 selected = handles.experiment.creator{handles.blockList.Value};
 res = handles.experiment.creator;
 res(loc) = [];
-newOrder = [res(1:loc) {selected} res(loc+1:end)];
+newOrder = [res(1:loc); {selected}; res(loc+1:end)];
 handles.experiment.creator = newOrder;
 handles.blockList.Value = handles.blockList.Value + 1;
 guidata(handles.figure1, handles);
