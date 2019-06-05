@@ -30,6 +30,7 @@ function gatherdata
     data=struct;
     data.version = version;
     data.psychtoolboxVersion = PsychtoolboxVersion;
+    data.dbstack = dbstack(0, '-completenames');
     save('version', 'data');
     
     % Save filenames
