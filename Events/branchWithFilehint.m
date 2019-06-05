@@ -207,6 +207,8 @@ function out = getEventStruct(q)
 % reply.data = Ask(windowPtr, event.quest, event.textcolor,event.bgcolor,event.mode);';
     event = struct;
     
+    q(2).String = regexprep(q(2).String, '[''| ]?([1-9|a-z|A-Z])[''| ]? ?([,| ])?', '''$1''$2');
+    
     event.valid = eval(q(2).String);
     event.skipCorrect = eval(q(3).String);
     event.skipWrong =   eval(q(4).String);
@@ -223,6 +225,10 @@ function out = getEventStruct(q)
     
     if length(event.skipCorrect) ~= length(event.valid) || length(event.skipWrong) ~= length(event.valid)
         error('Valid input, skip on correct and skip on false must have the same number of entries!');
+    end
+    
+    for i=1:length(event.valid)
+        event.valid{i} = string(event.valid{i});
     end
     
 %     t = contains(event.valid, input);
