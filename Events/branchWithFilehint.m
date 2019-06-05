@@ -207,7 +207,7 @@ function out = getEventStruct(q)
 % reply.data = Ask(windowPtr, event.quest, event.textcolor,event.bgcolor,event.mode);';
     event = struct;
     
-    q(2).String = regexprep(q(2).String, '[''| ]?([1-9|a-z|A-Z])[''| ]? ?([,| ])?', '''$1''$2');
+    q(2).String = regexprep(q(2).String, '[''| ]?([1-9|a-z|A-Z]+)[''| ]? ?([,| ])?', '''$1''$2');
     
     event.valid = eval(q(2).String);
     event.skipCorrect = eval(q(3).String);
