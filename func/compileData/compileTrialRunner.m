@@ -110,6 +110,7 @@ for eventCell = events
         % done
         index = index + 1; % If succesfull, increment index
     catch e
+        memdump;
         if strcmp(e.identifier,'MATLAB:Containers:Map:NoKey')
             error('Missing event: %s',event)
         else

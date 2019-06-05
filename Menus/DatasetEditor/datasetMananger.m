@@ -81,6 +81,7 @@ function guiUpdate(handles)
 try
     handles.listbox.String = getDatasets();
 catch e
+    memdump;
     waitfor(errordlg('Error while evaluating the datasets'));
     rethrow(e);
 end
@@ -104,7 +105,7 @@ if length(handles.listbox.String) > 1
                            info.name, num2str(info.nFiles), datestr(info.createdDate), info.filetype);
        handles.databaseInfo.String = infostr;
     catch e
-        save(sprintf('memdump_%s.mat',strrep(strrep(datestr(clock), ' ', '_'), ':', '-')));
+        memdump;
         handles.databaseInfo.String = e.message;
         rethrow(e);
     end
@@ -173,6 +174,7 @@ if ~isempty(name)
         createDataset(name{1}, {}, '', struct);
         waitfor(DatasetEditor(name{1},0));
     catch e
+        memdump;
         waitfor(errordlg(sprintf('Error: %s',e.message)));
         set(handles.figure1,'Visible','on')
         guiUpdate(handles);
@@ -196,6 +198,7 @@ try
     set(handles.figure1,'Visible','off')
     waitfor(DatasetEditor(name,0));
 catch e
+    memdump;
     waitfor(errordlg(sprintf('Error: %s',e.message)));
     set(handles.figure1,'Visible','on')
     guiUpdate(handles);
@@ -219,6 +222,7 @@ if ~isempty(name)
     try
         renameDataset(pname,name{1});
     catch e
+        memdump;
         waitfor(errordlg(sprintf('Error: %s',e.message)));
         enableButtons(handles);
         guiUpdate(handles);
@@ -244,6 +248,7 @@ try
     waitfor(msgbox(sprintf('Intact: %i\nmissing files: %i\ninvalid info file: %i\ndoes not exist: %i',...
         intact, missingFiles, invalidInfoFile, doesNotExist )));
 catch e
+    memdump;
     waitfor(errordlg(sprintf('Error: %s',e.message)));
     enableButtons(handles);
     guiUpdate(handles);
@@ -267,6 +272,7 @@ if strcmp(answ, 'Yes')
     try
         delDataset(name);
     catch e
+        memdump;
         waitfor(errordlg(sprintf('Error: %s',e.message)));
         enableButtons(handles);
         guiUpdate(handles);

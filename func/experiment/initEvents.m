@@ -70,6 +70,7 @@ for eventCell = events
             error('Event %s reported init failure', event);
         end
     catch e
+        memdump;
         if strcmp(e.identifier,'MATLAB:Containers:Map:NoKey')
             error('Missing event: %s',event)
         else

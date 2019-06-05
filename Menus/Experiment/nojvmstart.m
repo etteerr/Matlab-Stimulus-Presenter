@@ -23,7 +23,7 @@ try
     fprintf('Cleaning functions...\n');
     clear functions;
 catch e
-    save(sprintf('memdump_%s.mat',strrep(strrep(datestr(clock), ' ', '_'), ':', '-')));
+    memdump;
     fprintf('Error while generating experiment:\n%s', e.message);
     rethrow(e);
 end
@@ -47,6 +47,7 @@ try
     experimentRunning = 1;
     hW = initWindowBlack(ExperimentData.preMessage, -1, 1, debug);
 catch e
+    memdump;
     experimentRunning = 0;
     EndofExperiment;
     if strcmp(e.message,'See error message printed above.')
@@ -65,6 +66,7 @@ end
 try
     Data = runExperiment(ExperimentData,hW, 1);
 catch e
+    memdump;
     experimentRunning = 0;
     warning('Error while running the experiment! SORRY! More details in the Command Window');
     EndofExperiment;
@@ -93,6 +95,7 @@ catch e
             fprintf('Results saved (and appended) to: %s', fullfile(cd,['Results_' name '.csv']));
     catch e
         warning('failed to save data! Sorry!');
+        memdump;
     end
     rethrow(e)
 end

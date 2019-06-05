@@ -31,6 +31,7 @@ for i=1:length(configDirs)
                     %fprintf('Found config for %s\n', devname);
                 end
             catch e
+                memdump;
                 warning('Invalid DIO config: %s',file.name);
             end
         end

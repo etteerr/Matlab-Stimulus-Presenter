@@ -55,6 +55,7 @@ path(prevPath);
 try
     eventMap = containers.Map(eventNames,eventFiles);
 catch e
+    memdump;
     warning('eventMap is empty.\n%s\nThe line above should be your MSP root folder containing "Events" directory.\n%s', cd,e.message);
 end
 

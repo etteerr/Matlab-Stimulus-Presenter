@@ -121,6 +121,7 @@ try
     end
     diosessions = containers.Map(devnames, sessions);
 catch e
+    memdump;
     clear global diochannels
     clear global diosession
     warning('Dio init failed!\n%s', e.message);

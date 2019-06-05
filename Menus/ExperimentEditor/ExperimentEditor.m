@@ -232,7 +232,7 @@ if exist(fullfile(path, file),'file')
         guiUpdate(handles);
         
     catch e
-        save(sprintf('memdump_%s.mat',strrep(strrep(datestr(clock), ' ', '_'), ':', '-')));
+        memdump;
         errordlg(e.message);
         rethrow(e);
     end
@@ -271,7 +271,7 @@ function figure1_CloseRequestFcn(hObject, eventdata, handles)
 try
     updateExperiment(handles.experiment.name, handles.experiment);
 catch e
-    save(sprintf('memdump_%s.mat',strrep(strrep(datestr(clock), ' ', '_'), ':', '-')));
+    memdump;
     try
         global experiment
         experiment = handles.experiment;
