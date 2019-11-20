@@ -116,7 +116,8 @@ function out = getRunFunction()
 % Screen('Flip', windowPtr [, when] [, dontclear] [, dontsync] [, multiflip]);
 %[newX,newY]=Screen('DrawText', windowPtr, text [,x] [,y] [,color] [,backgroundColor] [,yPositionIsBaseline] [,swapTextDirection]);
 
-    out = ['Screen(''Flip'', windowPtr, 0, event.clearscr, 2);\r\nreply.data = Ask(windowPtr, event.quest, event.textcolor,event.bgcolor,event.mode, ''center'', ''center'');\r\n'...
+    out = ['Screen(''Flip'', windowPtr, 0, double(~event.clearscr), 2);\r\n' ...
+        'reply.data = Ask(windowPtr, event.quest, event.textcolor,event.bgcolor,event.mode, event.horzpos, event.vertpos, event.fontsize);\r\n'...
            ];
 end
 
@@ -145,22 +146,38 @@ function out = getQuestStruct()
     
     q(3).name = 'Input sort';
     q(3).sort = 'popupmenu';
-    q(3).data = { 'GetClicks', 'GetChar', 'GetString' };
-    q(3).toolTip = 'GetClicks: Waits for mouseclick, GetChar: Get keyboard input and shows it on screen, GetString: Gets keyboard input';
+    q(3).data = { 'Visible text', 'Hidden text', 'Mouse Click' };
+    q(3).toolTip = 'Visible text: Displays a question and shows the users keyboard input on screen, Hidden text: Displays a question and hides the users keyboard input on screen, Mouse Click: Waits for a mouseclick';
     
     q(4).name = 'Text Color:';
     q(4).sort = 'edit';
     q(4).data = '[255 255 255]';
-    q(4).toolTip = 'RGB triplet: default white. [0 0 0] = black';
+    q(4).toolTip = 'RGB triplet: default white. (for black, use [0 0 0])';
     
     q(5).name = 'Background color:';
     q(5).sort = 'edit';
     q(5).data = '[0 0 0]';
-    q(5).toolTip = 'RGB triplet: default black. [255 255 255] = white';
+    q(5).toolTip = 'RGB triplet: default black. (for white, use [255 255 255])';
     
-    q(6).name = '';
-    q(6).sort = 'checkbox';
-    q(6).data = 'Clear screen';
+    q(6).name = 'Horizontal alignment:';
+    q(6).sort = 'popupmenu';
+    q(6).data = {'center', 'left', 'right'};
+    q(6).toolTip = 'determines where the text appears ';
+    
+    q(7).name = 'Vertical alignment:';
+    q(7).sort = 'popupmenu';
+    q(7).data = {'top', 'center', 'bottom'};
+    q(7).toolTip = 'determines where the text appears ';
+    
+    q(8).name = 'Font size:';
+    q(8).sort = 'edit';
+    q(8).data = '30';
+    q(8).toolTip = 'determines the font size';
+    
+    q(9).name = '';
+    q(9).sort = 'checkbox';
+    q(9).data = 'Clear screen';
+    q(9).Tooltop = 'clear the screen before the question appears';
     out = q; %See eventEditor
 end
 
@@ -180,9 +197,18 @@ function out = getEventStruct(q)
 % reply.data = Ask(windowPtr, event.quest, event.textcolor,event.bgcolor,event.mode);';
     event = struct;
     event.quest = q(2).Answer;
-    event.mode = q(3).Answer;
+    if strcmp(q(3).Answer, 'Visible text')
+        event.mode = 'GetChar';
+    elseif strcmp(q(3).Answer, 'Hidden text')
+        event.mode = 'GetString';
+    elseif strcmp(q(3).Answer, 'Mouse Click')
+        event.mode = 'GetClicks';
+    end        
     event.textcolor = eval(q(4).Answer);
     event.bgcolor = eval(q(5).Answer);
-    event.clearscr = q(6).Value;
+    event.horzpos = q(6).Answer;
+    event.vertpos = q(7).Answer;
+    event.fontsize = eval(q(8).Answer);
+    event.clearscr = q(9).Value;
     out = event;
 end
