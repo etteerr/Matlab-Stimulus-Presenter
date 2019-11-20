@@ -1,6 +1,8 @@
+function memdump
 % Take all the experiments and include them in the memdump
-save('memdump');
-gatherdata;
+    save('memdump');
+    gatherdata;
+end
 
 
 
