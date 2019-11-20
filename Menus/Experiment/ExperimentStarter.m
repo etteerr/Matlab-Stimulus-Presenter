@@ -243,9 +243,11 @@ else
     end
     %end of init
     try
+        handles.StartExperiment.Enable = 'off';
         Data = runExperiment(ExperimentData,hW);
     catch e
         experimentRunning = 0;
+        handles.StartExperiment.Enable = 'on';
         memdump;
         waitfor(errordlg(sprintf('Error while running the experiment! SORRY! More details in the Command Window')));
         EndofExperiment;
@@ -309,10 +311,12 @@ try
     msgbox(sprintf('Results saved (and appended) to: %s', fullfile(cd,'Results',['Results_' name '.csv'])));
 catch e
     experimentRunning = 0;
+    handles.StartExperiment.Enable = 'on';
     memdump;
     rethrow(e);
     %% TODO error handling
 end
+handles.StartExperiment.Enable = 'on';
 experimentRunning = 0;
 
 
