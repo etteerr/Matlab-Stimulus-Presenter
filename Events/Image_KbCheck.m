@@ -124,6 +124,17 @@ function out = getLoadFunction()
         'event.barDimensions 	 = event.frameDimensions;                   \r\n' ...
         'event.frameColor      = [230 144 255];                             \r\n' ...
         'event.barColor        = [30 144 255];                              \r\n' ...
+        'if isempty(event.key)                                              \r\n' ...
+        '   event.key = '':'';                                              \r\n' ...
+        'elseif ismember('' '',event.key)                                   \r\n' ...
+        'keys = strsplit(event.key);                                        \r\n' ...
+        'event.key = zeros(1,length(keys)) ;                                \r\n' ...
+        'for i = 1:length(keys)                                             \r\n' ...
+        '    event.key(i) = KbName(keys(i));                                \r\n' ...
+        'end                                                                \r\n' ...
+        'else                                                               \r\n' ...
+        'event.key = KbName(event.key);                                     \r\n' ...
+        'end                                                                \r\n' ...
      ];
     
 end
@@ -228,14 +239,15 @@ function out = getQuestStruct()
     q(6).data       = '';
     q(6).tooltop    = 'if enabled, a bar will indicate how much time is left to respond';
      
-    q(7).name       = 'Location';
+    q(7).name       = 'Wait bar location';
     q(7).sort       = 'popupmenu';
     q(7).data       = {'top','bottom'};
     q(7).tooltop    = 'determines whether the waitbar will be shown at the top or bottom of the screen';
     
-    q(8).name = 'Behaviors';
-    q(8).sort = 'text';
-    q(8).data = 'Select options:';
+    q(8).name       = 'Behaviors';
+    q(8).sort       = 'text';
+    q(8).data       = 'Select options:';
+    
     out = q; %See eventEditor
 end
 
@@ -254,17 +266,6 @@ function out = getEventStruct(answersOfQuestions)
     
     % 4. target key
     event.key = answersOfQuestions(4).String;
-    if isempty(event.key)
-        event.key = ':';
-    elseif ismember(' ', event.key)
-        keys = strsplit(event.key);
-        event.key = [];
-        for i = 1:length(keys)
-            event.key = [event.key, KbName(keys(i))];
-        end        
-    else
-        event.key = KbName(event.key);
-    end
     
     % 5. max reaction time    
     event.keyTime = answersOfQuestions(5).String;    
