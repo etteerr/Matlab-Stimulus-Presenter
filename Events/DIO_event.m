@@ -72,11 +72,11 @@ function res = gateway(varargin)
 end
 %% Do edit the following
 function out = getEventName()
-    out = 'DIO event'; % The displayed event name
+    out = 'Set marker'; % The displayed event name
 end
 
 function out = getDescription()
-    out = 'Changes the state of the selected channel';
+    out = 'Changes the state of the selected marker channel';
 end
 
 function out = dataType()
@@ -100,10 +100,13 @@ function out = getLoadFunction()
 %               'Still the second line!\r\nThe Third line!'];
 % if out == '', no load function will be written.
 % Any change to event will be saved for the runFunction
-    out = [ 'global diosessions;\r\n' ...
-            'event.s = diosessions(event.devname);\r\n' ...
-            'event.s.outState(event.ch) = event.value;\r\n' ...
-            'diosessions(event.devname) = event.s;' ...
+    out = [ 'global skipDIO;        \r\n' ...
+            'global diosessions;    \r\n' ...
+            'if ~skipDIO;       \r\n' ...
+            'event.s = diosessions(event.devname);      \r\n' ...
+            'event.s.outState(event.ch) = event.value;  \r\n' ...
+            'diosessions(event.devname) = event.s;      \r\n' ...
+            'end ' ...
           ];
  %may be multiline!
 end
@@ -115,7 +118,11 @@ function out = getRunFunction()
 %     string = ['My long strings first line\r\n', ...
 %               'The second line!', ...
 %               'Still the second line!\r\nThe Third line!'];
-    out = ['event.s.session.outputSingleScan(event.s.outState);'];
+    out = [ 'global skipDIO;    \r\n' ...
+            'if ~skipDIO;       \r\n' ...
+            'event.s.session.outputSingleScan(event.s.outState); ;        \r\n' ...
+            'end' ...
+            ];
 end
 
 function out = getQuestStruct()
@@ -147,12 +154,12 @@ function out = getQuestStruct()
     out(2).name = 'Channel:';
     out(2).sort = 'popupmenu';
     out(2).data = channels;
-    out(2).toolTip = 'Select the channel for which the value shall be changed';
+    out(2).toolTip = 'Select the marker channel for which the state shall be changed';
     
     out(3).name = 'Value:';
     out(3).sort = 'popupmenu';
     out(3).data = {'0', '1'};
-    out(3).toolTip = 'Select the output value (0=low, 1=high)';
+    out(3).toolTip = 'Select the output value (0=off, 1=on)';
 end
 
 function out = getEventStruct(data)

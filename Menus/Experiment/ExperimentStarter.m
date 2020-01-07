@@ -36,7 +36,7 @@ function varargout = ExperimentStarter(varargin)
 
 % Edit the above text to modify the response to help ExperimentStarter
 
-% Last Modified by GUIDE v2.5 28-Sep-2017 11:42:03
+% Last Modified by GUIDE v2.5 07-Jan-2020 14:02:18
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -155,6 +155,10 @@ if isempty(nummer)
     return
 end
 rng(nummer);
+
+% Get DIO state
+global skipDIO
+skipDIO = handles.skipDIO.Value;
 
 try
     % Experiment generic info/settings
@@ -534,3 +538,12 @@ function nojvmmode_Callback(hObject, eventdata, handles)
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hint: get(hObject,'Value') returns toggle state of nojvmmode
+
+
+% --- Executes on button press in skipDIO.
+function skipDIO_Callback(hObject, eventdata, handles)
+% hObject    handle to skipDIO (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hint: get(hObject,'Value') returns toggle state of skipDIO
